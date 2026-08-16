@@ -1,0 +1,7 @@
+{
+  "python.defaultInterpreterPath": "C:\\Users\\bartp\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+  "python.analysis.autoSearchPaths": true,
+  "python.analysis.extraPaths": [
+    "C:\\Users\\bartp\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages"
+  ]
+}

@@ -1,0 +1,1326 @@
+2026-08-13 19:15:07,749 [INFO] ==========================================
+2026-08-13 19:15:07,749 [INFO]    MyMusic Spotipy Full Library Sync      
+2026-08-13 19:15:07,749 [INFO] ==========================================
+2026-08-13 19:15:08,221 [INFO] Spotipy OAuth Token Authenticated: chocow (111573307)
+2026-08-13 19:17:54,483 [INFO] ==========================================
+2026-08-13 19:17:54,489 [INFO]    MyMusic Spotipy Full Library Sync      
+2026-08-13 19:17:54,489 [INFO] ==========================================
+2026-08-13 19:17:54,608 [INFO] Spotipy authenticated via ClientCredentials.
+2026-08-13 19:17:54,608 [INFO] Requesting user playlists from Spotify API...
+2026-08-13 19:17:56,005 [INFO] ==========================================
+2026-08-13 19:17:56,005 [INFO]    MyMusic Spotipy Full Library Sync      
+2026-08-13 19:17:56,005 [INFO] ==========================================
+2026-08-13 19:17:56,428 [INFO] Spotipy OAuth Token Authenticated: chocow (111573307)
+2026-08-13 19:17:56,428 [INFO] Requesting user playlists from Spotify API...
+2026-08-13 19:18:47,519 [INFO] ==========================================
+2026-08-13 19:18:47,519 [INFO]    MyMusic Spotipy Full Library Sync      
+2026-08-13 19:18:47,519 [INFO] ==========================================
+2026-08-13 19:18:47,963 [INFO] Spotipy OAuth Token Authenticated: chocow (111573307)
+2026-08-13 19:18:47,963 [INFO] Requesting user playlists from Spotify API...
+2026-08-13 19:23:54,067 [INFO] ==========================================
+2026-08-13 19:23:54,067 [INFO]    MyMusic Spotipy Full Library Sync      
+2026-08-13 19:23:54,067 [INFO] ==========================================
+2026-08-13 19:23:54,178 [INFO] Spotipy authenticated via ClientCredentials.
+2026-08-13 19:23:54,178 [INFO] Llamando a sp.current_user_playlists(limit=50)...
+2026-08-13 19:24:16,840 [INFO] ==========================================
+2026-08-13 19:24:16,847 [INFO]    MyMusic Spotipy Full Library Sync      
+2026-08-13 19:24:16,847 [INFO] ==========================================
+2026-08-13 19:24:16,951 [INFO] Spotipy authenticated via ClientCredentials.
+2026-08-13 19:24:16,951 [INFO] No active user OAuth session active for sp.current_user_playlists(). Preserving persistent library.
+2026-08-13 19:24:16,951 [INFO] Spotipy API extraction skipped or unauthenticated. Running CSV fallback process...
+2026-08-13 19:24:16,951 [INFO] Running CSV scanner fallback...
+2026-08-13 19:24:16,951 [INFO] Successfully updated public\data\music_library.json (7 playlists stored).
+2026-08-13 19:24:16,951 [INFO] Sync completed successfully. Total playlists stored: 7
+2026-08-13 19:28:09,325 [INFO] ==========================================
+2026-08-13 19:28:09,325 [INFO]    MyMusic Spotipy User Sync (Strict)     
+2026-08-13 19:28:09,325 [INFO] ==========================================
+2026-08-13 19:28:09,797 [INFO] Spotipy OAuth Token Authenticated: chocow (111573307)
+2026-08-13 19:28:09,797 [INFO] Llamando a sp.current_user_playlists(limit=50)...
+2026-08-13 19:33:18,165 [INFO] ==========================================
+2026-08-13 19:33:18,165 [INFO]    MyMusic Spotipy Purged OAuth Sync      
+2026-08-13 19:33:18,165 [INFO] ==========================================
+2026-08-13 19:33:18,467 [INFO] Inicializando cliente puro de Spotipy con requests_timeout=15...
+2026-08-13 19:33:18,467 [INFO] Verificando perfil de usuario sp.current_user()...
+2026-08-13 19:33:18,821 [INFO] Spotipy OAuth Token Authenticated: chocow (111573307)
+2026-08-13 19:33:18,821 [INFO] Llamando a sp.current_user_playlists(limit=50)...
+2026-08-13 19:36:53,330 [INFO] ==========================================
+2026-08-13 19:36:53,330 [INFO]    MyMusic Spotipy Pure Sync (retries=0)  
+2026-08-13 19:36:53,330 [INFO] ==========================================
+2026-08-13 19:36:53,628 [INFO] Inicializando cliente puro de Spotipy con requests_timeout=15 y retries=0...
+2026-08-13 19:36:53,628 [INFO] Verificando perfil de usuario sp.current_user()...
+2026-08-13 19:36:53,975 [INFO] Spotipy OAuth Token Authenticated: chocow (111573307)
+2026-08-13 19:36:53,975 [INFO] Llamando a sp.current_user_playlists(limit=50)...
+2026-08-13 19:36:54,024 [ERROR] Error de Spotify al obtener playlists: HTTP 429 - /v1/me/playlists?limit=50&offset=0:
+ Max Retries
+2026-08-13 19:36:54,024 [ERROR] CRÍTICO: Rate Limit (429) alcanzado en la primera llamada. Spotify nos pide esperar N/As.
+2026-08-13 19:37:04,790 [INFO] ==========================================
+2026-08-13 19:37:04,790 [INFO]    MyMusic Spotipy Pure Sync (retries=0)  
+2026-08-13 19:37:04,790 [INFO] ==========================================
+2026-08-13 19:37:05,088 [INFO] Inicializando cliente puro de Spotipy con requests_timeout=15 y retries=0...
+2026-08-13 19:37:05,088 [INFO] Verificando perfil de usuario sp.current_user()...
+2026-08-13 19:37:05,422 [INFO] Spotipy OAuth Token Authenticated: chocow (111573307)
+2026-08-13 19:37:05,422 [INFO] Llamando a sp.current_user_playlists(limit=50)...
+2026-08-13 19:37:05,471 [ERROR] Error de Spotify al obtener playlists: HTTP 429 - /v1/me/playlists?limit=50&offset=0:
+ Max Retries
+2026-08-13 19:37:05,471 [ERROR] CRÍTICO: Rate Limit (429) alcanzado en la primera llamada. Spotify nos pide esperar N/As.
+2026-08-13 20:22:53,505 [INFO] ==========================================
+2026-08-13 20:22:53,505 [INFO]    MyMusic Spotipy Pure Sync (retries=0)  
+2026-08-13 20:22:53,505 [INFO] ==========================================
+2026-08-13 20:22:53,817 [INFO] Inicializando cliente puro de Spotipy con requests_timeout=15 y retries=0...
+2026-08-13 20:22:53,817 [INFO] Verificando perfil de usuario sp.current_user()...
+2026-08-13 20:22:54,203 [INFO] Spotipy OAuth Token Authenticated: chocow (111573307)
+2026-08-13 20:22:54,203 [INFO] Llamando a sp.current_user_playlists(limit=50)...
+2026-08-13 20:22:54,254 [ERROR] Error de Spotify al obtener playlists: HTTP 429 - /v1/me/playlists?limit=50&offset=0:
+ Max Retries
+2026-08-13 20:22:54,254 [ERROR] CRÍTICO: Rate Limit (429) alcanzado en la primera llamada. Spotify nos pide esperar N/As.
+2026-08-13 20:34:28,675 [INFO] ==========================================
+2026-08-13 20:34:28,675 [INFO]    MyMusic Spotipy Pure Sync (retries=0)  
+2026-08-13 20:34:28,675 [INFO] ==========================================
+2026-08-13 20:34:29,008 [INFO] Inicializando cliente puro de Spotipy con requests_timeout=15 y retries=0...
+2026-08-13 20:34:29,008 [INFO] Verificando perfil de usuario sp.current_user()...
+2026-08-13 20:34:29,397 [INFO] Spotipy OAuth Token Authenticated: chocow (111573307)
+2026-08-13 20:34:29,397 [INFO] Llamando a sp.current_user_playlists(limit=50)...
+2026-08-13 20:34:29,447 [ERROR] Error de Spotify al obtener playlists: HTTP 429 - /v1/me/playlists?limit=50&offset=0:
+ Max Retries
+2026-08-13 20:34:29,447 [ERROR] CRÍTICO: Rate Limit (429) alcanzado en la primera llamada. Spotify nos pide esperar N/As.
+2026-08-13 20:40:25,703 [INFO] ==========================================
+2026-08-13 20:40:25,703 [INFO]    MyMusic Spotipy Pure Sync (retries=0)  
+2026-08-13 20:40:25,703 [INFO] ==========================================
+2026-08-13 20:40:26,045 [INFO] Inicializando cliente puro de Spotipy con requests_timeout=15 y retries=0...
+2026-08-13 20:40:26,045 [INFO] Verificando perfil de usuario sp.current_user()...
+2026-08-13 20:40:26,487 [INFO] Spotipy OAuth Token Authenticated: chocow (111573307)
+2026-08-13 20:40:26,487 [INFO] Llamando a sp.current_user_playlists(limit=50)...
+2026-08-13 20:40:26,536 [ERROR] Error de Spotify al obtener playlists: HTTP 429 - /v1/me/playlists?limit=50&offset=0:
+ Max Retries
+2026-08-13 20:40:26,536 [ERROR] CRÍTICO: Rate Limit (429) alcanzado en la primera llamada. Spotify nos pide esperar N/As.
+2026-08-13 20:40:36,448 [INFO] ==========================================
+2026-08-13 20:40:36,448 [INFO]    MyMusic Spotipy Pure Sync (retries=0)  
+2026-08-13 20:40:36,448 [INFO] ==========================================
+2026-08-13 20:40:36,772 [INFO] Inicializando cliente puro de Spotipy con requests_timeout=15 y retries=0...
+2026-08-13 20:40:36,772 [INFO] Verificando perfil de usuario sp.current_user()...
+2026-08-13 20:40:37,150 [INFO] Spotipy OAuth Token Authenticated: chocow (111573307)
+2026-08-13 20:40:37,150 [INFO] Llamando a sp.current_user_playlists(limit=50)...
+2026-08-13 20:40:37,203 [ERROR] Error de Spotify al obtener playlists: HTTP 429 - /v1/me/playlists?limit=50&offset=0:
+ Max Retries
+2026-08-13 20:40:37,203 [ERROR] CRÍTICO: Rate Limit (429) alcanzado en la primera llamada. Spotify nos pide esperar N/As.
+2026-08-13 20:47:16,070 [INFO] ==========================================
+2026-08-13 20:47:16,071 [INFO]    MyMusic Spotipy Pure Sync (retries=0)  
+2026-08-13 20:47:16,071 [INFO] ==========================================
+2026-08-13 20:47:16,368 [INFO] Inicializando cliente puro de Spotipy con requests_timeout=15 y retries=0...
+2026-08-13 20:47:16,368 [INFO] Verificando perfil de usuario sp.current_user()...
+2026-08-13 20:47:16,755 [INFO] Spotipy OAuth Token Authenticated: chocow (111573307)
+2026-08-13 20:47:16,755 [INFO] Llamando a sp.current_user_playlists(limit=50)...
+2026-08-13 20:47:16,806 [ERROR] Error de Spotify al obtener playlists: HTTP 429 - /v1/me/playlists?limit=50&offset=0:
+ Max Retries
+2026-08-13 20:47:16,806 [ERROR] CRÍTICO: Rate Limit (429) alcanzado en la primera llamada. Spotify nos pide esperar N/As.
+2026-08-13 20:49:52,946 [INFO] ==========================================
+2026-08-13 20:49:52,946 [INFO]    MyMusic Spotipy Pure Sync (retries=0)  
+2026-08-13 20:49:52,946 [INFO] ==========================================
+2026-08-13 20:49:53,253 [INFO] Inicializando cliente puro de Spotipy con requests_timeout=15 y retries=0...
+2026-08-13 20:49:53,254 [INFO] Verificando perfil de usuario sp.current_user()...
+2026-08-13 20:49:53,684 [INFO] Spotipy OAuth Token Authenticated: chocow (111573307)
+2026-08-13 20:49:53,684 [INFO] Llamando a sp.current_user_playlists(limit=50)...
+2026-08-13 20:49:53,734 [ERROR] Error de Spotify al obtener playlists: HTTP 429 - /v1/me/playlists?limit=50&offset=0:
+ Max Retries
+2026-08-13 20:49:53,734 [ERROR] CRÍTICO: Rate Limit (429) alcanzado en la primera llamada. Spotify nos pide esperar N/As.
+2026-08-13 20:50:27,776 [INFO] ==========================================
+2026-08-13 20:50:27,776 [INFO]    MyMusic Spotipy Pure Sync (retries=0)  
+2026-08-13 20:50:27,776 [INFO] ==========================================
+2026-08-13 20:50:28,070 [INFO] Inicializando cliente puro de Spotipy con requests_timeout=15 y retries=0...
+2026-08-13 20:50:28,071 [INFO] Verificando perfil de usuario sp.current_user()...
+2026-08-13 20:50:28,484 [INFO] Spotipy OAuth Token Authenticated: chocow (111573307)
+2026-08-13 20:50:28,484 [INFO] Llamando a sp.current_user_playlists(limit=50)...
+2026-08-13 20:50:28,537 [ERROR] Error de Spotify al obtener playlists: HTTP 429 - /v1/me/playlists?limit=50&offset=0:
+ Max Retries
+2026-08-13 20:50:28,537 [ERROR] CRÍTICO: Rate Limit (429) alcanzado en la primera llamada. Spotify nos pide esperar N/As.
+2026-08-13 20:52:54,788 [INFO] ==========================================
+2026-08-13 20:52:54,788 [INFO]    MyMusic Spotipy Pure Sync (retries=0)  
+2026-08-13 20:52:54,788 [INFO] ==========================================
+2026-08-13 20:52:55,097 [INFO] Inicializando cliente puro de Spotipy con requests_timeout=15 y retries=0...
+2026-08-13 20:52:55,097 [INFO] Verificando perfil de usuario sp.current_user()...
+2026-08-13 20:52:55,595 [INFO] Spotipy OAuth Token Authenticated: chocow (111573307)
+2026-08-13 20:52:55,595 [INFO] Llamando a sp.current_user_playlists(limit=1)...
+2026-08-13 20:52:55,644 [ERROR] Error de Spotify al obtener playlists: HTTP 429 - /v1/me/playlists?limit=1&offset=0:
+ Max Retries
+2026-08-13 20:52:55,644 [ERROR] CRÍTICO: Rate Limit (429) alcanzado en la primera llamada. Spotify nos pide esperar N/As.
+2026-08-14 12:10:15,901 [INFO] ==========================================
+2026-08-14 12:10:15,901 [INFO]    MyMusic Spotipy Pure Sync (retries=0)  
+2026-08-14 12:10:15,901 [INFO] ==========================================
+2026-08-14 12:10:16,484 [INFO] Inicializando cliente puro de Spotipy con requests_timeout=15 y retries=0...
+2026-08-14 12:10:16,484 [INFO] Verificando perfil de usuario sp.current_user()...
+2026-08-14 12:10:16,921 [INFO] Spotipy OAuth Token Authenticated: chocow (111573307)
+2026-08-14 12:10:16,921 [INFO] Llamando a sp.current_user_playlists(limit=1)...
+2026-08-14 12:10:16,971 [ERROR] Error de Spotify al obtener playlists: HTTP 429 - /v1/me/playlists?limit=1&offset=0:
+ Max Retries
+2026-08-14 12:10:16,971 [ERROR] CRÍTICO: Rate Limit (429) alcanzado en la primera llamada. Spotify nos pide esperar N/As.
+2026-08-14 12:37:31,881 [INFO] ==========================================
+2026-08-14 12:37:31,881 [INFO]   MyMusic CSV Ingestor — Fase 1 (v1.0)   
+2026-08-14 12:37:31,881 [INFO] ==========================================
+2026-08-14 12:37:31,884 [INFO] Encontrados 22 archivos CSV en 'data\imports'.
+2026-08-14 12:37:31,885 [INFO] Tamaño total: 1798.0 KB — ETA estimado: ~4s
+2026-08-14 12:37:31,885 [INFO] [1/22] Procesando '2000-2010' (2000-2010.csv)...
+2026-08-14 12:37:31,904 [INFO]   Nueva playlist: 388 tracks importados.
+2026-08-14 12:37:31,904 [INFO] [2/22] Procesando 'booya' (booya.csv)...
+2026-08-14 12:37:31,916 [INFO]   1 filas descartadas en booya.csv (tracks locales o URIs inválidas).
+2026-08-14 12:37:31,916 [INFO]   Nueva playlist: 816 tracks importados.
+2026-08-14 12:37:31,916 [INFO] [3/22] Procesando 'bueno, rock' (bueno,_rock.csv)...
+2026-08-14 12:37:31,918 [INFO]   Nueva playlist: 85 tracks importados.
+2026-08-14 12:37:31,918 [INFO] [4/22] Procesando 'classics' (classics.csv)...
+2026-08-14 12:37:31,925 [INFO]   1 filas descartadas en classics.csv (tracks locales o URIs inválidas).
+2026-08-14 12:37:31,925 [INFO]   Nueva playlist: 534 tracks importados.
+2026-08-14 12:37:31,925 [INFO] [5/22] Procesando 'cosas' (cosas.csv)...
+2026-08-14 12:37:31,931 [INFO]   Nueva playlist: 401 tracks importados.
+2026-08-14 12:37:31,931 [INFO] [6/22] Procesando 'Dance & House' (Dance_&_House.csv)...
+2026-08-14 12:37:31,932 [INFO]   Upsert: 122 tracks (era 1 localmente).
+2026-08-14 12:37:31,933 [INFO] [7/22] Procesando 'DnB' (DnB.csv)...
+2026-08-14 12:37:31,935 [INFO]   ★ Detectada playlist benchmark DnB: 'DnB'
+2026-08-14 12:37:31,965 [INFO]   Upsert: 120 tracks (era 1 localmente).
+2026-08-14 12:37:31,965 [INFO] [8/22] Procesando 'Estoy Vivo' (Estoy_Vivo.csv)...
+2026-08-14 12:37:31,966 [INFO]   Upsert: 61 tracks (era 1 localmente).
+2026-08-14 12:37:31,966 [INFO] [9/22] Procesando 'frungir' (frungir.csv)...
+2026-08-14 12:37:31,969 [INFO]   Nueva playlist: 175 tracks importados.
+2026-08-14 12:37:31,969 [INFO] [10/22] Procesando 'guai' (guai.csv)...
+2026-08-14 12:37:31,976 [INFO]   Nueva playlist: 568 tracks importados.
+2026-08-14 12:37:31,976 [INFO] [11/22] Procesando 'Liked Songs' (Liked_Songs.csv)...
+2026-08-14 12:37:32,006 [INFO]   Nueva playlist: 1784 tracks importados.
+2026-08-14 12:37:32,006 [INFO] [12/22] Procesando 'Mamagusta' (Mamagusta.csv)...
+2026-08-14 12:37:32,006 [INFO]   Upsert: 4 tracks (era 1 localmente).
+2026-08-14 12:37:32,007 [INFO] [13/22] Procesando 'melancolico y estrellado' (melancolico_y_estrellado.csv)...
+2026-08-14 12:37:32,009 [INFO]   Nueva playlist: 77 tracks importados.
+2026-08-14 12:37:32,009 [INFO] [14/22] Procesando 'Musique nèg' (Musique_nèg.csv)...
+2026-08-14 12:37:32,011 [INFO]   Nueva playlist: 80 tracks importados.
+2026-08-14 12:37:32,011 [INFO] [15/22] Procesando 'premio' (premio.csv)...
+2026-08-14 12:37:32,014 [INFO]   Nueva playlist: 206 tracks importados.
+2026-08-14 12:37:32,014 [INFO] [16/22] Procesando 'Putas Joyas que curan el Alma' (Putas_Joyas_que_curan_el_Alma.csv)...
+2026-08-14 12:37:32,016 [INFO]   Upsert: 83 tracks (era 1 localmente).
+2026-08-14 12:37:32,016 [INFO] [17/22] Procesando 'reggaeton, funk, dancehall' (reggaeton,_funk,_dancehall.csv)...
+2026-08-14 12:37:32,017 [INFO]   Upsert: 73 tracks (era 2 localmente).
+2026-08-14 12:37:32,017 [INFO] [18/22] Procesando 'Sabor Ketama' (Sabor_Ketama.csv)...
+2026-08-14 12:37:32,018 [INFO]   Upsert: 14 tracks (era 1 localmente).
+2026-08-14 12:37:32,018 [INFO] [19/22] Procesando 'TECHNO' (TECHNO.csv)...
+2026-08-14 12:37:32,020 [INFO]   Nueva playlist: 93 tracks importados.
+2026-08-14 12:37:32,020 [INFO] [20/22] Procesando 'Top 50 Francia' (Top_50_Francia.csv)...
+2026-08-14 12:37:32,021 [INFO]   Nueva playlist: 50 tracks importados.
+2026-08-14 12:37:32,021 [INFO] [21/22] Procesando 'Tus canciones más escuchadas en 2025' (Tus_canciones_más_escuchadas_en_2025.csv)...
+2026-08-14 12:37:32,024 [INFO]   Nueva playlist: 100 tracks importados.
+2026-08-14 12:37:32,024 [INFO] [22/22] Procesando 'welcome and relax' (welcome_and_relax.csv)...
+2026-08-14 12:37:32,042 [INFO]   Nueva playlist: 1266 tracks importados.
+2026-08-14 12:37:32,042 [INFO] Enlazando benchmark DnB ('DnB') en completion_meta de todas las playlists...
+2026-08-14 12:37:32,393 [INFO] Librería guardada en public\data\music_library.json (22 playlists).
+2026-08-14 12:37:32,393 [INFO] ==========================================
+2026-08-14 12:37:32,393 [INFO]   Ingesta completada: 22 playlists OK, 0 saltadas.
+2026-08-14 12:37:32,393 [INFO]   Total de tracks importados: 7100
+2026-08-14 12:37:32,398 [INFO]   Benchmark DnB detectado: 'DnB'
+2026-08-14 12:37:32,398 [INFO] ==========================================
+2026-08-14 12:42:11,764 [INFO] ==========================================
+2026-08-14 12:42:11,765 [INFO]   MyMusic Enrich Metadata — Francotirador 
+2026-08-14 12:42:11,765 [INFO] ==========================================
+2026-08-14 12:42:11,765 [INFO] Cargando public\data\music_library.json...
+2026-08-14 12:42:11,861 [INFO] Total IDs únicos en la librería: 7,057
+2026-08-14 12:42:11,862 [INFO] IDs sin audio_features:          4
+2026-08-14 12:42:11,862 [INFO] Ya enriquecidos:                 7,053
+2026-08-14 12:42:11,862 [INFO] Chunks a procesar:               1 x 100 IDs
+2026-08-14 12:42:11,862 [INFO] Throttle:                        3.0s entre chunks
+2026-08-14 12:42:11,862 [INFO] ETA estimado:                    ~3s (~0.1 min)
+2026-08-14 12:42:11,862 [INFO] [DRY-RUN] Modo de solo lectura. No se realizaran llamadas a la API.
+2026-08-14 12:42:11,862 [INFO] [DRY-RUN] Tracks a enriquecer: ['1X7iYIHrw4RMqNCmkwINnc', '1pVnvnj9Qi9FrXpIgNXcr5', '6yuvC80FcnVJNvC0DbXN9e', '7HEcT2WhsA1HTQQEu58Vci']
+2026-08-14 12:42:21,106 [INFO] ==========================================
+2026-08-14 12:42:21,106 [INFO]   MyMusic Enrich Metadata — Francotirador 
+2026-08-14 12:42:21,106 [INFO] ==========================================
+2026-08-14 12:42:21,106 [INFO] Cargando public\data\music_library.json...
+2026-08-14 12:42:21,192 [INFO] Total IDs únicos en la librería: 7,057
+2026-08-14 12:42:21,192 [INFO] IDs sin audio_features:          4
+2026-08-14 12:42:21,193 [INFO] Ya enriquecidos:                 7,053
+2026-08-14 12:42:21,193 [INFO] Chunks a procesar:               1 x 100 IDs
+2026-08-14 12:42:21,193 [INFO] Throttle:                        3.0s entre chunks
+2026-08-14 12:42:21,193 [INFO] ETA estimado:                    ~3s (~0.1 min)
+2026-08-14 12:42:21,199 [INFO] [Chunk 1/1] Solicitando features para 4 tracks...
+2026-08-14 12:42:21,859 [ERROR]   SpotifyException HTTP 403 en chunk 1: http status: 403, code: -1 - https://api.spotify.com/v1/audio-features/?ids=1X7iYIHrw4RMqNCmkwINnc,1pVnvnj9Qi9FrXpIgNXcr5,6yuvC80FcnVJNvC0DbXN9e,7HEcT2WhsA1HTQQEu58Vci:
+ None, reason: None
+2026-08-14 12:42:22,192 [INFO] [FINAL] Librería guardada: public\data\music_library.json (22 playlists).
+2026-08-14 12:42:22,192 [INFO] ==========================================
+2026-08-14 12:42:22,192 [INFO]   Enriquecimiento completado.
+2026-08-14 12:42:22,192 [INFO]   IDs unicos enriquecidos: 0
+2026-08-14 12:42:22,197 [INFO]   Sin features en Spotify: 0  (tracks retirados)
+2026-08-14 12:42:22,197 [INFO]   Errores de chunk:        4
+2026-08-14 12:42:22,197 [INFO] ==========================================
+2026-08-14 12:43:22,606 [INFO] Auth: usando Client Credentials (ADVERTENCIA: puede devolver 403 en audio-features).
+2026-08-14 12:43:22,607 [INFO] ==========================================
+2026-08-14 12:43:22,607 [INFO]   MyMusic Enrich Metadata — Francotirador 
+2026-08-14 12:43:22,607 [INFO] ==========================================
+2026-08-14 12:43:22,607 [INFO] Cargando public\data\music_library.json...
+2026-08-14 12:43:22,697 [INFO] Total IDs únicos en la librería: 7,057
+2026-08-14 12:43:22,697 [INFO] IDs sin audio_features:          4
+2026-08-14 12:43:22,697 [INFO] Ya enriquecidos:                 7,053
+2026-08-14 12:43:22,697 [INFO] Chunks a procesar:               1 x 100 IDs
+2026-08-14 12:43:22,697 [INFO] Throttle:                        3.0s entre chunks
+2026-08-14 12:43:22,701 [INFO] ETA estimado:                    ~3s (~0.1 min)
+2026-08-14 12:43:22,701 [INFO] [DRY-RUN] Modo de solo lectura. No se realizaran llamadas a la API.
+2026-08-14 12:43:22,701 [INFO] [DRY-RUN] Tracks a enriquecer: ['1X7iYIHrw4RMqNCmkwINnc', '1pVnvnj9Qi9FrXpIgNXcr5', '6yuvC80FcnVJNvC0DbXN9e', '7HEcT2WhsA1HTQQEu58Vci']
+2026-08-14 12:52:14,923 [INFO] ==========================================
+2026-08-14 12:52:14,923 [INFO]    MyMusic Delta Sync — Fase 2 (v2.0)    
+2026-08-14 12:52:14,923 [INFO] ==========================================
+2026-08-14 12:52:15,290 [INFO] Verificando perfil de usuario (delta-sync)...
+2026-08-14 12:52:15,715 [INFO] Autenticado: chocow (111573307)
+2026-08-14 12:52:15,799 [INFO] Obteniendo lista de playlists (metadatos ligeros)...
+2026-08-14 12:52:15,852 [ERROR] Error al obtener playlists: HTTP 429
+2026-08-14 12:55:51,373 [INFO] ==========================================
+2026-08-14 12:55:51,373 [INFO]    MyMusic Delta Sync — Fase 2 (v2.0)    
+2026-08-14 12:55:51,373 [INFO] ==========================================
+2026-08-14 12:55:51,676 [INFO] Verificando perfil de usuario (delta-sync)...
+2026-08-14 12:55:52,038 [INFO] Autenticado: chocow (111573307)
+2026-08-14 12:55:52,116 [INFO] Obteniendo lista de playlists (metadatos ligeros)...
+2026-08-14 12:55:52,168 [ERROR] Error al obtener playlists: HTTP 429
+2026-08-14 12:58:40,263 [INFO] ==========================================
+2026-08-14 12:58:40,263 [INFO]    MyMusic Delta Sync — Fase 2 (v2.0)    
+2026-08-14 12:58:40,263 [INFO] ==========================================
+2026-08-14 12:58:40,497 [INFO] Verificando perfil de usuario (delta-sync)...
+2026-08-14 12:58:40,860 [INFO] Autenticado: chocow (111573307)
+2026-08-14 12:58:40,937 [INFO] Obteniendo lista de playlists (metadatos ligeros)...
+2026-08-14 12:58:40,994 [ERROR] Error al obtener playlists: HTTP 429
+2026-08-14 13:05:50,244 [INFO] ==========================================
+2026-08-14 13:05:50,245 [INFO]    MyMusic Delta Sync — Fase 2 (v2.0)    
+2026-08-14 13:05:50,245 [INFO] ==========================================
+2026-08-14 13:05:50,550 [INFO] Verificando perfil de usuario (delta-sync)...
+2026-08-14 13:05:50,912 [INFO] Autenticado: chocow (111573307)
+2026-08-14 13:05:50,999 [INFO] Obteniendo lista de playlists (metadatos ligeros)...
+2026-08-14 13:05:51,048 [ERROR] Error al obtener playlists: HTTP 429
+2026-08-14 13:16:52,887 [INFO] ==========================================
+2026-08-14 13:16:52,887 [INFO]    MyMusic Delta Sync — Fase 2 (v2.0)    
+2026-08-14 13:16:52,887 [INFO] ==========================================
+2026-08-14 13:16:53,150 [INFO] Verificando perfil de usuario (delta-sync)...
+2026-08-14 13:16:53,511 [INFO] Autenticado: chocow (111573307)
+2026-08-14 13:16:53,580 [INFO] Obteniendo lista de playlists (metadatos ligeros)...
+2026-08-14 13:16:53,636 [ERROR] Error al obtener playlists: HTTP 429
+2026-08-14 14:40:52,889 [ERROR] HTTP Error for GET to https://api.spotify.com/v1/me/playlists with Params: {'limit': 50, 'offset': 0} returned 401 due to Missing/invalid/expired access token
+2026-08-14 14:40:52,896 [WARNING] User playlists call returned: http status: 401, code: -1 - https://api.spotify.com/v1/me/playlists?limit=50&offset=0:
+ Missing/invalid/expired access token, reason: None
+2026-08-14 14:40:52,896 [INFO] No active user session playlists found via Spotipy. Preserving persistent library.
+2026-08-14 14:40:52,896 [INFO] Spotipy API extraction skipped or unauthenticated. Running CSV fallback process...
+2026-08-14 14:40:52,896 [INFO] Running CSV scanner fallback...
+2026-08-14 14:40:53,063 [INFO] Successfully updated public\data\music_library.json (8 playlists stored).
+2026-08-14 14:40:53,070 [INFO] Sync completed successfully. Total playlists: 8
+2026-08-14 14:43:41,032 [WARNING] User playlists API call failed: http status: 401, code: -1 - https://api.spotify.com/v1/me/playlists?limit=50&offset=0:
+ Missing/invalid/expired access token, reason: None
+2026-08-14 14:43:41,032 [WARNING] No active user session playlists returned from Spotify. Preserving persistent library.
+2026-08-14 14:43:41,032 [INFO] Spotipy API extraction skipped or unauthenticated. Running CSV fallback process...
+2026-08-14 14:43:41,032 [INFO] Running CSV scanner fallback...
+2026-08-14 14:43:41,184 [INFO] Successfully updated public\data\music_library.json (8 playlists stored).
+2026-08-14 14:43:41,184 [INFO] Sync completed successfully. Total playlists: 8
+2026-08-14 14:44:32,496 [WARNING] User playlists API call failed: http status: 401, code: -1 - https://api.spotify.com/v1/me/playlists?limit=50&offset=0:
+ Missing/invalid/expired access token, reason: None
+2026-08-14 14:44:32,496 [WARNING] No active user session playlists returned from Spotify. Preserving persistent library.
+2026-08-14 14:44:32,496 [INFO] Spotipy API extraction skipped or unauthenticated. Running CSV fallback process...
+2026-08-14 14:44:32,496 [INFO] Running CSV scanner fallback...
+2026-08-14 14:44:32,649 [INFO] Successfully updated public\data\music_library.json (8 playlists stored).
+2026-08-14 14:44:32,649 [INFO] Sync completed successfully. Total playlists: 8
+2026-08-14 14:53:54,275 [ERROR] Error en sp.current_user_playlists()
+Traceback (most recent call last):
+  File "C:\Users\bartp\AppData\Local\Programs\Python\Python312\Lib\site-packages\spotipy\client.py", line 271, in _internal_call
+    response.raise_for_status()
+  File "C:\Users\bartp\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\models.py", line 1028, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 401 Client Error: Unauthorized for url: https://api.spotify.com/v1/me/playlists?limit=50&offset=0
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\bartp\.gemini\antigravity-ide\scratch\spotify-collab\sync_library.py", line 133, in sync_with_spotipy
+    sys.exit(1)
+                
+  File "C:\Users\bartp\AppData\Local\Programs\Python\Python312\Lib\site-packages\spotipy\client.py", line 668, in current_user_playlists
+    return self._get("me/playlists", limit=limit, offset=offset)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\bartp\AppData\Local\Programs\Python\Python312\Lib\site-packages\spotipy\client.py", line 321, in _get
+    return self._internal_call("GET", url, payload, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\bartp\AppData\Local\Programs\Python\Python312\Lib\site-packages\spotipy\client.py", line 291, in _internal_call
+    raise SpotifyException(
+spotipy.exceptions.SpotifyException: http status: 401, code: -1 - https://api.spotify.com/v1/me/playlists?limit=50&offset=0:
+ Missing/invalid/expired access token, reason: None
+2026-08-14 14:53:54,316 [ERROR] User playlists API call failed: http status: 401, code: -1 - https://api.spotify.com/v1/me/playlists?limit=50&offset=0:
+ Missing/invalid/expired access token, reason: None
+2026-08-14 14:59:03,306 [ERROR] Error de Spotify al obtener playlists: HTTP 401 - https://api.spotify.com/v1/me/playlists?limit=50&offset=0:
+ Missing/invalid/expired access token
+2026-08-14 15:44:35,952 [INFO] ==========================================
+2026-08-14 15:44:35,952 [INFO]    MyMusic Delta Sync — Fase 2 (v2.0)    
+2026-08-14 15:44:35,952 [INFO] ==========================================
+2026-08-14 15:44:36,402 [INFO] Verificando perfil de usuario (delta-sync)...
+2026-08-14 15:44:36,965 [INFO] Autenticado: chocow (111573307)
+2026-08-14 15:44:36,985 [INFO] Obteniendo lista de playlists (metadatos ligeros)...
+2026-08-14 15:44:37,034 [ERROR] Error al obtener playlists: HTTP 429
+2026-08-14 15:51:42,607 [INFO] ==========================================
+2026-08-14 15:51:42,607 [INFO]    MyMusic Delta Sync — Fase 2 (v2.0)    
+2026-08-14 15:51:42,607 [INFO] ==========================================
+2026-08-14 15:51:42,868 [INFO] Verificando perfil de usuario (delta-sync)...
+2026-08-14 15:51:43,278 [INFO] Autenticado: chocow (111573307)
+2026-08-14 15:51:43,298 [INFO] Obteniendo lista de playlists (metadatos ligeros)...
+2026-08-14 15:51:43,577 [INFO] Encontradas 19 playlists remotas.
+2026-08-14 15:51:43,577 [INFO] [DELTA] 'reggaeton, funk, dancehall' — snapshot cambió. Descargando IDs de tracks...
+2026-08-14 15:51:43,826 [INFO]   Delta 'reggaeton, funk, dancehall': +0 añadidas, -73 borradas, ~0 movidas.
+2026-08-14 15:51:43,826 [INFO] [DELTA] 'Estoy Vivo' — snapshot cambió. Descargando IDs de tracks...
+2026-08-14 15:51:43,993 [INFO]   Delta 'Estoy Vivo': +0 añadidas, -61 borradas, ~0 movidas.
+2026-08-14 15:51:43,993 [INFO] [DELTA] 'Dance & House' — snapshot cambió. Descargando IDs de tracks...
+2026-08-14 15:51:45,042 [INFO]   Delta 'Dance & House': +0 añadidas, -122 borradas, ~0 movidas.
+2026-08-14 15:51:45,042 [INFO] [DELTA] 'Putas Joyas que curan el Alma' — snapshot cambió. Descargando IDs de tracks...
+2026-08-14 15:51:45,237 [INFO]   Delta 'Putas Joyas que curan el Alma': +0 añadidas, -83 borradas, ~0 movidas.
+2026-08-14 15:51:45,237 [INFO] [DELTA] 'DnB' — snapshot cambió. Descargando IDs de tracks...
+2026-08-14 15:51:46,215 [INFO]   Delta 'DnB': +0 añadidas, -120 borradas, ~0 movidas.
+2026-08-14 15:51:46,215 [INFO] [DELTA] 'Mamagusta' — snapshot cambió. Descargando IDs de tracks...
+2026-08-14 15:51:46,340 [INFO]   Delta 'Mamagusta': +0 añadidas, -4 borradas, ~0 movidas.
+2026-08-14 15:51:46,340 [INFO] [DELTA] 'Sabor Ketama' — snapshot cambió. Descargando IDs de tracks...
+2026-08-14 15:51:46,486 [WARNING] Error 403 en tracks de 'Sabor Ketama'. Saltando.
+2026-08-14 15:51:46,486 [INFO] [DELTA] 'melancolico y estrellado' — snapshot cambió. Descargando IDs de tracks...
+2026-08-14 15:51:46,777 [INFO]   Delta 'melancolico y estrellado': +0 añadidas, -0 borradas, ~0 movidas.
+2026-08-14 15:51:46,777 [INFO] [DELTA] 'bueno, rock' — snapshot cambió. Descargando IDs de tracks...
+2026-08-14 15:51:47,041 [INFO]   Delta 'bueno, rock': +0 añadidas, -0 borradas, ~0 movidas.
+2026-08-14 15:51:47,041 [INFO] [DELTA] 'Musique nèg' — snapshot cambió. Descargando IDs de tracks...
+2026-08-14 15:51:47,354 [INFO]   Delta 'Musique nèg': +0 añadidas, -0 borradas, ~0 movidas.
+2026-08-14 15:51:47,354 [INFO] [DELTA] 'classics' — snapshot cambió. Descargando IDs de tracks...
+2026-08-14 15:51:51,589 [INFO]   Delta 'classics': +0 añadidas, -0 borradas, ~0 movidas.
+2026-08-14 15:51:51,589 [INFO] [DELTA] 'cosas' — snapshot cambió. Descargando IDs de tracks...
+2026-08-14 15:51:54,811 [INFO]   Delta 'cosas': +0 añadidas, -0 borradas, ~0 movidas.
+2026-08-14 15:51:54,811 [INFO] [DELTA] 'premio' — snapshot cambió. Descargando IDs de tracks...
+2026-08-14 15:51:56,540 [INFO]   Delta 'premio': +0 añadidas, -0 borradas, ~0 movidas.
+2026-08-14 15:51:56,540 [INFO] [DELTA] 'booya' — snapshot cambió. Descargando IDs de tracks...
+2026-08-14 15:52:02,977 [INFO]   Delta 'booya': +0 añadidas, -0 borradas, ~0 movidas.
+2026-08-14 15:52:02,977 [INFO] [DELTA] 'frungir' — snapshot cambió. Descargando IDs de tracks...
+2026-08-14 15:52:04,032 [INFO]   Delta 'frungir': +0 añadidas, -0 borradas, ~0 movidas.
+2026-08-14 15:52:04,032 [INFO] [DELTA] 'welcome and relax' — snapshot cambió. Descargando IDs de tracks...
+2026-08-14 15:52:13,961 [INFO]   Delta 'welcome and relax': +0 añadidas, -0 borradas, ~0 movidas.
+2026-08-14 15:52:13,961 [INFO] [DELTA] 'TECHNO' — snapshot cambió. Descargando IDs de tracks...
+2026-08-14 15:52:14,148 [INFO]   Delta 'TECHNO': +0 añadidas, -0 borradas, ~0 movidas.
+2026-08-14 15:52:14,148 [INFO] [DELTA] '2000-2010' — snapshot cambió. Descargando IDs de tracks...
+2026-08-14 15:52:16,780 [INFO]   Delta '2000-2010': +0 añadidas, -0 borradas, ~0 movidas.
+2026-08-14 15:52:16,780 [INFO] [DELTA] 'guai' — snapshot cambió. Descargando IDs de tracks...
+2026-08-14 15:52:21,154 [INFO]   Delta 'guai': +0 añadidas, -0 borradas, ~0 movidas.
+2026-08-14 15:52:21,161 [INFO] Library guardada: public\data\music_library.json (19 playlists).
+2026-08-14 15:52:21,163 [INFO] Delta-sync completado. Playlists: 19. Delta: +0 / -463 / ~0.
+2026-08-14 15:52:21,612 [INFO] Auth: usando token OAuth de usuario (--token / SPOTIFY_ACCESS_TOKEN).
+2026-08-14 15:52:21,612 [INFO] ==========================================
+2026-08-14 15:52:21,612 [INFO]   MyMusic Enrich Metadata — Francotirador 
+2026-08-14 15:52:21,612 [INFO] ==========================================
+2026-08-14 15:52:21,612 [INFO] Cargando public\data\music_library.json...
+2026-08-14 15:52:21,626 [INFO] Total IDs únicos en la librería: 14
+2026-08-14 15:52:21,626 [INFO] IDs sin audio_features:          0
+2026-08-14 15:52:21,626 [INFO] Ya enriquecidos:                 14
+2026-08-14 15:52:21,626 [INFO] Chunks a procesar:               0 x 100 IDs
+2026-08-14 15:52:21,626 [INFO] Throttle:                        3.0s entre chunks
+2026-08-14 15:52:21,626 [INFO] ETA estimado:                    ~0s (~0.0 min)
+2026-08-14 15:52:21,626 [INFO] La libreria ya esta completamente enriquecida. Nada que hacer.
+2026-08-14 16:03:53,319 [INFO] ==========================================
+2026-08-14 16:03:53,320 [INFO]   MyMusic CSV Ingestor — Fase 1 (v1.0)   
+2026-08-14 16:03:53,320 [INFO] ==========================================
+2026-08-14 16:03:53,320 [INFO] Encontrados 22 archivos CSV en 'data\imports'.
+2026-08-14 16:03:53,320 [INFO] Tamaño total: 1798.0 KB — ETA estimado: ~4s
+2026-08-14 16:03:53,322 [INFO] [1/22] Procesando '2000-2010' (2000-2010.csv)...
+2026-08-14 16:03:53,340 [INFO]   Upsert: 388 tracks (era 0 localmente).
+2026-08-14 16:03:53,340 [INFO] [2/22] Procesando 'booya' (booya.csv)...
+2026-08-14 16:03:53,361 [INFO]   1 filas descartadas en booya.csv (tracks locales o URIs inválidas).
+2026-08-14 16:03:53,361 [INFO]   Upsert: 816 tracks (era 0 localmente).
+2026-08-14 16:03:53,361 [INFO] [3/22] Procesando 'bueno, rock' (bueno,_rock.csv)...
+2026-08-14 16:03:53,372 [INFO]   Upsert: 85 tracks (era 0 localmente).
+2026-08-14 16:03:53,372 [INFO] [4/22] Procesando 'classics' (classics.csv)...
+2026-08-14 16:03:53,390 [INFO]   1 filas descartadas en classics.csv (tracks locales o URIs inválidas).
+2026-08-14 16:03:53,391 [INFO]   Upsert: 534 tracks (era 0 localmente).
+2026-08-14 16:03:53,391 [INFO] [5/22] Procesando 'cosas' (cosas.csv)...
+2026-08-14 16:03:53,403 [INFO]   Upsert: 401 tracks (era 0 localmente).
+2026-08-14 16:03:53,403 [INFO] [6/22] Procesando 'Dance & House' (Dance_&_House.csv)...
+2026-08-14 16:03:53,416 [INFO]   Upsert: 122 tracks (era 0 localmente).
+2026-08-14 16:03:53,416 [INFO] [7/22] Procesando 'DnB' (DnB.csv)...
+2026-08-14 16:03:53,427 [INFO]   [DnB BENCHMARK] Detectada playlist benchmark: 'DnB'
+2026-08-14 16:03:53,427 [INFO]   Upsert: 120 tracks (era 0 localmente).
+2026-08-14 16:03:53,427 [INFO] [8/22] Procesando 'Estoy Vivo' (Estoy_Vivo.csv)...
+2026-08-14 16:03:53,433 [INFO]   Upsert: 61 tracks (era 0 localmente).
+2026-08-14 16:03:53,433 [INFO] [9/22] Procesando 'frungir' (frungir.csv)...
+2026-08-14 16:03:53,448 [INFO]   Upsert: 175 tracks (era 0 localmente).
+2026-08-14 16:03:53,448 [INFO] [10/22] Procesando 'guai' (guai.csv)...
+2026-08-14 16:03:53,464 [INFO]   Upsert: 568 tracks (era 0 localmente).
+2026-08-14 16:03:53,464 [INFO] [11/22] Procesando 'Liked Songs' (Liked_Songs.csv)...
+2026-08-14 16:03:53,493 [INFO]   Nueva playlist: 1784 tracks importados.
+2026-08-14 16:03:53,493 [INFO] [12/22] Procesando 'Mamagusta' (Mamagusta.csv)...
+2026-08-14 16:03:53,505 [INFO]   Upsert: 4 tracks (era 0 localmente).
+2026-08-14 16:03:53,505 [INFO] [13/22] Procesando 'melancolico y estrellado' (melancolico_y_estrellado.csv)...
+2026-08-14 16:03:53,514 [INFO]   Upsert: 77 tracks (era 0 localmente).
+2026-08-14 16:03:53,514 [INFO] [14/22] Procesando 'Musique nèg' (Musique_nèg.csv)...
+2026-08-14 16:03:53,526 [INFO]   Upsert: 80 tracks (era 0 localmente).
+2026-08-14 16:03:53,526 [INFO] [15/22] Procesando 'premio' (premio.csv)...
+2026-08-14 16:03:53,537 [INFO]   Upsert: 206 tracks (era 0 localmente).
+2026-08-14 16:03:53,537 [INFO] [16/22] Procesando 'Putas Joyas que curan el Alma' (Putas_Joyas_que_curan_el_Alma.csv)...
+2026-08-14 16:03:53,547 [INFO]   Upsert: 83 tracks (era 0 localmente).
+2026-08-14 16:03:53,548 [INFO] [17/22] Procesando 'reggaeton, funk, dancehall' (reggaeton,_funk,_dancehall.csv)...
+2026-08-14 16:03:53,556 [INFO]   Upsert: 73 tracks (era 0 localmente).
+2026-08-14 16:03:53,556 [INFO] [18/22] Procesando 'Sabor Ketama' (Sabor_Ketama.csv)...
+2026-08-14 16:03:53,563 [INFO]   Upsert: 14 tracks (era 14 localmente).
+2026-08-14 16:03:53,563 [INFO] [19/22] Procesando 'TECHNO' (TECHNO.csv)...
+2026-08-14 16:03:53,576 [INFO]   Upsert: 93 tracks (era 0 localmente).
+2026-08-14 16:03:53,576 [INFO] [20/22] Procesando 'Top 50 Francia' (Top_50_Francia.csv)...
+2026-08-14 16:03:53,584 [INFO]   Nueva playlist: 50 tracks importados.
+2026-08-14 16:03:53,584 [INFO] [21/22] Procesando 'Tus canciones más escuchadas en 2025' (Tus_canciones_más_escuchadas_en_2025.csv)...
+2026-08-14 16:03:53,596 [INFO]   Nueva playlist: 100 tracks importados.
+2026-08-14 16:03:53,596 [INFO] [22/22] Procesando 'welcome and relax' (welcome_and_relax.csv)...
+2026-08-14 16:03:53,622 [INFO]   Upsert: 1266 tracks (era 0 localmente).
+2026-08-14 16:03:53,622 [INFO] Enlazando benchmark DnB ('DnB') en completion_meta de todas las playlists...
+2026-08-14 16:03:54,046 [INFO] Librería guardada en public\data\music_library.json (22 playlists).
+2026-08-14 16:03:54,046 [INFO] ==========================================
+2026-08-14 16:03:54,046 [INFO]   Ingesta completada: 22 playlists OK, 0 saltadas.
+2026-08-14 16:03:54,046 [INFO]   Total de tracks importados: 7100
+2026-08-14 16:03:54,046 [INFO]   Benchmark DnB detectado: 'DnB'
+2026-08-14 16:03:54,046 [INFO] ==========================================
+2026-08-14 16:39:17,003 [INFO] ==========================================
+2026-08-14 16:39:17,003 [INFO]    MyMusic Delta Sync — Fase 2 (v2.0)    
+2026-08-14 16:39:17,003 [INFO] ==========================================
+2026-08-14 16:39:17,274 [INFO] Verificando perfil de usuario (delta-sync)...
+2026-08-14 16:39:17,642 [INFO] Autenticado: chocow (111573307)
+2026-08-14 16:39:17,732 [INFO] Obteniendo lista de playlists (metadatos ligeros)...
+2026-08-14 16:39:17,934 [INFO] Encontradas 19 playlists remotas.
+2026-08-14 16:39:17,934 [INFO] [SKIP] 'reggaeton, funk, dancehall' — snapshot sin cambios.
+2026-08-14 16:39:17,934 [INFO] [SKIP] 'Estoy Vivo' — snapshot sin cambios.
+2026-08-14 16:39:17,934 [INFO] [SKIP] 'Dance & House' — snapshot sin cambios.
+2026-08-14 16:39:17,934 [INFO] [SKIP] 'Putas Joyas que curan el Alma' — snapshot sin cambios.
+2026-08-14 16:39:17,934 [INFO] [SKIP] 'DnB' — snapshot sin cambios.
+2026-08-14 16:39:17,934 [INFO] [SKIP] 'Mamagusta' — snapshot sin cambios.
+2026-08-14 16:39:17,934 [INFO] [DELTA] 'Sabor Ketama' — snapshot cambió. Descargando IDs de tracks...
+2026-08-14 16:39:18,087 [WARNING] Error 403 en tracks de 'Sabor Ketama'. Saltando.
+2026-08-14 16:39:18,087 [INFO] [SKIP] 'melancolico y estrellado' — snapshot sin cambios.
+2026-08-14 16:39:18,087 [INFO] [SKIP] 'bueno, rock' — snapshot sin cambios.
+2026-08-14 16:39:18,087 [INFO] [SKIP] 'Musique nèg' — snapshot sin cambios.
+2026-08-14 16:39:18,087 [INFO] [SKIP] 'classics' — snapshot sin cambios.
+2026-08-14 16:39:18,087 [INFO] [SKIP] 'cosas' — snapshot sin cambios.
+2026-08-14 16:39:18,087 [INFO] [SKIP] 'premio' — snapshot sin cambios.
+2026-08-14 16:39:18,087 [INFO] [SKIP] 'booya' — snapshot sin cambios.
+2026-08-14 16:39:18,087 [INFO] [SKIP] 'frungir' — snapshot sin cambios.
+2026-08-14 16:39:18,087 [INFO] [SKIP] 'welcome and relax' — snapshot sin cambios.
+2026-08-14 16:39:18,087 [INFO] [SKIP] 'TECHNO' — snapshot sin cambios.
+2026-08-14 16:39:18,087 [INFO] [SKIP] '2000-2010' — snapshot sin cambios.
+2026-08-14 16:39:18,087 [INFO] [SKIP] 'guai' — snapshot sin cambios.
+2026-08-14 16:39:18,378 [INFO] Library guardada: public\data\music_library.json (19 playlists).
+2026-08-14 16:39:18,387 [INFO] Delta-sync completado. Playlists: 19. Delta: +0 / -0 / ~0.
+2026-08-14 16:39:18,809 [INFO] Auth: usando token OAuth de usuario (--token / SPOTIFY_ACCESS_TOKEN).
+2026-08-14 16:39:18,809 [INFO] ==========================================
+2026-08-14 16:39:18,809 [INFO]   MyMusic Enrich Metadata — Francotirador 
+2026-08-14 16:39:18,809 [INFO] ==========================================
+2026-08-14 16:39:18,809 [INFO] Cargando public\data\music_library.json...
+2026-08-14 16:39:18,884 [INFO] Total IDs únicos en la librería: 5,123
+2026-08-14 16:39:18,885 [INFO] IDs sin audio_features:          4
+2026-08-14 16:39:18,885 [INFO] Ya enriquecidos:                 5,119
+2026-08-14 16:39:18,885 [INFO] Chunks a procesar:               1 x 100 IDs
+2026-08-14 16:39:18,885 [INFO] Throttle:                        3.0s entre chunks
+2026-08-14 16:39:18,885 [INFO] ETA estimado:                    ~3s (~0.1 min)
+2026-08-14 16:39:18,885 [INFO] [Chunk 1/1] Solicitando features para 4 tracks...
+2026-08-14 16:39:19,218 [ERROR]   HTTP 403 en chunk 1: Spotify requiere token OAuth de usuario para audio-features (deprecado para Client Credentials desde mayo 2024).
+2026-08-14 16:39:19,218 [ERROR]   SOLUCION: python enrich_metadata.py --token <SPOTIFY_ACCESS_TOKEN>
+2026-08-14 16:39:19,530 [INFO] [FINAL] Librería guardada: public\data\music_library.json (19 playlists).
+2026-08-14 16:39:19,530 [INFO] ==========================================
+2026-08-14 16:39:19,531 [INFO]   Enriquecimiento completado.
+2026-08-14 16:39:19,531 [INFO]   IDs unicos enriquecidos: 0
+2026-08-14 16:39:19,531 [INFO]   Sin features en Spotify: 0  (tracks retirados)
+2026-08-14 16:39:19,531 [INFO]   Errores de chunk:        4
+2026-08-14 16:39:19,531 [INFO] ==========================================
+2026-08-14 16:52:18,981 [INFO] ==========================================
+2026-08-14 16:52:18,981 [INFO]    MyMusic Delta Sync — Fase 2 (v2.0)    
+2026-08-14 16:52:18,981 [INFO] ==========================================
+2026-08-14 16:52:19,270 [INFO] Verificando perfil de usuario (delta-sync)...
+2026-08-14 16:52:19,672 [INFO] Autenticado: chocow (111573307)
+2026-08-14 16:52:19,751 [INFO] Obteniendo lista de playlists (metadatos ligeros)...
+2026-08-14 16:52:19,925 [INFO] Encontradas 19 playlists remotas.
+2026-08-14 16:52:19,925 [INFO] [SKIP] 'reggaeton, funk, dancehall' — snapshot sin cambios.
+2026-08-14 16:52:19,925 [INFO] [SKIP] 'Estoy Vivo' — snapshot sin cambios.
+2026-08-14 16:52:19,925 [INFO] [SKIP] 'Dance & House' — snapshot sin cambios.
+2026-08-14 16:52:19,925 [INFO] [SKIP] 'Putas Joyas que curan el Alma' — snapshot sin cambios.
+2026-08-14 16:52:19,925 [INFO] [SKIP] 'DnB' — snapshot sin cambios.
+2026-08-14 16:52:19,925 [INFO] [SKIP] 'Mamagusta' — snapshot sin cambios.
+2026-08-14 16:52:19,925 [INFO] [DELTA] 'Sabor Ketama' — snapshot cambió. Descargando IDs de tracks...
+2026-08-14 16:52:20,038 [WARNING] Error 403 en tracks de 'Sabor Ketama'. Saltando.
+2026-08-14 16:52:20,038 [INFO] [SKIP] 'melancolico y estrellado' — snapshot sin cambios.
+2026-08-14 16:52:20,038 [INFO] [SKIP] 'bueno, rock' — snapshot sin cambios.
+2026-08-14 16:52:20,038 [INFO] [SKIP] 'Musique nèg' — snapshot sin cambios.
+2026-08-14 16:52:20,038 [INFO] [SKIP] 'classics' — snapshot sin cambios.
+2026-08-14 16:52:20,038 [INFO] [SKIP] 'cosas' — snapshot sin cambios.
+2026-08-14 16:52:20,038 [INFO] [SKIP] 'premio' — snapshot sin cambios.
+2026-08-14 16:52:20,038 [INFO] [SKIP] 'booya' — snapshot sin cambios.
+2026-08-14 16:52:20,038 [INFO] [SKIP] 'frungir' — snapshot sin cambios.
+2026-08-14 16:52:20,038 [INFO] [SKIP] 'welcome and relax' — snapshot sin cambios.
+2026-08-14 16:52:20,038 [INFO] [SKIP] 'TECHNO' — snapshot sin cambios.
+2026-08-14 16:52:20,038 [INFO] [SKIP] '2000-2010' — snapshot sin cambios.
+2026-08-14 16:52:20,038 [INFO] [SKIP] 'guai' — snapshot sin cambios.
+2026-08-14 16:52:20,357 [INFO] Library guardada: public\data\music_library.json (19 playlists).
+2026-08-14 16:52:20,357 [INFO] Delta-sync completado. Playlists: 19. Delta: +0 / -0 / ~0.
+2026-08-14 16:52:20,791 [INFO] Auth: usando token OAuth de usuario (--token / SPOTIFY_ACCESS_TOKEN).
+2026-08-14 16:52:20,791 [INFO] ==========================================
+2026-08-14 16:52:20,791 [INFO]   MyMusic Enrich Metadata — Francotirador 
+2026-08-14 16:52:20,791 [INFO] ==========================================
+2026-08-14 16:52:20,791 [INFO] Cargando public\data\music_library.json...
+2026-08-14 16:52:20,871 [INFO] Total IDs únicos en la librería: 5,123
+2026-08-14 16:52:20,871 [INFO] IDs sin audio_features:          4
+2026-08-14 16:52:20,871 [INFO] Ya enriquecidos:                 5,119
+2026-08-14 16:52:20,871 [INFO] Chunks a procesar:               1 x 100 IDs
+2026-08-14 16:52:20,871 [INFO] Throttle:                        3.0s entre chunks
+2026-08-14 16:52:20,871 [INFO] ETA estimado:                    ~3s (~0.1 min)
+2026-08-14 16:52:20,886 [INFO] [Chunk 1/1] Solicitando features para 4 tracks...
+2026-08-14 16:52:21,189 [ERROR]   HTTP 403 en chunk 1: Spotify requiere token OAuth de usuario para audio-features (deprecado para Client Credentials desde mayo 2024).
+2026-08-14 16:52:21,189 [ERROR]   SOLUCION: python enrich_metadata.py --token <SPOTIFY_ACCESS_TOKEN>
+2026-08-14 16:52:21,488 [INFO] [FINAL] Librería guardada: public\data\music_library.json (19 playlists).
+2026-08-14 16:52:21,492 [INFO] ==========================================
+2026-08-14 16:52:21,492 [INFO]   Enriquecimiento completado.
+2026-08-14 16:52:21,492 [INFO]   IDs unicos enriquecidos: 0
+2026-08-14 16:52:21,492 [INFO]   Sin features en Spotify: 0  (tracks retirados)
+2026-08-14 16:52:21,492 [INFO]   Errores de chunk:        4
+2026-08-14 16:52:21,492 [INFO] ==========================================
+2026-08-16 13:02:43,498 [INFO] ==========================================
+2026-08-16 13:02:43,499 [INFO]    MyMusic Delta Sync — Fase 2 (v2.0)    
+2026-08-16 13:02:43,499 [INFO] ==========================================
+2026-08-16 13:02:44,261 [INFO] Verificando perfil de usuario (delta-sync)...
+2026-08-16 13:02:44,858 [INFO] Autenticado: chocow (111573307)
+2026-08-16 13:02:44,952 [INFO] Obteniendo lista de playlists (metadatos ligeros)...
+2026-08-16 13:02:45,142 [INFO] Encontradas 19 playlists remotas.
+2026-08-16 13:02:45,143 [INFO] [DELTA] 'reggaeton, funk, dancehall' — snapshot cambió. Descargando IDs de tracks...
+2026-08-16 13:02:45,351 [INFO]   Delta 'reggaeton, funk, dancehall': +0 añadidas, -73 borradas, ~0 movidas.
+2026-08-16 13:02:45,351 [INFO] [SKIP] 'Estoy Vivo' — snapshot sin cambios.
+2026-08-16 13:02:45,351 [INFO] [SKIP] 'Dance & House' — snapshot sin cambios.
+2026-08-16 13:02:45,351 [INFO] [SKIP] 'Putas Joyas que curan el Alma' — snapshot sin cambios.
+2026-08-16 13:02:45,352 [INFO] [DELTA] 'DnB' — snapshot cambió. Descargando IDs de tracks...
+2026-08-16 13:02:46,381 [INFO]   Delta 'DnB': +0 añadidas, -120 borradas, ~0 movidas.
+2026-08-16 13:02:46,382 [INFO] [SKIP] 'Mamagusta' — snapshot sin cambios.
+2026-08-16 13:02:46,382 [INFO] [DELTA] 'Sabor Ketama' — snapshot cambió. Descargando IDs de tracks...
+2026-08-16 13:02:46,642 [WARNING] Error 403 en tracks de 'Sabor Ketama'. Saltando.
+2026-08-16 13:02:46,642 [INFO] [SKIP] 'melancolico y estrellado' — snapshot sin cambios.
+2026-08-16 13:02:46,642 [INFO] [SKIP] 'bueno, rock' — snapshot sin cambios.
+2026-08-16 13:02:46,642 [INFO] [SKIP] 'Musique nèg' — snapshot sin cambios.
+2026-08-16 13:02:46,642 [INFO] [SKIP] 'classics' — snapshot sin cambios.
+2026-08-16 13:02:46,642 [INFO] [SKIP] 'cosas' — snapshot sin cambios.
+2026-08-16 13:02:46,642 [INFO] [SKIP] 'premio' — snapshot sin cambios.
+2026-08-16 13:02:46,642 [INFO] [SKIP] 'booya' — snapshot sin cambios.
+2026-08-16 13:02:46,642 [INFO] [SKIP] 'frungir' — snapshot sin cambios.
+2026-08-16 13:02:46,642 [INFO] [DELTA] 'welcome and relax' — snapshot cambió. Descargando IDs de tracks...
+2026-08-16 13:02:56,044 [INFO]   Delta 'welcome and relax': +0 añadidas, -1244 borradas, ~0 movidas.
+2026-08-16 13:02:56,044 [INFO] [SKIP] 'TECHNO' — snapshot sin cambios.
+2026-08-16 13:02:56,044 [INFO] [SKIP] '2000-2010' — snapshot sin cambios.
+2026-08-16 13:02:56,044 [INFO] [SKIP] 'guai' — snapshot sin cambios.
+2026-08-16 13:02:56,412 [INFO] Library guardada: public\data\music_library.json (19 playlists).
+2026-08-16 13:02:56,419 [INFO] Delta-sync completado. Playlists: 19. Delta: +0 / -1437 / ~0.
+2026-08-16 13:02:57,272 [INFO] Auth: usando token OAuth de usuario (--token / SPOTIFY_ACCESS_TOKEN).
+2026-08-16 13:02:57,272 [INFO] ==========================================
+2026-08-16 13:02:57,272 [INFO]   MyMusic Enrich Metadata — Francotirador 
+2026-08-16 13:02:57,272 [INFO] ==========================================
+2026-08-16 13:02:57,272 [INFO] Cargando public\data\music_library.json...
+2026-08-16 13:02:57,344 [INFO] Total IDs únicos en la librería: 3,686
+2026-08-16 13:02:57,345 [INFO] IDs sin audio_features:          3
+2026-08-16 13:02:57,345 [INFO] Ya enriquecidos:                 3,683
+2026-08-16 13:02:57,345 [INFO] Chunks a procesar:               1 x 100 IDs
+2026-08-16 13:02:57,345 [INFO] Throttle:                        3.0s entre chunks
+2026-08-16 13:02:57,345 [INFO] ETA estimado:                    ~3s (~0.1 min)
+2026-08-16 13:02:57,351 [INFO] [Chunk 1/1] Solicitando features para 3 tracks...
+2026-08-16 13:02:57,862 [ERROR]   HTTP 403 en chunk 1: Spotify requiere token OAuth de usuario para audio-features (deprecado para Client Credentials desde mayo 2024).
+2026-08-16 13:02:57,862 [ERROR]   SOLUCION: python enrich_metadata.py --token <SPOTIFY_ACCESS_TOKEN>
+2026-08-16 13:02:58,170 [INFO] [FINAL] Librería guardada: public\data\music_library.json (19 playlists).
+2026-08-16 13:02:58,170 [INFO] ==========================================
+2026-08-16 13:02:58,170 [INFO]   Enriquecimiento completado.
+2026-08-16 13:02:58,170 [INFO]   IDs unicos enriquecidos: 0
+2026-08-16 13:02:58,170 [INFO]   Sin features en Spotify: 0  (tracks retirados)
+2026-08-16 13:02:58,171 [INFO]   Errores de chunk:        3
+2026-08-16 13:02:58,171 [INFO] ==========================================
+2026-08-16 13:18:25,761 [INFO] ==========================================
+2026-08-16 13:18:25,761 [INFO]   MyMusic CSV Ingestor — Fase 1 (v1.0)   
+2026-08-16 13:18:25,761 [INFO] ==========================================
+2026-08-16 13:18:25,761 [INFO] Encontrados 22 archivos CSV en 'data\imports'.
+2026-08-16 13:18:25,763 [INFO] Tamaño total: 1798.0 KB — ETA estimado: ~4s
+2026-08-16 13:18:25,807 [INFO] [1/22] Procesando '2000-2010' (2000-2010.csv)...
+2026-08-16 13:18:25,832 [INFO]   Upsert: 388 tracks (era 388 localmente).
+2026-08-16 13:18:25,832 [INFO] [2/22] Procesando 'booya' (booya.csv)...
+2026-08-16 13:18:25,863 [INFO]   1 filas descartadas en booya.csv (tracks locales o URIs inválidas).
+2026-08-16 13:18:25,866 [INFO]   Upsert: 816 tracks (era 816 localmente).
+2026-08-16 13:18:25,866 [INFO] [3/22] Procesando 'bueno, rock' (bueno,_rock.csv)...
+2026-08-16 13:18:25,877 [INFO]   Upsert: 85 tracks (era 85 localmente).
+2026-08-16 13:18:25,877 [INFO] [4/22] Procesando 'classics' (classics.csv)...
+2026-08-16 13:18:25,895 [INFO]   1 filas descartadas en classics.csv (tracks locales o URIs inválidas).
+2026-08-16 13:18:25,896 [INFO]   Upsert: 534 tracks (era 534 localmente).
+2026-08-16 13:18:25,896 [INFO] [5/22] Procesando 'cosas' (cosas.csv)...
+2026-08-16 13:18:25,913 [INFO]   Upsert: 401 tracks (era 401 localmente).
+2026-08-16 13:18:25,913 [INFO] [6/22] Procesando 'Dance & House' (Dance_&_House.csv)...
+2026-08-16 13:18:25,926 [INFO]   Upsert: 122 tracks (era 122 localmente).
+2026-08-16 13:18:25,926 [INFO] [7/22] Procesando 'DnB' (DnB.csv)...
+2026-08-16 13:18:25,939 [INFO]   [DnB BENCHMARK] Detectada playlist benchmark: 'DnB'
+2026-08-16 13:18:25,939 [INFO]   Upsert: 120 tracks (era 0 localmente).
+2026-08-16 13:18:25,939 [INFO] [8/22] Procesando 'Estoy Vivo' (Estoy_Vivo.csv)...
+2026-08-16 13:18:25,952 [INFO]   Upsert: 61 tracks (era 61 localmente).
+2026-08-16 13:18:25,952 [INFO] [9/22] Procesando 'frungir' (frungir.csv)...
+2026-08-16 13:18:25,967 [INFO]   Upsert: 175 tracks (era 175 localmente).
+2026-08-16 13:18:25,967 [INFO] [10/22] Procesando 'guai' (guai.csv)...
+2026-08-16 13:18:25,988 [INFO]   Upsert: 568 tracks (era 568 localmente).
+2026-08-16 13:18:25,988 [INFO] [11/22] Procesando 'Liked Songs' (Liked_Songs.csv)...
+2026-08-16 13:18:26,022 [INFO]   Nueva playlist: 1784 tracks importados.
+2026-08-16 13:18:26,022 [INFO] [12/22] Procesando 'Mamagusta' (Mamagusta.csv)...
+2026-08-16 13:18:26,035 [INFO]   Upsert: 4 tracks (era 4 localmente).
+2026-08-16 13:18:26,035 [INFO] [13/22] Procesando 'melancolico y estrellado' (melancolico_y_estrellado.csv)...
+2026-08-16 13:18:26,051 [INFO]   Upsert: 77 tracks (era 77 localmente).
+2026-08-16 13:18:26,051 [INFO] [14/22] Procesando 'Musique nèg' (Musique_nèg.csv)...
+2026-08-16 13:18:26,063 [INFO]   Upsert: 80 tracks (era 80 localmente).
+2026-08-16 13:18:26,063 [INFO] [15/22] Procesando 'premio' (premio.csv)...
+2026-08-16 13:18:26,079 [INFO]   Upsert: 206 tracks (era 206 localmente).
+2026-08-16 13:18:26,079 [INFO] [16/22] Procesando 'Putas Joyas que curan el Alma' (Putas_Joyas_que_curan_el_Alma.csv)...
+2026-08-16 13:18:26,092 [INFO]   Upsert: 83 tracks (era 83 localmente).
+2026-08-16 13:18:26,093 [INFO] [17/22] Procesando 'reggaeton, funk, dancehall' (reggaeton,_funk,_dancehall.csv)...
+2026-08-16 13:18:26,103 [INFO]   Upsert: 73 tracks (era 0 localmente).
+2026-08-16 13:18:26,103 [INFO] [18/22] Procesando 'Sabor Ketama' (Sabor_Ketama.csv)...
+2026-08-16 13:18:26,117 [INFO]   Upsert: 14 tracks (era 14 localmente).
+2026-08-16 13:18:26,117 [INFO] [19/22] Procesando 'TECHNO' (TECHNO.csv)...
+2026-08-16 13:18:26,128 [INFO]   Upsert: 93 tracks (era 93 localmente).
+2026-08-16 13:18:26,129 [INFO] [20/22] Procesando 'Top 50 Francia' (Top_50_Francia.csv)...
+2026-08-16 13:18:26,139 [INFO]   Nueva playlist: 50 tracks importados.
+2026-08-16 13:18:26,140 [INFO] [21/22] Procesando 'Tus canciones más escuchadas en 2025' (Tus_canciones_más_escuchadas_en_2025.csv)...
+2026-08-16 13:18:26,154 [INFO]   Nueva playlist: 100 tracks importados.
+2026-08-16 13:18:26,156 [INFO] [22/22] Procesando 'welcome and relax' (welcome_and_relax.csv)...
+2026-08-16 13:18:26,186 [INFO]   Upsert: 1266 tracks (era 0 localmente).
+2026-08-16 13:18:26,187 [INFO] Enlazando benchmark DnB ('DnB') en completion_meta de todas las playlists...
+2026-08-16 13:18:26,631 [INFO] Librería guardada en public\data\music_library.json (22 playlists).
+2026-08-16 13:18:26,632 [INFO] ==========================================
+2026-08-16 13:18:26,632 [INFO]   Ingesta completada: 22 playlists OK, 0 saltadas.
+2026-08-16 13:18:26,632 [INFO]   Total de tracks importados: 7100
+2026-08-16 13:18:26,632 [INFO]   Benchmark DnB detectado: 'DnB'
+2026-08-16 13:18:26,632 [INFO] ==========================================
+2026-08-16 13:22:10,449 [INFO] ==========================================
+2026-08-16 13:22:10,449 [INFO]    MyMusic Delta Sync — Fase 2 (v2.0)    
+2026-08-16 13:22:10,449 [INFO] ==========================================
+2026-08-16 13:22:10,853 [INFO] Verificando perfil de usuario (delta-sync)...
+2026-08-16 13:22:11,360 [INFO] Autenticado: chocow (111573307)
+2026-08-16 13:22:11,469 [INFO] Obteniendo lista de playlists (metadatos ligeros)...
+2026-08-16 13:22:11,655 [INFO] Encontradas 17 playlists remotas.
+2026-08-16 13:22:11,655 [INFO] [SKIP] 'reggaeton, funk, dancehall' — snapshot sin cambios.
+2026-08-16 13:22:11,655 [INFO] [SKIP] 'Estoy Vivo' — snapshot sin cambios.
+2026-08-16 13:22:11,655 [INFO] [SKIP] 'Dance & House' — snapshot sin cambios.
+2026-08-16 13:22:11,655 [INFO] [SKIP] 'Putas Joyas que curan el Alma' — snapshot sin cambios.
+2026-08-16 13:22:11,655 [INFO] [SKIP] 'DnB' — snapshot sin cambios.
+2026-08-16 13:22:11,655 [INFO] [SKIP] 'melancolico y estrellado' — snapshot sin cambios.
+2026-08-16 13:22:11,655 [INFO] [SKIP] 'bueno, rock' — snapshot sin cambios.
+2026-08-16 13:22:11,655 [INFO] [SKIP] 'Musique nèg' — snapshot sin cambios.
+2026-08-16 13:22:11,655 [INFO] [SKIP] 'classics' — snapshot sin cambios.
+2026-08-16 13:22:11,655 [INFO] [SKIP] 'cosas' — snapshot sin cambios.
+2026-08-16 13:22:11,655 [INFO] [SKIP] 'premio' — snapshot sin cambios.
+2026-08-16 13:22:11,655 [INFO] [SKIP] 'booya' — snapshot sin cambios.
+2026-08-16 13:22:11,656 [INFO] [SKIP] 'frungir' — snapshot sin cambios.
+2026-08-16 13:22:11,656 [INFO] [SKIP] 'welcome and relax' — snapshot sin cambios.
+2026-08-16 13:22:11,656 [INFO] [SKIP] 'TECHNO' — snapshot sin cambios.
+2026-08-16 13:22:11,656 [INFO] [SKIP] '2000-2010' — snapshot sin cambios.
+2026-08-16 13:22:11,656 [INFO] [SKIP] 'guai' — snapshot sin cambios.
+2026-08-16 13:22:12,070 [INFO] Library guardada: public\data\music_library.json (19 playlists).
+2026-08-16 13:22:12,079 [INFO] Delta-sync completado. Playlists: 19. Delta: +0 / -0 / ~0.
+2026-08-16 13:22:12,667 [INFO] Auth: usando token OAuth de usuario (--token / SPOTIFY_ACCESS_TOKEN).
+2026-08-16 13:22:12,668 [INFO] ==========================================
+2026-08-16 13:22:12,668 [INFO]   MyMusic Enrich Metadata — Francotirador 
+2026-08-16 13:22:12,668 [INFO] ==========================================
+2026-08-16 13:22:12,668 [INFO] Cargando public\data\music_library.json...
+2026-08-16 13:22:12,768 [INFO] Total IDs únicos en la librería: 5,123
+2026-08-16 13:22:12,768 [INFO] IDs sin audio_features:          4
+2026-08-16 13:22:12,768 [INFO] Ya enriquecidos:                 5,119
+2026-08-16 13:22:12,770 [INFO] Chunks a procesar:               1 x 100 IDs
+2026-08-16 13:22:12,770 [INFO] Throttle:                        3.0s entre chunks
+2026-08-16 13:22:12,770 [INFO] ETA estimado:                    ~3s (~0.1 min)
+2026-08-16 13:22:12,778 [INFO] [Chunk 1/1] Solicitando features para 4 tracks...
+2026-08-16 13:22:13,213 [ERROR]   HTTP 403 en chunk 1: Spotify requiere token OAuth de usuario para audio-features (deprecado para Client Credentials desde mayo 2024).
+2026-08-16 13:22:13,213 [ERROR]   SOLUCION: python enrich_metadata.py --token <SPOTIFY_ACCESS_TOKEN>
+2026-08-16 13:22:13,614 [INFO] [FINAL] Librería guardada: public\data\music_library.json (19 playlists).
+2026-08-16 13:22:13,614 [INFO] ==========================================
+2026-08-16 13:22:13,614 [INFO]   Enriquecimiento completado.
+2026-08-16 13:22:13,614 [INFO]   IDs unicos enriquecidos: 0
+2026-08-16 13:22:13,614 [INFO]   Sin features en Spotify: 0  (tracks retirados)
+2026-08-16 13:22:13,614 [INFO]   Errores de chunk:        4
+2026-08-16 13:22:13,615 [INFO] ==========================================
+2026-08-16 13:26:53,221 [INFO] ==========================================
+2026-08-16 13:26:53,222 [INFO]    MyMusic Delta Sync — Fase 2 (v2.0)    
+2026-08-16 13:26:53,222 [INFO] ==========================================
+2026-08-16 13:26:53,692 [INFO] Verificando perfil de usuario (delta-sync)...
+2026-08-16 13:26:54,327 [INFO] Autenticado: chocow (111573307)
+2026-08-16 13:26:54,408 [INFO] Obteniendo lista de playlists (metadatos ligeros)...
+2026-08-16 13:26:54,587 [INFO] Encontradas 17 playlists remotas.
+2026-08-16 13:26:54,587 [INFO] [SKIP] 'reggaeton, funk, dancehall' — snapshot sin cambios.
+2026-08-16 13:26:54,587 [INFO] [SKIP] 'Estoy Vivo' — snapshot sin cambios.
+2026-08-16 13:26:54,587 [INFO] [SKIP] 'Dance & House' — snapshot sin cambios.
+2026-08-16 13:26:54,587 [INFO] [SKIP] 'Putas Joyas que curan el Alma' — snapshot sin cambios.
+2026-08-16 13:26:54,587 [INFO] [SKIP] 'DnB' — snapshot sin cambios.
+2026-08-16 13:26:54,587 [INFO] [SKIP] 'melancolico y estrellado' — snapshot sin cambios.
+2026-08-16 13:26:54,587 [INFO] [SKIP] 'bueno, rock' — snapshot sin cambios.
+2026-08-16 13:26:54,587 [INFO] [SKIP] 'Musique nèg' — snapshot sin cambios.
+2026-08-16 13:26:54,587 [INFO] [SKIP] 'classics' — snapshot sin cambios.
+2026-08-16 13:26:54,587 [INFO] [SKIP] 'cosas' — snapshot sin cambios.
+2026-08-16 13:26:54,587 [INFO] [SKIP] 'premio' — snapshot sin cambios.
+2026-08-16 13:26:54,587 [INFO] [SKIP] 'booya' — snapshot sin cambios.
+2026-08-16 13:26:54,587 [INFO] [SKIP] 'frungir' — snapshot sin cambios.
+2026-08-16 13:26:54,587 [INFO] [SKIP] 'welcome and relax' — snapshot sin cambios.
+2026-08-16 13:26:54,587 [INFO] [SKIP] 'TECHNO' — snapshot sin cambios.
+2026-08-16 13:26:54,587 [INFO] [SKIP] '2000-2010' — snapshot sin cambios.
+2026-08-16 13:26:54,587 [INFO] [SKIP] 'guai' — snapshot sin cambios.
+2026-08-16 13:26:54,917 [INFO] Library guardada: public\data\music_library.json (19 playlists).
+2026-08-16 13:26:54,930 [INFO] Delta-sync completado. Playlists: 19. Delta: +0 / -0 / ~0.
+2026-08-16 13:26:55,448 [INFO] Auth: usando token OAuth de usuario (--token / SPOTIFY_ACCESS_TOKEN).
+2026-08-16 13:26:55,448 [INFO] ==========================================
+2026-08-16 13:26:55,448 [INFO]   MyMusic Enrich Metadata — Francotirador 
+2026-08-16 13:26:55,448 [INFO] ==========================================
+2026-08-16 13:26:55,448 [INFO] Cargando public\data\music_library.json...
+2026-08-16 13:26:55,530 [INFO] Total IDs únicos en la librería: 5,123
+2026-08-16 13:26:55,530 [INFO] IDs sin audio_features:          4
+2026-08-16 13:26:55,530 [INFO] Ya enriquecidos:                 5,119
+2026-08-16 13:26:55,530 [INFO] Chunks a procesar:               1 x 100 IDs
+2026-08-16 13:26:55,530 [INFO] Throttle:                        3.0s entre chunks
+2026-08-16 13:26:55,530 [INFO] ETA estimado:                    ~3s (~0.1 min)
+2026-08-16 13:26:55,540 [INFO] [Chunk 1/1] Solicitando features para 4 tracks...
+2026-08-16 13:26:55,927 [ERROR]   HTTP 403 en chunk 1: Spotify requiere token OAuth de usuario para audio-features (deprecado para Client Credentials desde mayo 2024).
+2026-08-16 13:26:55,927 [ERROR]   SOLUCION: python enrich_metadata.py --token <SPOTIFY_ACCESS_TOKEN>
+2026-08-16 13:26:56,247 [INFO] [FINAL] Librería guardada: public\data\music_library.json (19 playlists).
+2026-08-16 13:26:56,247 [INFO] ==========================================
+2026-08-16 13:26:56,247 [INFO]   Enriquecimiento completado.
+2026-08-16 13:26:56,247 [INFO]   IDs unicos enriquecidos: 0
+2026-08-16 13:26:56,247 [INFO]   Sin features en Spotify: 0  (tracks retirados)
+2026-08-16 13:26:56,247 [INFO]   Errores de chunk:        4
+2026-08-16 13:26:56,247 [INFO] ==========================================
+2026-08-16 13:28:13,438 [INFO] ==========================================
+2026-08-16 13:28:13,438 [INFO]    MyMusic Delta Sync — Fase 2 (v2.0)    
+2026-08-16 13:28:13,438 [INFO] ==========================================
+2026-08-16 13:28:13,983 [INFO] Verificando perfil de usuario (delta-sync)...
+2026-08-16 13:28:14,484 [INFO] Autenticado: chocow (111573307)
+2026-08-16 13:28:14,568 [INFO] Obteniendo lista de playlists (metadatos ligeros)...
+2026-08-16 13:28:14,760 [INFO] Encontradas 17 playlists remotas.
+2026-08-16 13:28:14,760 [INFO] [SKIP] 'reggaeton, funk, dancehall' — snapshot sin cambios.
+2026-08-16 13:28:14,760 [INFO] [SKIP] 'Estoy Vivo' — snapshot sin cambios.
+2026-08-16 13:28:14,760 [INFO] [SKIP] 'Dance & House' — snapshot sin cambios.
+2026-08-16 13:28:14,760 [INFO] [SKIP] 'Putas Joyas que curan el Alma' — snapshot sin cambios.
+2026-08-16 13:28:14,760 [INFO] [SKIP] 'DnB' — snapshot sin cambios.
+2026-08-16 13:28:14,760 [INFO] [SKIP] 'melancolico y estrellado' — snapshot sin cambios.
+2026-08-16 13:28:14,760 [INFO] [SKIP] 'bueno, rock' — snapshot sin cambios.
+2026-08-16 13:28:14,760 [INFO] [SKIP] 'Musique nèg' — snapshot sin cambios.
+2026-08-16 13:28:14,760 [INFO] [SKIP] 'classics' — snapshot sin cambios.
+2026-08-16 13:28:14,760 [INFO] [SKIP] 'cosas' — snapshot sin cambios.
+2026-08-16 13:28:14,760 [INFO] [SKIP] 'premio' — snapshot sin cambios.
+2026-08-16 13:28:14,760 [INFO] [SKIP] 'booya' — snapshot sin cambios.
+2026-08-16 13:28:14,760 [INFO] [SKIP] 'frungir' — snapshot sin cambios.
+2026-08-16 13:28:14,760 [INFO] [SKIP] 'welcome and relax' — snapshot sin cambios.
+2026-08-16 13:28:14,760 [INFO] [SKIP] 'TECHNO' — snapshot sin cambios.
+2026-08-16 13:28:14,760 [INFO] [SKIP] '2000-2010' — snapshot sin cambios.
+2026-08-16 13:28:14,760 [INFO] [SKIP] 'guai' — snapshot sin cambios.
+2026-08-16 13:28:15,084 [INFO] Library guardada: public\data\music_library.json (19 playlists).
+2026-08-16 13:28:15,092 [INFO] Delta-sync completado. Playlists: 19. Delta: +0 / -0 / ~0.
+2026-08-16 13:32:56,021 [INFO] ==========================================
+2026-08-16 13:32:56,021 [INFO]    MyMusic Delta Sync — Fase 2 (v2.0)    
+2026-08-16 13:32:56,021 [INFO] ==========================================
+2026-08-16 13:32:56,417 [INFO] Verificando perfil de usuario (delta-sync)...
+2026-08-16 13:32:56,932 [INFO] Autenticado: chocow (111573307)
+2026-08-16 13:32:57,023 [INFO] Obteniendo lista de playlists (metadatos ligeros)...
+2026-08-16 13:32:57,252 [INFO] Encontradas 17 playlists remotas.
+2026-08-16 13:32:57,253 [INFO] [SKIP] 'reggaeton, funk, dancehall' — snapshot sin cambios.
+2026-08-16 13:32:57,253 [INFO] [SKIP] 'Estoy Vivo' — snapshot sin cambios.
+2026-08-16 13:32:57,253 [INFO] [SKIP] 'Dance & House' — snapshot sin cambios.
+2026-08-16 13:32:57,253 [INFO] [SKIP] 'Putas Joyas que curan el Alma' — snapshot sin cambios.
+2026-08-16 13:32:57,253 [INFO] [SKIP] 'DnB' — snapshot sin cambios.
+2026-08-16 13:32:57,253 [INFO] [SKIP] 'melancolico y estrellado' — snapshot sin cambios.
+2026-08-16 13:32:57,253 [INFO] [SKIP] 'bueno, rock' — snapshot sin cambios.
+2026-08-16 13:32:57,253 [INFO] [SKIP] 'Musique nèg' — snapshot sin cambios.
+2026-08-16 13:32:57,253 [INFO] [SKIP] 'classics' — snapshot sin cambios.
+2026-08-16 13:32:57,253 [INFO] [SKIP] 'cosas' — snapshot sin cambios.
+2026-08-16 13:32:57,253 [INFO] [SKIP] 'premio' — snapshot sin cambios.
+2026-08-16 13:32:57,253 [INFO] [SKIP] 'booya' — snapshot sin cambios.
+2026-08-16 13:32:57,253 [INFO] [SKIP] 'frungir' — snapshot sin cambios.
+2026-08-16 13:32:57,253 [INFO] [SKIP] 'welcome and relax' — snapshot sin cambios.
+2026-08-16 13:32:57,253 [INFO] [SKIP] 'TECHNO' — snapshot sin cambios.
+2026-08-16 13:32:57,253 [INFO] [SKIP] '2000-2010' — snapshot sin cambios.
+2026-08-16 13:32:57,253 [INFO] [SKIP] 'guai' — snapshot sin cambios.
+2026-08-16 13:32:57,620 [INFO] Library guardada: public\data\music_library.json (19 playlists).
+2026-08-16 13:32:57,630 [INFO] Delta-sync completado. Playlists: 19. Delta: +0 / -0 / ~0.
+2026-08-16 13:32:58,245 [INFO] Auth: usando token OAuth de usuario (--token / SPOTIFY_ACCESS_TOKEN).
+2026-08-16 13:32:58,245 [INFO] ==========================================
+2026-08-16 13:32:58,246 [INFO]   MyMusic Enrich Metadata — Francotirador 
+2026-08-16 13:32:58,246 [INFO] ==========================================
+2026-08-16 13:32:58,246 [INFO] Cargando public\data\music_library.json...
+2026-08-16 13:32:58,326 [INFO] Total IDs únicos en la librería: 5,123
+2026-08-16 13:32:58,326 [INFO] IDs sin audio_features:          4
+2026-08-16 13:32:58,326 [INFO] Ya enriquecidos:                 5,119
+2026-08-16 13:32:58,327 [INFO] Chunks a procesar:               1 x 100 IDs
+2026-08-16 13:32:58,327 [INFO] Throttle:                        3.0s entre chunks
+2026-08-16 13:32:58,327 [INFO] ETA estimado:                    ~3s (~0.1 min)
+2026-08-16 13:32:58,329 [INFO] [Chunk 1/1] Solicitando features para 4 tracks...
+2026-08-16 13:32:58,768 [ERROR]   HTTP 403 en chunk 1: Spotify requiere token OAuth de usuario para audio-features (deprecado para Client Credentials desde mayo 2024).
+2026-08-16 13:32:58,769 [ERROR]   SOLUCION: python enrich_metadata.py --token <SPOTIFY_ACCESS_TOKEN>
+2026-08-16 13:32:59,138 [INFO] [FINAL] Librería guardada: public\data\music_library.json (19 playlists).
+2026-08-16 13:32:59,138 [INFO] ==========================================
+2026-08-16 13:32:59,138 [INFO]   Enriquecimiento completado.
+2026-08-16 13:32:59,138 [INFO]   IDs unicos enriquecidos: 0
+2026-08-16 13:32:59,138 [INFO]   Sin features en Spotify: 0  (tracks retirados)
+2026-08-16 13:32:59,138 [INFO]   Errores de chunk:        4
+2026-08-16 13:32:59,138 [INFO] ==========================================
+2026-08-16 13:37:24,884 [INFO] ==========================================
+2026-08-16 13:37:24,884 [INFO]    MyMusic Delta Sync — Fase 2 (v2.0)    
+2026-08-16 13:37:24,884 [INFO] ==========================================
+2026-08-16 13:37:25,392 [INFO] Verificando perfil de usuario (delta-sync)...
+2026-08-16 13:37:25,868 [INFO] Autenticado: chocow (111573307)
+2026-08-16 13:37:25,932 [INFO] Obteniendo lista de playlists (metadatos ligeros)...
+2026-08-16 13:37:26,186 [INFO] Encontradas 17 playlists remotas.
+2026-08-16 13:37:26,186 [INFO] [SKIP] 'reggaeton, funk, dancehall' — snapshot sin cambios.
+2026-08-16 13:37:26,186 [INFO] [SKIP] 'Estoy Vivo' — snapshot sin cambios.
+2026-08-16 13:37:26,186 [INFO] [SKIP] 'Dance & House' — snapshot sin cambios.
+2026-08-16 13:37:26,186 [INFO] [SKIP] 'Putas Joyas que curan el Alma' — snapshot sin cambios.
+2026-08-16 13:37:26,186 [INFO] [SKIP] 'DnB' — snapshot sin cambios.
+2026-08-16 13:37:26,186 [INFO] [SKIP] 'melancolico y estrellado' — snapshot sin cambios.
+2026-08-16 13:37:26,186 [INFO] [SKIP] 'bueno, rock' — snapshot sin cambios.
+2026-08-16 13:37:26,186 [INFO] [SKIP] 'Musique nèg' — snapshot sin cambios.
+2026-08-16 13:37:26,186 [INFO] [SKIP] 'classics' — snapshot sin cambios.
+2026-08-16 13:37:26,186 [INFO] [SKIP] 'cosas' — snapshot sin cambios.
+2026-08-16 13:37:26,186 [INFO] [SKIP] 'premio' — snapshot sin cambios.
+2026-08-16 13:37:26,186 [INFO] [SKIP] 'booya' — snapshot sin cambios.
+2026-08-16 13:37:26,186 [INFO] [SKIP] 'frungir' — snapshot sin cambios.
+2026-08-16 13:37:26,186 [INFO] [SKIP] 'welcome and relax' — snapshot sin cambios.
+2026-08-16 13:37:26,186 [INFO] [SKIP] 'TECHNO' — snapshot sin cambios.
+2026-08-16 13:37:26,186 [INFO] [SKIP] '2000-2010' — snapshot sin cambios.
+2026-08-16 13:37:26,186 [INFO] [SKIP] 'guai' — snapshot sin cambios.
+2026-08-16 13:37:26,492 [INFO] Library guardada: public\data\music_library.json (19 playlists).
+2026-08-16 13:37:26,500 [INFO] Delta-sync completado. Playlists: 19. Delta: +0 / -0 / ~0.
+2026-08-16 13:37:27,068 [INFO] Auth: usando token OAuth de usuario (--token / SPOTIFY_ACCESS_TOKEN).
+2026-08-16 13:37:27,068 [INFO] ==========================================
+2026-08-16 13:37:27,068 [INFO]   MyMusic Enrich Metadata — Francotirador 
+2026-08-16 13:37:27,068 [INFO] ==========================================
+2026-08-16 13:37:27,068 [INFO] Cargando public\data\music_library.json...
+2026-08-16 13:37:27,145 [INFO] Total IDs únicos en la librería: 5,123
+2026-08-16 13:37:27,145 [INFO] IDs sin audio_features:          4
+2026-08-16 13:37:27,145 [INFO] Ya enriquecidos:                 5,119
+2026-08-16 13:37:27,145 [INFO] Chunks a procesar:               1 x 100 IDs
+2026-08-16 13:37:27,145 [INFO] Throttle:                        3.0s entre chunks
+2026-08-16 13:37:27,145 [INFO] ETA estimado:                    ~3s (~0.1 min)
+2026-08-16 13:37:27,145 [INFO] [Chunk 1/1] Solicitando features para 4 tracks...
+2026-08-16 13:37:27,542 [ERROR]   HTTP 403 en chunk 1: Spotify requiere token OAuth de usuario para audio-features (deprecado para Client Credentials desde mayo 2024).
+2026-08-16 13:37:27,542 [ERROR]   SOLUCION: python enrich_metadata.py --token <SPOTIFY_ACCESS_TOKEN>
+2026-08-16 13:37:27,873 [INFO] [FINAL] Librería guardada: public\data\music_library.json (19 playlists).
+2026-08-16 13:37:27,873 [INFO] ==========================================
+2026-08-16 13:37:27,873 [INFO]   Enriquecimiento completado.
+2026-08-16 13:37:27,873 [INFO]   IDs unicos enriquecidos: 0
+2026-08-16 13:37:27,873 [INFO]   Sin features en Spotify: 0  (tracks retirados)
+2026-08-16 13:37:27,873 [INFO]   Errores de chunk:        4
+2026-08-16 13:37:27,873 [INFO] ==========================================
+2026-08-16 13:37:56,323 [INFO] ==========================================
+2026-08-16 13:37:56,323 [INFO]    MyMusic Delta Sync — Fase 2 (v2.0)    
+2026-08-16 13:37:56,323 [INFO] ==========================================
+2026-08-16 13:37:56,698 [INFO] Verificando perfil de usuario (delta-sync)...
+2026-08-16 13:37:57,212 [INFO] Autenticado: chocow (111573307)
+2026-08-16 13:37:57,282 [INFO] Obteniendo lista de playlists (metadatos ligeros)...
+2026-08-16 13:37:57,476 [INFO] Encontradas 17 playlists remotas.
+2026-08-16 13:37:57,476 [INFO] [SKIP] 'reggaeton, funk, dancehall' — snapshot sin cambios.
+2026-08-16 13:37:57,476 [INFO] [SKIP] 'Estoy Vivo' — snapshot sin cambios.
+2026-08-16 13:37:57,476 [INFO] [SKIP] 'Dance & House' — snapshot sin cambios.
+2026-08-16 13:37:57,476 [INFO] [SKIP] 'Putas Joyas que curan el Alma' — snapshot sin cambios.
+2026-08-16 13:37:57,476 [INFO] [SKIP] 'DnB' — snapshot sin cambios.
+2026-08-16 13:37:57,476 [INFO] [SKIP] 'melancolico y estrellado' — snapshot sin cambios.
+2026-08-16 13:37:57,476 [INFO] [SKIP] 'bueno, rock' — snapshot sin cambios.
+2026-08-16 13:37:57,476 [INFO] [SKIP] 'Musique nèg' — snapshot sin cambios.
+2026-08-16 13:37:57,476 [INFO] [SKIP] 'classics' — snapshot sin cambios.
+2026-08-16 13:37:57,476 [INFO] [SKIP] 'cosas' — snapshot sin cambios.
+2026-08-16 13:37:57,476 [INFO] [SKIP] 'premio' — snapshot sin cambios.
+2026-08-16 13:37:57,476 [INFO] [SKIP] 'booya' — snapshot sin cambios.
+2026-08-16 13:37:57,476 [INFO] [SKIP] 'frungir' — snapshot sin cambios.
+2026-08-16 13:37:57,476 [INFO] [SKIP] 'welcome and relax' — snapshot sin cambios.
+2026-08-16 13:37:57,476 [INFO] [SKIP] 'TECHNO' — snapshot sin cambios.
+2026-08-16 13:37:57,476 [INFO] [SKIP] '2000-2010' — snapshot sin cambios.
+2026-08-16 13:37:57,476 [INFO] [SKIP] 'guai' — snapshot sin cambios.
+2026-08-16 13:37:57,775 [INFO] Library guardada: public\data\music_library.json (19 playlists).
+2026-08-16 13:37:57,785 [INFO] Delta-sync completado. Playlists: 19. Delta: +0 / -0 / ~0.
+2026-08-16 13:37:58,321 [INFO] Auth: usando token OAuth de usuario (--token / SPOTIFY_ACCESS_TOKEN).
+2026-08-16 13:37:58,323 [INFO] ==========================================
+2026-08-16 13:37:58,323 [INFO]   MyMusic Enrich Metadata — Francotirador 
+2026-08-16 13:37:58,323 [INFO] ==========================================
+2026-08-16 13:37:58,323 [INFO] Cargando public\data\music_library.json...
+2026-08-16 13:37:58,393 [INFO] Total IDs únicos en la librería: 5,123
+2026-08-16 13:37:58,393 [INFO] IDs sin audio_features:          4
+2026-08-16 13:37:58,393 [INFO] Ya enriquecidos:                 5,119
+2026-08-16 13:37:58,393 [INFO] Chunks a procesar:               1 x 100 IDs
+2026-08-16 13:37:58,393 [INFO] Throttle:                        3.0s entre chunks
+2026-08-16 13:37:58,393 [INFO] ETA estimado:                    ~3s (~0.1 min)
+2026-08-16 13:37:58,400 [INFO] [Chunk 1/1] Solicitando features para 4 tracks...
+2026-08-16 13:37:58,795 [ERROR]   HTTP 403 en chunk 1: Spotify requiere token OAuth de usuario para audio-features (deprecado para Client Credentials desde mayo 2024).
+2026-08-16 13:37:58,795 [ERROR]   SOLUCION: python enrich_metadata.py --token <SPOTIFY_ACCESS_TOKEN>
+2026-08-16 13:37:59,099 [INFO] [FINAL] Librería guardada: public\data\music_library.json (19 playlists).
+2026-08-16 13:37:59,099 [INFO] ==========================================
+2026-08-16 13:37:59,099 [INFO]   Enriquecimiento completado.
+2026-08-16 13:37:59,099 [INFO]   IDs unicos enriquecidos: 0
+2026-08-16 13:37:59,099 [INFO]   Sin features en Spotify: 0  (tracks retirados)
+2026-08-16 13:37:59,099 [INFO]   Errores de chunk:        4
+2026-08-16 13:37:59,099 [INFO] ==========================================
+2026-08-16 13:42:24,193 [INFO] ==========================================
+2026-08-16 13:42:24,193 [INFO]   MyMusic CSV Ingestor — Fase 1 (v1.0)   
+2026-08-16 13:42:24,193 [INFO] ==========================================
+2026-08-16 13:42:24,203 [INFO] Encontrados 22 archivos CSV en 'data/imports'.
+2026-08-16 13:42:24,204 [INFO] Tamaño total: 1798.0 KB — ETA estimado: ~4s
+2026-08-16 13:42:24,291 [INFO] [1/22] Procesando '2000-2010' (2000-2010.csv)...
+2026-08-16 13:42:24,321 [INFO]   Upsert: 388 tracks (era 388 localmente).
+2026-08-16 13:42:24,321 [INFO] [2/22] Procesando 'booya' (booya.csv)...
+2026-08-16 13:42:24,346 [INFO]   1 filas descartadas en booya.csv (tracks locales o URIs inválidas).
+2026-08-16 13:42:24,354 [INFO]   Upsert: 816 tracks (era 816 localmente).
+2026-08-16 13:42:24,355 [INFO] [3/22] Procesando 'bueno, rock' (bueno,_rock.csv)...
+2026-08-16 13:42:24,365 [INFO]   Upsert: 85 tracks (era 85 localmente).
+2026-08-16 13:42:24,365 [INFO] [4/22] Procesando 'classics' (classics.csv)...
+2026-08-16 13:42:24,383 [INFO]   1 filas descartadas en classics.csv (tracks locales o URIs inválidas).
+2026-08-16 13:42:24,384 [INFO]   Upsert: 534 tracks (era 534 localmente).
+2026-08-16 13:42:24,384 [INFO] [5/22] Procesando 'cosas' (cosas.csv)...
+2026-08-16 13:42:24,403 [INFO]   Upsert: 401 tracks (era 401 localmente).
+2026-08-16 13:42:24,403 [INFO] [6/22] Procesando 'Dance & House' (Dance_&_House.csv)...
+2026-08-16 13:42:24,418 [INFO]   Upsert: 122 tracks (era 122 localmente).
+2026-08-16 13:42:24,418 [INFO] [7/22] Procesando 'DnB' (DnB.csv)...
+2026-08-16 13:42:24,431 [INFO]   [DnB BENCHMARK] Detectada playlist benchmark: 'DnB'
+2026-08-16 13:42:24,431 [INFO]   Upsert: 120 tracks (era 120 localmente).
+2026-08-16 13:42:24,431 [INFO] [8/22] Procesando 'Estoy Vivo' (Estoy_Vivo.csv)...
+2026-08-16 13:42:24,448 [INFO]   Upsert: 61 tracks (era 61 localmente).
+2026-08-16 13:42:24,448 [INFO] [9/22] Procesando 'frungir' (frungir.csv)...
+2026-08-16 13:42:24,465 [INFO]   Upsert: 175 tracks (era 175 localmente).
+2026-08-16 13:42:24,465 [INFO] [10/22] Procesando 'guai' (guai.csv)...
+2026-08-16 13:42:24,488 [INFO]   Upsert: 568 tracks (era 568 localmente).
+2026-08-16 13:42:24,489 [INFO] [11/22] Procesando 'Liked Songs' (Liked_Songs.csv)...
+2026-08-16 13:42:24,524 [INFO]   Nueva playlist: 1784 tracks importados.
+2026-08-16 13:42:24,524 [INFO] [12/22] Procesando 'Mamagusta' (Mamagusta.csv)...
+2026-08-16 13:42:24,538 [INFO]   Upsert: 4 tracks (era 4 localmente).
+2026-08-16 13:42:24,540 [INFO] [13/22] Procesando 'melancolico y estrellado' (melancolico_y_estrellado.csv)...
+2026-08-16 13:42:24,551 [INFO]   Upsert: 77 tracks (era 77 localmente).
+2026-08-16 13:42:24,551 [INFO] [14/22] Procesando 'Musique nèg' (Musique_nèg.csv)...
+2026-08-16 13:42:24,555 [INFO]   Upsert: 80 tracks (era 80 localmente).
+2026-08-16 13:42:24,555 [INFO] [15/22] Procesando 'premio' (premio.csv)...
+2026-08-16 13:42:24,576 [INFO]   Upsert: 206 tracks (era 206 localmente).
+2026-08-16 13:42:24,576 [INFO] [16/22] Procesando 'Putas Joyas que curan el Alma' (Putas_Joyas_que_curan_el_Alma.csv)...
+2026-08-16 13:42:24,589 [INFO]   Upsert: 83 tracks (era 83 localmente).
+2026-08-16 13:42:24,589 [INFO] [17/22] Procesando 'reggaeton, funk, dancehall' (reggaeton,_funk,_dancehall.csv)...
+2026-08-16 13:42:24,601 [INFO]   Upsert: 73 tracks (era 73 localmente).
+2026-08-16 13:42:24,601 [INFO] [18/22] Procesando 'Sabor Ketama' (Sabor_Ketama.csv)...
+2026-08-16 13:42:24,615 [INFO]   Upsert: 14 tracks (era 14 localmente).
+2026-08-16 13:42:24,615 [INFO] [19/22] Procesando 'TECHNO' (TECHNO.csv)...
+2026-08-16 13:42:24,628 [INFO]   Upsert: 93 tracks (era 93 localmente).
+2026-08-16 13:42:24,628 [INFO] [20/22] Procesando 'Top 50 Francia' (Top_50_Francia.csv)...
+2026-08-16 13:42:24,641 [INFO]   Nueva playlist: 50 tracks importados.
+2026-08-16 13:42:24,641 [INFO] [21/22] Procesando 'Tus canciones más escuchadas en 2025' (Tus_canciones_más_escuchadas_en_2025.csv)...
+2026-08-16 13:42:24,656 [INFO]   Nueva playlist: 100 tracks importados.
+2026-08-16 13:42:24,656 [INFO] [22/22] Procesando 'welcome and relax' (welcome_and_relax.csv)...
+2026-08-16 13:42:24,683 [INFO]   Upsert: 1266 tracks (era 1266 localmente).
+2026-08-16 13:42:24,683 [INFO] Enlazando benchmark DnB ('DnB') en completion_meta de todas las playlists...
+2026-08-16 13:42:25,183 [INFO] Librería guardada en public/data/music_library.json (22 playlists).
+2026-08-16 13:42:25,183 [INFO] ==========================================
+2026-08-16 13:42:25,184 [INFO]   Ingesta completada: 22 playlists OK, 0 saltadas.
+2026-08-16 13:42:25,184 [INFO]   Total de tracks importados: 7100
+2026-08-16 13:42:25,184 [INFO]   Benchmark DnB detectado: 'DnB'
+2026-08-16 13:42:25,184 [INFO] ==========================================
+2026-08-16 13:43:14,062 [INFO] ==========================================
+2026-08-16 13:43:14,062 [INFO]    MyMusic Delta Sync — Fase 2 (v2.0)    
+2026-08-16 13:43:14,062 [INFO] ==========================================
+2026-08-16 13:43:14,478 [INFO] Verificando perfil de usuario (delta-sync)...
+2026-08-16 13:43:15,034 [INFO] Autenticado: chocow (111573307)
+2026-08-16 13:43:15,125 [INFO] Obteniendo lista de playlists (metadatos ligeros)...
+2026-08-16 13:43:15,388 [INFO] Encontradas 17 playlists remotas.
+2026-08-16 13:43:15,388 [INFO] [SKIP] 'reggaeton, funk, dancehall' — snapshot sin cambios.
+2026-08-16 13:43:15,388 [INFO] [SKIP] 'Estoy Vivo' — snapshot sin cambios.
+2026-08-16 13:43:15,388 [INFO] [SKIP] 'Dance & House' — snapshot sin cambios.
+2026-08-16 13:43:15,388 [INFO] [SKIP] 'Putas Joyas que curan el Alma' — snapshot sin cambios.
+2026-08-16 13:43:15,388 [INFO] [SKIP] 'DnB' — snapshot sin cambios.
+2026-08-16 13:43:15,388 [INFO] [SKIP] 'melancolico y estrellado' — snapshot sin cambios.
+2026-08-16 13:43:15,388 [INFO] [SKIP] 'bueno, rock' — snapshot sin cambios.
+2026-08-16 13:43:15,388 [INFO] [SKIP] 'Musique nèg' — snapshot sin cambios.
+2026-08-16 13:43:15,388 [INFO] [SKIP] 'classics' — snapshot sin cambios.
+2026-08-16 13:43:15,388 [INFO] [SKIP] 'cosas' — snapshot sin cambios.
+2026-08-16 13:43:15,388 [INFO] [SKIP] 'premio' — snapshot sin cambios.
+2026-08-16 13:43:15,388 [INFO] [SKIP] 'booya' — snapshot sin cambios.
+2026-08-16 13:43:15,388 [INFO] [SKIP] 'frungir' — snapshot sin cambios.
+2026-08-16 13:43:15,388 [INFO] [SKIP] 'welcome and relax' — snapshot sin cambios.
+2026-08-16 13:43:15,388 [INFO] [SKIP] 'TECHNO' — snapshot sin cambios.
+2026-08-16 13:43:15,388 [INFO] [SKIP] '2000-2010' — snapshot sin cambios.
+2026-08-16 13:43:15,388 [INFO] [SKIP] 'guai' — snapshot sin cambios.
+2026-08-16 13:43:15,731 [INFO] Library guardada: public\data\music_library.json (19 playlists).
+2026-08-16 13:43:15,739 [INFO] Delta-sync completado. Playlists: 19. Delta: +0 / -0 / ~0.
+2026-08-16 13:43:16,360 [INFO] Auth: usando token OAuth de usuario (--token / SPOTIFY_ACCESS_TOKEN).
+2026-08-16 13:43:16,360 [INFO] ==========================================
+2026-08-16 13:43:16,360 [INFO]   MyMusic Enrich Metadata — Francotirador 
+2026-08-16 13:43:16,360 [INFO] ==========================================
+2026-08-16 13:43:16,360 [INFO] Cargando public\data\music_library.json...
+2026-08-16 13:43:16,439 [INFO] Total IDs únicos en la librería: 5,123
+2026-08-16 13:43:16,439 [INFO] IDs sin audio_features:          4
+2026-08-16 13:43:16,439 [INFO] Ya enriquecidos:                 5,119
+2026-08-16 13:43:16,439 [INFO] Chunks a procesar:               1 x 100 IDs
+2026-08-16 13:43:16,439 [INFO] Throttle:                        3.0s entre chunks
+2026-08-16 13:43:16,439 [INFO] ETA estimado:                    ~3s (~0.1 min)
+2026-08-16 13:43:16,444 [INFO] [Chunk 1/1] Solicitando features para 4 tracks...
+2026-08-16 13:43:16,826 [ERROR]   HTTP 403 en chunk 1: Spotify requiere token OAuth de usuario para audio-features (deprecado para Client Credentials desde mayo 2024).
+2026-08-16 13:43:16,826 [ERROR]   SOLUCION: python enrich_metadata.py --token <SPOTIFY_ACCESS_TOKEN>
+2026-08-16 13:43:17,173 [INFO] [FINAL] Librería guardada: public\data\music_library.json (19 playlists).
+2026-08-16 13:43:17,173 [INFO] ==========================================
+2026-08-16 13:43:17,173 [INFO]   Enriquecimiento completado.
+2026-08-16 13:43:17,173 [INFO]   IDs unicos enriquecidos: 0
+2026-08-16 13:43:17,173 [INFO]   Sin features en Spotify: 0  (tracks retirados)
+2026-08-16 13:43:17,173 [INFO]   Errores de chunk:        4
+2026-08-16 13:43:17,173 [INFO] ==========================================
+2026-08-16 13:44:21,830 [INFO] ==========================================
+2026-08-16 13:44:21,830 [INFO]    MyMusic Delta Sync — Fase 2 (v2.0)    
+2026-08-16 13:44:21,830 [INFO] ==========================================
+2026-08-16 13:44:22,336 [INFO] Verificando perfil de usuario (delta-sync)...
+2026-08-16 13:44:22,792 [INFO] Autenticado: chocow (111573307)
+2026-08-16 13:44:22,870 [INFO] Obteniendo lista de playlists (metadatos ligeros)...
+2026-08-16 13:44:23,206 [INFO] Encontradas 17 playlists remotas.
+2026-08-16 13:44:23,206 [INFO] [SKIP] 'reggaeton, funk, dancehall' — snapshot sin cambios.
+2026-08-16 13:44:23,206 [INFO] [SKIP] 'Estoy Vivo' — snapshot sin cambios.
+2026-08-16 13:44:23,206 [INFO] [SKIP] 'Dance & House' — snapshot sin cambios.
+2026-08-16 13:44:23,206 [INFO] [SKIP] 'Putas Joyas que curan el Alma' — snapshot sin cambios.
+2026-08-16 13:44:23,206 [INFO] [SKIP] 'DnB' — snapshot sin cambios.
+2026-08-16 13:44:23,206 [INFO] [SKIP] 'melancolico y estrellado' — snapshot sin cambios.
+2026-08-16 13:44:23,206 [INFO] [SKIP] 'bueno, rock' — snapshot sin cambios.
+2026-08-16 13:44:23,206 [INFO] [SKIP] 'Musique nèg' — snapshot sin cambios.
+2026-08-16 13:44:23,206 [INFO] [SKIP] 'classics' — snapshot sin cambios.
+2026-08-16 13:44:23,206 [INFO] [SKIP] 'cosas' — snapshot sin cambios.
+2026-08-16 13:44:23,206 [INFO] [SKIP] 'premio' — snapshot sin cambios.
+2026-08-16 13:44:23,206 [INFO] [SKIP] 'booya' — snapshot sin cambios.
+2026-08-16 13:44:23,206 [INFO] [SKIP] 'frungir' — snapshot sin cambios.
+2026-08-16 13:44:23,206 [INFO] [SKIP] 'welcome and relax' — snapshot sin cambios.
+2026-08-16 13:44:23,206 [INFO] [SKIP] 'TECHNO' — snapshot sin cambios.
+2026-08-16 13:44:23,206 [INFO] [SKIP] '2000-2010' — snapshot sin cambios.
+2026-08-16 13:44:23,206 [INFO] [SKIP] 'guai' — snapshot sin cambios.
+2026-08-16 13:44:23,549 [INFO] Library guardada: public\data\music_library.json (19 playlists).
+2026-08-16 13:44:23,558 [INFO] Delta-sync completado. Playlists: 19. Delta: +0 / -0 / ~0.
+2026-08-16 13:50:39,811 [INFO] ==========================================
+2026-08-16 13:50:39,811 [INFO]   MyMusic CSV Ingestor — Fase 1 (v1.0)   
+2026-08-16 13:50:39,813 [INFO] ==========================================
+2026-08-16 13:50:39,813 [INFO] Encontrados 22 archivos CSV en 'data\imports'.
+2026-08-16 13:50:39,813 [INFO] Tamaño total: 1798.0 KB — ETA estimado: ~4s
+2026-08-16 13:50:39,881 [INFO] [1/22] Procesando '2000-2010' (2000-2010.csv)...
+2026-08-16 13:50:39,895 [INFO]   Upsert: 388 tracks (era 388 localmente).
+2026-08-16 13:50:39,895 [INFO] [2/22] Procesando 'booya' (booya.csv)...
+2026-08-16 13:50:39,907 [INFO]   1 filas descartadas en booya.csv (tracks locales o URIs inválidas).
+2026-08-16 13:50:39,912 [INFO]   Upsert: 816 tracks (era 816 localmente).
+2026-08-16 13:50:39,912 [INFO] [3/22] Procesando 'bueno, rock' (bueno,_rock.csv)...
+2026-08-16 13:50:39,914 [INFO]   Upsert: 85 tracks (era 85 localmente).
+2026-08-16 13:50:39,914 [INFO] [4/22] Procesando 'classics' (classics.csv)...
+2026-08-16 13:50:39,921 [INFO]   1 filas descartadas en classics.csv (tracks locales o URIs inválidas).
+2026-08-16 13:50:39,923 [INFO]   Upsert: 534 tracks (era 534 localmente).
+2026-08-16 13:50:39,923 [INFO] [5/22] Procesando 'cosas' (cosas.csv)...
+2026-08-16 13:50:39,929 [INFO]   Upsert: 401 tracks (era 401 localmente).
+2026-08-16 13:50:39,929 [INFO] [6/22] Procesando 'Dance & House' (Dance_&_House.csv)...
+2026-08-16 13:50:39,931 [INFO]   Upsert: 122 tracks (era 122 localmente).
+2026-08-16 13:50:39,931 [INFO] [7/22] Procesando 'DnB' (DnB.csv)...
+2026-08-16 13:50:39,934 [INFO]   [DnB BENCHMARK] Detectada playlist benchmark: 'DnB'
+2026-08-16 13:50:39,934 [INFO]   Upsert: 120 tracks (era 120 localmente).
+2026-08-16 13:50:39,934 [INFO] [8/22] Procesando 'Estoy Vivo' (Estoy_Vivo.csv)...
+2026-08-16 13:50:39,935 [INFO]   Upsert: 61 tracks (era 61 localmente).
+2026-08-16 13:50:39,935 [INFO] [9/22] Procesando 'frungir' (frungir.csv)...
+2026-08-16 13:50:39,938 [INFO]   Upsert: 175 tracks (era 175 localmente).
+2026-08-16 13:50:39,938 [INFO] [10/22] Procesando 'guai' (guai.csv)...
+2026-08-16 13:50:39,946 [INFO]   Upsert: 568 tracks (era 568 localmente).
+2026-08-16 13:50:39,946 [INFO] [11/22] Procesando 'Liked Songs' (Liked_Songs.csv)...
+2026-08-16 13:50:39,971 [INFO]   Nueva playlist: 1784 tracks importados.
+2026-08-16 13:50:39,971 [INFO] [12/22] Procesando 'Mamagusta' (Mamagusta.csv)...
+2026-08-16 13:50:39,971 [INFO]   Upsert: 4 tracks (era 4 localmente).
+2026-08-16 13:50:39,971 [INFO] [13/22] Procesando 'melancolico y estrellado' (melancolico_y_estrellado.csv)...
+2026-08-16 13:50:39,972 [INFO]   Upsert: 77 tracks (era 77 localmente).
+2026-08-16 13:50:39,972 [INFO] [14/22] Procesando 'Musique nèg' (Musique_nèg.csv)...
+2026-08-16 13:50:39,974 [INFO]   Upsert: 80 tracks (era 80 localmente).
+2026-08-16 13:50:39,974 [INFO] [15/22] Procesando 'premio' (premio.csv)...
+2026-08-16 13:50:39,977 [INFO]   Upsert: 206 tracks (era 206 localmente).
+2026-08-16 13:50:39,977 [INFO] [16/22] Procesando 'Putas Joyas que curan el Alma' (Putas_Joyas_que_curan_el_Alma.csv)...
+2026-08-16 13:50:39,979 [INFO]   Upsert: 83 tracks (era 83 localmente).
+2026-08-16 13:50:39,979 [INFO] [17/22] Procesando 'reggaeton, funk, dancehall' (reggaeton,_funk,_dancehall.csv)...
+2026-08-16 13:50:39,981 [INFO]   Upsert: 73 tracks (era 73 localmente).
+2026-08-16 13:50:39,981 [INFO] [18/22] Procesando 'Sabor Ketama' (Sabor_Ketama.csv)...
+2026-08-16 13:50:39,981 [INFO]   Upsert: 14 tracks (era 14 localmente).
+2026-08-16 13:50:39,981 [INFO] [19/22] Procesando 'TECHNO' (TECHNO.csv)...
+2026-08-16 13:50:39,983 [INFO]   Upsert: 93 tracks (era 93 localmente).
+2026-08-16 13:50:39,983 [INFO] [20/22] Procesando 'Top 50 Francia' (Top_50_Francia.csv)...
+2026-08-16 13:50:39,984 [INFO]   Nueva playlist: 50 tracks importados.
+2026-08-16 13:50:39,984 [INFO] [21/22] Procesando 'Tus canciones más escuchadas en 2025' (Tus_canciones_más_escuchadas_en_2025.csv)...
+2026-08-16 13:50:39,986 [INFO]   Nueva playlist: 100 tracks importados.
+2026-08-16 13:50:39,986 [INFO] [22/22] Procesando 'welcome and relax' (welcome_and_relax.csv)...
+2026-08-16 13:50:40,005 [INFO]   Upsert: 1266 tracks (era 1266 localmente).
+2026-08-16 13:50:40,005 [INFO] Enlazando benchmark DnB ('DnB') en completion_meta de todas las playlists...
+2026-08-16 13:50:40,478 [INFO] Librería guardada en public\data\music_library.json (22 playlists).
+2026-08-16 13:50:40,478 [INFO] ==========================================
+2026-08-16 13:50:40,478 [INFO]   Ingesta completada: 22 playlists OK, 0 saltadas.
+2026-08-16 13:50:40,478 [INFO]   Total de tracks importados: 7100
+2026-08-16 13:50:40,478 [INFO]   Benchmark DnB detectado: 'DnB'
+2026-08-16 13:50:40,478 [INFO] ==========================================
+2026-08-16 13:51:30,547 [INFO] ==========================================
+2026-08-16 13:51:30,552 [INFO]    MyMusic Delta Sync — Fase 2 (v2.0)    
+2026-08-16 13:51:30,552 [INFO] ==========================================
+2026-08-16 13:51:30,975 [INFO] Verificando perfil de usuario (delta-sync)...
+2026-08-16 13:51:31,449 [INFO] Autenticado: chocow (111573307)
+2026-08-16 13:51:31,540 [INFO] Sincronizando 'Liked Songs' (Canciones que te gustan)...
+2026-08-16 13:51:31,774 [INFO] [DELTA] Descargando Liked Songs (1788 tracks remotos)...
+2026-08-16 13:51:44,829 [INFO] Liked Songs sincronizado con éxito (1788 tracks).
+2026-08-16 13:51:44,829 [INFO] Obteniendo lista de playlists (metadatos ligeros)...
+2026-08-16 13:51:45,063 [INFO] Encontradas 17 playlists remotas en la cuenta.
+2026-08-16 13:51:45,063 [INFO] [DELTA] 'reggaeton, funk, dancehall' — snapshot cambió. Descargando IDs de tracks...
+2026-08-16 13:51:45,348 [INFO]   Delta 'reggaeton, funk, dancehall': +0 añadidas, -0 borradas, ~0 movidas.
+2026-08-16 13:51:45,348 [INFO] [DELTA] 'Estoy Vivo' — snapshot cambió. Descargando IDs de tracks...
+2026-08-16 13:51:45,586 [INFO]   Delta 'Estoy Vivo': +0 añadidas, -0 borradas, ~0 movidas.
+2026-08-16 13:51:45,586 [INFO] [DELTA] 'Dance & House' — snapshot cambió. Descargando IDs de tracks...
+2026-08-16 13:51:46,431 [INFO]   Delta 'Dance & House': +0 añadidas, -0 borradas, ~0 movidas.
+2026-08-16 13:51:46,431 [INFO] [DELTA] 'Putas Joyas que curan el Alma' — snapshot cambió. Descargando IDs de tracks...
+2026-08-16 13:51:46,723 [INFO]   Delta 'Putas Joyas que curan el Alma': +0 añadidas, -0 borradas, ~0 movidas.
+2026-08-16 13:51:46,723 [INFO] [DELTA] 'DnB' — snapshot cambió. Descargando IDs de tracks...
+2026-08-16 13:51:47,806 [INFO]   Delta 'DnB': +0 añadidas, -0 borradas, ~0 movidas.
+2026-08-16 13:51:47,806 [INFO] [DELTA] 'melancolico y estrellado' — snapshot cambió. Descargando IDs de tracks...
+2026-08-16 13:51:48,057 [INFO]   Delta 'melancolico y estrellado': +0 añadidas, -0 borradas, ~0 movidas.
+2026-08-16 13:51:48,057 [INFO] [DELTA] 'bueno, rock' — snapshot cambió. Descargando IDs de tracks...
+2026-08-16 13:51:48,438 [INFO]   Delta 'bueno, rock': +0 añadidas, -0 borradas, ~0 movidas.
+2026-08-16 13:51:48,438 [INFO] [DELTA] 'Musique nèg' — snapshot cambió. Descargando IDs de tracks...
+2026-08-16 13:51:48,882 [INFO]   Delta 'Musique nèg': +0 añadidas, -0 borradas, ~0 movidas.
+2026-08-16 13:51:48,882 [INFO] [DELTA] 'classics' — snapshot cambió. Descargando IDs de tracks...
+2026-08-16 13:51:53,061 [INFO]   Delta 'classics': +0 añadidas, -0 borradas, ~0 movidas.
+2026-08-16 13:51:53,061 [INFO] [DELTA] 'cosas' — snapshot cambió. Descargando IDs de tracks...
+2026-08-16 13:51:56,125 [INFO]   Delta 'cosas': +0 añadidas, -0 borradas, ~0 movidas.
+2026-08-16 13:51:56,125 [INFO] [DELTA] 'premio' — snapshot cambió. Descargando IDs de tracks...
+2026-08-16 13:51:58,088 [INFO]   Delta 'premio': +0 añadidas, -0 borradas, ~0 movidas.
+2026-08-16 13:51:58,090 [INFO] [DELTA] 'booya' — snapshot cambió. Descargando IDs de tracks...
+2026-08-16 13:52:04,838 [INFO]   Delta 'booya': +0 añadidas, -0 borradas, ~0 movidas.
+2026-08-16 13:52:04,838 [INFO] [DELTA] 'frungir' — snapshot cambió. Descargando IDs de tracks...
+2026-08-16 13:52:05,803 [INFO]   Delta 'frungir': +0 añadidas, -0 borradas, ~0 movidas.
+2026-08-16 13:52:05,803 [INFO] [DELTA] 'welcome and relax' — snapshot cambió. Descargando IDs de tracks...
+2026-08-16 13:52:15,617 [INFO]   Delta 'welcome and relax': +0 añadidas, -0 borradas, ~0 movidas.
+2026-08-16 13:52:15,617 [INFO] [DELTA] 'TECHNO' — snapshot cambió. Descargando IDs de tracks...
+2026-08-16 13:52:15,866 [INFO]   Delta 'TECHNO': +0 añadidas, -0 borradas, ~0 movidas.
+2026-08-16 13:52:15,866 [INFO] [DELTA] '2000-2010' — snapshot cambió. Descargando IDs de tracks...
+2026-08-16 13:52:18,652 [INFO]   Delta '2000-2010': +0 añadidas, -0 borradas, ~0 movidas.
+2026-08-16 13:52:18,652 [INFO] [DELTA] 'guai' — snapshot cambió. Descargando IDs de tracks...
+2026-08-16 13:52:22,848 [INFO]   Delta 'guai': +0 añadidas, -0 borradas, ~0 movidas.
+2026-08-16 13:52:23,421 [INFO] Library guardada: public\data\music_library.json (39 playlists).
+2026-08-16 13:52:23,436 [INFO] Delta-sync completado. Playlists: 39. Delta: +0 / -0 / ~0.
+2026-08-16 13:52:24,085 [INFO] Auth: usando token OAuth de usuario (--token / SPOTIFY_ACCESS_TOKEN).
+2026-08-16 13:52:24,085 [INFO] ==========================================
+2026-08-16 13:52:24,085 [INFO]   MyMusic Enrich Metadata — Francotirador 
+2026-08-16 13:52:24,085 [INFO] ==========================================
+2026-08-16 13:52:24,085 [INFO] Cargando public\data\music_library.json...
+2026-08-16 13:52:24,197 [INFO] Total IDs únicos en la librería: 7,061
+2026-08-16 13:52:24,197 [INFO] IDs sin audio_features:          8
+2026-08-16 13:52:24,197 [INFO] Ya enriquecidos:                 7,053
+2026-08-16 13:52:24,197 [INFO] Chunks a procesar:               1 x 100 IDs
+2026-08-16 13:52:24,197 [INFO] Throttle:                        3.0s entre chunks
+2026-08-16 13:52:24,197 [INFO] ETA estimado:                    ~3s (~0.1 min)
+2026-08-16 13:52:24,212 [INFO] [Chunk 1/1] Solicitando features para 8 tracks...
+2026-08-16 13:52:24,641 [ERROR]   HTTP 403 en chunk 1: Spotify requiere token OAuth de usuario para audio-features (deprecado para Client Credentials desde mayo 2024).
+2026-08-16 13:52:24,641 [ERROR]   SOLUCION: python enrich_metadata.py --token <SPOTIFY_ACCESS_TOKEN>
+2026-08-16 13:52:25,121 [INFO] [FINAL] Librería guardada: public\data\music_library.json (39 playlists).
+2026-08-16 13:52:25,121 [INFO] ==========================================
+2026-08-16 13:52:25,121 [INFO]   Enriquecimiento completado.
+2026-08-16 13:52:25,121 [INFO]   IDs unicos enriquecidos: 0
+2026-08-16 13:52:25,121 [INFO]   Sin features en Spotify: 0  (tracks retirados)
+2026-08-16 13:52:25,121 [INFO]   Errores de chunk:        8
+2026-08-16 13:52:25,121 [INFO] ==========================================
+2026-08-16 13:59:03,200 [INFO] ==========================================
+2026-08-16 13:59:03,200 [INFO]   MyMusic CSV Ingestor — Fase 1 (v1.0)   
+2026-08-16 13:59:03,200 [INFO] ==========================================
+2026-08-16 13:59:03,200 [INFO] Encontrados 22 archivos CSV en 'data\imports'.
+2026-08-16 13:59:03,200 [INFO] Tamaño total: 1798.0 KB — ETA estimado: ~4s
+2026-08-16 13:59:03,283 [INFO] [1/22] Procesando '2000-2010' (2000-2010.csv)...
+2026-08-16 13:59:03,291 [INFO]   Upsert: 388 tracks (era 388 localmente).
+2026-08-16 13:59:03,291 [INFO] [2/22] Procesando 'booya' (booya.csv)...
+2026-08-16 13:59:03,309 [INFO]   1 filas descartadas en booya.csv (tracks locales o URIs inválidas).
+2026-08-16 13:59:03,310 [INFO]   Upsert: 816 tracks (era 816 localmente).
+2026-08-16 13:59:03,310 [INFO] [3/22] Procesando 'bueno, rock' (bueno,_rock.csv)...
+2026-08-16 13:59:03,312 [INFO]   Upsert: 85 tracks (era 85 localmente).
+2026-08-16 13:59:03,312 [INFO] [4/22] Procesando 'classics' (classics.csv)...
+2026-08-16 13:59:03,321 [INFO]   1 filas descartadas en classics.csv (tracks locales o URIs inválidas).
+2026-08-16 13:59:03,321 [INFO]   Upsert: 534 tracks (era 534 localmente).
+2026-08-16 13:59:03,321 [INFO] [5/22] Procesando 'cosas' (cosas.csv)...
+2026-08-16 13:59:03,328 [INFO]   Upsert: 401 tracks (era 401 localmente).
+2026-08-16 13:59:03,328 [INFO] [6/22] Procesando 'Dance & House' (Dance_&_House.csv)...
+2026-08-16 13:59:03,331 [INFO]   Upsert: 122 tracks (era 122 localmente).
+2026-08-16 13:59:03,331 [INFO] [7/22] Procesando 'DnB' (DnB.csv)...
+2026-08-16 13:59:03,333 [INFO]   [DnB BENCHMARK] Detectada playlist benchmark: 'DnB'
+2026-08-16 13:59:03,333 [INFO]   Upsert: 120 tracks (era 120 localmente).
+2026-08-16 13:59:03,333 [INFO] [8/22] Procesando 'Estoy Vivo' (Estoy_Vivo.csv)...
+2026-08-16 13:59:03,335 [INFO]   Upsert: 61 tracks (era 61 localmente).
+2026-08-16 13:59:03,335 [INFO] [9/22] Procesando 'frungir' (frungir.csv)...
+2026-08-16 13:59:03,338 [INFO]   Upsert: 175 tracks (era 175 localmente).
+2026-08-16 13:59:03,338 [INFO] [10/22] Procesando 'guai' (guai.csv)...
+2026-08-16 13:59:03,347 [INFO]   Upsert: 568 tracks (era 568 localmente).
+2026-08-16 13:59:03,348 [INFO] [11/22] Procesando 'Liked Songs' (Liked_Songs.csv)...
+2026-08-16 13:59:03,376 [INFO]   Upsert: 1784 tracks (era 1788 localmente).
+2026-08-16 13:59:03,376 [INFO] [12/22] Procesando 'Mamagusta' (Mamagusta.csv)...
+2026-08-16 13:59:03,378 [INFO]   Upsert: 4 tracks (era 4 localmente).
+2026-08-16 13:59:03,378 [INFO] [13/22] Procesando 'melancolico y estrellado' (melancolico_y_estrellado.csv)...
+2026-08-16 13:59:03,380 [INFO]   Upsert: 77 tracks (era 77 localmente).
+2026-08-16 13:59:03,380 [INFO] [14/22] Procesando 'Musique nèg' (Musique_nèg.csv)...
+2026-08-16 13:59:03,381 [INFO]   Upsert: 80 tracks (era 80 localmente).
+2026-08-16 13:59:03,382 [INFO] [15/22] Procesando 'premio' (premio.csv)...
+2026-08-16 13:59:03,385 [INFO]   Upsert: 206 tracks (era 206 localmente).
+2026-08-16 13:59:03,385 [INFO] [16/22] Procesando 'Putas Joyas que curan el Alma' (Putas_Joyas_que_curan_el_Alma.csv)...
+2026-08-16 13:59:03,387 [INFO]   Upsert: 83 tracks (era 83 localmente).
+2026-08-16 13:59:03,387 [INFO] [17/22] Procesando 'reggaeton, funk, dancehall' (reggaeton,_funk,_dancehall.csv)...
+2026-08-16 13:59:03,389 [INFO]   Upsert: 73 tracks (era 73 localmente).
+2026-08-16 13:59:03,389 [INFO] [18/22] Procesando 'Sabor Ketama' (Sabor_Ketama.csv)...
+2026-08-16 13:59:03,390 [INFO]   Upsert: 14 tracks (era 14 localmente).
+2026-08-16 13:59:03,390 [INFO] [19/22] Procesando 'TECHNO' (TECHNO.csv)...
+2026-08-16 13:59:03,391 [INFO]   Upsert: 93 tracks (era 93 localmente).
+2026-08-16 13:59:03,391 [INFO] [20/22] Procesando 'Top 50 Francia' (Top_50_Francia.csv)...
+2026-08-16 13:59:03,392 [INFO]   Upsert: 50 tracks (era 50 localmente).
+2026-08-16 13:59:03,392 [INFO] [21/22] Procesando 'Tus canciones más escuchadas en 2025' (Tus_canciones_más_escuchadas_en_2025.csv)...
+2026-08-16 13:59:03,394 [INFO]   Upsert: 100 tracks (era 100 localmente).
+2026-08-16 13:59:03,394 [INFO] [22/22] Procesando 'welcome and relax' (welcome_and_relax.csv)...
+2026-08-16 13:59:03,420 [INFO]   Upsert: 1266 tracks (era 1266 localmente).
+2026-08-16 13:59:03,420 [INFO] Enlazando benchmark DnB ('DnB') en completion_meta de todas las playlists...
+2026-08-16 13:59:03,694 [INFO] Librería guardada en public\data\music_library.json (22 playlists únicas).
+2026-08-16 13:59:03,694 [INFO] ==========================================
+2026-08-16 13:59:03,694 [INFO]   Ingesta completada: 22 playlists OK, 0 saltadas.
+2026-08-16 13:59:03,695 [INFO]   Total de tracks importados: 7100
+2026-08-16 13:59:03,695 [INFO]   Benchmark DnB detectado: 'DnB'
+2026-08-16 13:59:03,695 [INFO] ==========================================
+2026-08-16 14:03:45,998 [INFO] ==========================================
+2026-08-16 14:03:45,998 [INFO]    MyMusic Delta Sync — Fase 2 (v2.0)    
+2026-08-16 14:03:45,998 [INFO] ==========================================
+2026-08-16 14:03:46,428 [INFO] Verificando perfil de usuario (delta-sync)...
+2026-08-16 14:03:46,909 [INFO] Autenticado: chocow (111573307)
+2026-08-16 14:03:46,964 [INFO] Sincronizando 'Liked Songs' (Canciones que te gustan)...
+2026-08-16 14:03:47,207 [INFO] [DELTA] Descargando Liked Songs (1788 tracks remotos)...
+2026-08-16 14:03:59,784 [INFO] Liked Songs sincronizado con éxito (1788 tracks).
+2026-08-16 14:03:59,784 [INFO] Obteniendo lista de playlists (metadatos ligeros)...
+2026-08-16 14:03:59,976 [INFO] Encontradas 17 playlists remotas en la cuenta.
+2026-08-16 14:03:59,976 [INFO] [DELTA] 'reggaeton, funk, dancehall' — snapshot cambió. Descargando IDs de tracks...
+2026-08-16 14:04:00,191 [INFO]   Delta 'reggaeton, funk, dancehall': +0 añadidas, -0 borradas, ~0 movidas.
+2026-08-16 14:04:00,191 [INFO] [DELTA] 'Estoy Vivo' — snapshot cambió. Descargando IDs de tracks...
+2026-08-16 14:04:00,441 [INFO]   Delta 'Estoy Vivo': +0 añadidas, -0 borradas, ~0 movidas.
+2026-08-16 14:04:00,441 [INFO] [DELTA] 'Dance & House' — snapshot cambió. Descargando IDs de tracks...
+2026-08-16 14:04:01,471 [INFO]   Delta 'Dance & House': +0 añadidas, -0 borradas, ~0 movidas.
+2026-08-16 14:04:01,471 [INFO] [DELTA] 'Putas Joyas que curan el Alma' — snapshot cambió. Descargando IDs de tracks...
+2026-08-16 14:04:01,698 [INFO]   Delta 'Putas Joyas que curan el Alma': +0 añadidas, -0 borradas, ~0 movidas.
+2026-08-16 14:04:01,698 [INFO] [DELTA] 'DnB' — snapshot cambió. Descargando IDs de tracks...
+2026-08-16 14:04:02,575 [INFO]   Delta 'DnB': +0 añadidas, -0 borradas, ~0 movidas.
+2026-08-16 14:04:02,575 [INFO] [DELTA] 'melancolico y estrellado' — snapshot cambió. Descargando IDs de tracks...
+2026-08-16 14:04:02,811 [INFO]   Delta 'melancolico y estrellado': +0 añadidas, -0 borradas, ~0 movidas.
+2026-08-16 14:04:02,811 [INFO] [DELTA] 'bueno, rock' — snapshot cambió. Descargando IDs de tracks...
+2026-08-16 14:04:03,004 [INFO]   Delta 'bueno, rock': +0 añadidas, -0 borradas, ~0 movidas.
+2026-08-16 14:04:03,004 [INFO] [DELTA] 'Musique nèg' — snapshot cambió. Descargando IDs de tracks...
+2026-08-16 14:04:03,183 [INFO]   Delta 'Musique nèg': +0 añadidas, -0 borradas, ~0 movidas.
+2026-08-16 14:04:03,183 [INFO] [DELTA] 'classics' — snapshot cambió. Descargando IDs de tracks...
+2026-08-16 14:04:07,317 [INFO]   Delta 'classics': +0 añadidas, -0 borradas, ~0 movidas.
+2026-08-16 14:04:07,317 [INFO] [DELTA] 'cosas' — snapshot cambió. Descargando IDs de tracks...
+2026-08-16 14:04:10,607 [INFO]   Delta 'cosas': +0 añadidas, -0 borradas, ~0 movidas.
+2026-08-16 14:04:10,607 [INFO] [DELTA] 'premio' — snapshot cambió. Descargando IDs de tracks...
+2026-08-16 14:04:12,398 [INFO]   Delta 'premio': +0 añadidas, -0 borradas, ~0 movidas.
+2026-08-16 14:04:12,398 [INFO] [DELTA] 'booya' — snapshot cambió. Descargando IDs de tracks...
+2026-08-16 14:04:18,689 [INFO]   Delta 'booya': +0 añadidas, -0 borradas, ~0 movidas.
+2026-08-16 14:04:18,689 [INFO] [DELTA] 'frungir' — snapshot cambió. Descargando IDs de tracks...
+2026-08-16 14:04:19,698 [INFO]   Delta 'frungir': +0 añadidas, -0 borradas, ~0 movidas.
+2026-08-16 14:04:19,698 [INFO] [DELTA] 'welcome and relax' — snapshot cambió. Descargando IDs de tracks...
+2026-08-16 14:04:29,089 [INFO]   Delta 'welcome and relax': +0 añadidas, -0 borradas, ~0 movidas.
+2026-08-16 14:04:29,089 [INFO] [DELTA] 'TECHNO' — snapshot cambió. Descargando IDs de tracks...
+2026-08-16 14:04:29,270 [INFO]   Delta 'TECHNO': +0 añadidas, -0 borradas, ~0 movidas.
+2026-08-16 14:04:29,270 [INFO] [DELTA] '2000-2010' — snapshot cambió. Descargando IDs de tracks...
+2026-08-16 14:04:31,958 [INFO]   Delta '2000-2010': +0 añadidas, -0 borradas, ~0 movidas.
+2026-08-16 14:04:31,958 [INFO] [DELTA] 'guai' — snapshot cambió. Descargando IDs de tracks...
+2026-08-16 14:04:36,068 [INFO]   Delta 'guai': +0 añadidas, -0 borradas, ~0 movidas.
+2026-08-16 14:04:36,473 [INFO] Library guardada: public\data\music_library.json (22 playlists únicas).
+2026-08-16 14:04:36,486 [INFO] Delta-sync completado. Playlists: 22. Delta: +0 / -0 / ~0.
+2026-08-16 14:04:37,140 [INFO] Auth: usando token OAuth de usuario (--token / SPOTIFY_ACCESS_TOKEN).
+2026-08-16 14:04:37,140 [INFO] ==========================================
+2026-08-16 14:04:37,140 [INFO]   MyMusic Enrich Metadata — Francotirador 
+2026-08-16 14:04:37,140 [INFO] ==========================================
+2026-08-16 14:04:37,140 [INFO] Cargando public\data\music_library.json...
+2026-08-16 14:04:37,213 [INFO] Total IDs únicos en la librería: 7,061
+2026-08-16 14:04:37,213 [INFO] IDs sin audio_features:          8
+2026-08-16 14:04:37,213 [INFO] Ya enriquecidos:                 7,053
+2026-08-16 14:04:37,213 [INFO] Chunks a procesar:               1 x 100 IDs
+2026-08-16 14:04:37,213 [INFO] Throttle:                        3.0s entre chunks
+2026-08-16 14:04:37,213 [INFO] ETA estimado:                    ~3s (~0.1 min)
+2026-08-16 14:04:37,220 [INFO] [Chunk 1/1] Solicitando features para 8 tracks...
+2026-08-16 14:04:37,658 [ERROR]   HTTP 403 en chunk 1: Spotify requiere token OAuth de usuario para audio-features (deprecado para Client Credentials desde mayo 2024).
+2026-08-16 14:04:37,658 [ERROR]   SOLUCION: python enrich_metadata.py --token <SPOTIFY_ACCESS_TOKEN>
+2026-08-16 14:04:37,935 [INFO] [FINAL] Librería guardada: public\data\music_library.json (22 playlists).
+2026-08-16 14:04:37,935 [INFO] ==========================================
+2026-08-16 14:04:37,935 [INFO]   Enriquecimiento completado.
+2026-08-16 14:04:37,935 [INFO]   IDs unicos enriquecidos: 0
+2026-08-16 14:04:37,935 [INFO]   Sin features en Spotify: 0  (tracks retirados)
+2026-08-16 14:04:37,935 [INFO]   Errores de chunk:        8
+2026-08-16 14:04:37,935 [INFO] ==========================================
