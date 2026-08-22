@@ -19,16 +19,8 @@ import { SyncButton } from "@/components/SyncButton";
  */
 export default function Home() {
   const { login, logout } = useSpotifyAuth();
-  const { user, isLoading } = useAuthStore();
+  const { user } = useAuthStore();
 
-  // ─── Loading skeleton ─────────────────────────────────────────────────────
-  if (isLoading) {
-    return (
-      <div className="flex min-h-dvh items-center justify-center bg-background">
-        <span className="h-8 w-8 animate-spin rounded-full border-2 border-spotify border-t-transparent" />
-      </div>
-    );
-  }
 
   // ─── Authenticated view ───────────────────────────────────────────────────
   if (user) {
