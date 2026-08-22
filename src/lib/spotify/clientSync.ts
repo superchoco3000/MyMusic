@@ -3,7 +3,7 @@
  * ==============================================================================
  * Phase 1: Superficial Comparison (Fast fetch of metadata & track counts).
  * Phase 2: Instant UI Update (Prunes removed playlists, adds new ones, updates counts).
- * Phase 3: Deep Track Download ONLY for playlists with detected changes.
+ * Phase 3: Exhaustive Real-Time Track Download for all playlists and Liked Songs.
  */
 
 import type {
@@ -210,24 +210,25 @@ export async function syncSpotifyLibraryClient(
   let playlistUrl: string | null = "https://api.spotify.com/v1/me/playlists?limit=50";
 
   while (playlistUrl) {
-    const page: { items: RawSpotifyPlaylistSummary[]; next: string | null } =
+    const page: { items?: RawSpotifyPlaylistSummary[]; next?: string | null } =
       await spotifyFetchWithRetry(playlistUrl, token, (sec) => {
         notify("rate_limited", `Pausa de ${sec}s requerida por Spotify...`, 15, { retryAfterSeconds: sec });
       });
 
-    for (const item of page.items ?? []) {
+    const items = Array.isArray(page?.items) ? page.items : [];
+    for (const item of items) {
       if (item && item.id) {
         remotePlaylists.push(item);
       }
     }
-    playlistUrl = page.next;
+    playlistUrl = page?.next || null;
     if (playlistUrl) await sleep(60);
   }
 
   stats.playlistsTotal = remotePlaylists.length + (remoteLikedTotal > 0 ? 1 : 0);
 
   // ─── PASO 2: Actualización Rápida de UI (Fase 1) ────────────────────────────────
-  notify("updating_ui", "Paso 2/3: Comparando versiones y actualizando contadores...", 30);
+  notify("updating_ui", "Paso 2/3: Comparando versiones y actualizando contadores...", 25);
 
   const remotePlaylistIdsSet = new Set(remotePlaylists.map((p) => p.id));
   const stagedPlaylists: MusicLibraryPlaylist[] = [];
@@ -235,10 +236,6 @@ export async function syncSpotifyLibraryClient(
   // 2a. Comparar y preparar Liked Songs
   const existingLiked = localPlaylistsMap.get("spotify_liked_songs") || localPlaylistsMap.get("liked songs");
   const effectiveLikedCount = remoteLikedTotal > 0 ? remoteLikedTotal : (existingLiked?.total_tracks ?? existingLiked?.tracks_data?.length ?? 0);
-  const likedNeedsDeepSync =
-    !existingLiked ||
-    !existingLiked.tracks_data ||
-    existingLiked.tracks_data.length !== effectiveLikedCount;
 
   const stagedLiked: MusicLibraryPlaylist = {
     id: "spotify_liked_songs",
@@ -360,25 +357,102 @@ export async function syncSpotifyLibraryClient(
     window.dispatchEvent(new Event("mymusic_library_updated"));
   }
 
-  // ─── PASO 3: Comparación Profunda (Descarga de tracks SOLO donde cambió) ─────────
-  notify("syncing_playlists", "Paso 3/3: Descarga de canciones solo en listas modificadas...", 45);
+  // ─── PASO 3: Descarga Real y Exhaustiva de Canciones ─────────────────────────────
+  notify("syncing_playlists", "Paso 3/3: Descargando canciones reales de todas las listas...", 35);
 
   const finalizedPlaylists: MusicLibraryPlaylist[] = [];
 
-  // 3a. Deep sync Liked Songs si cambió
-  if (likedNeedsDeepSync && effectiveLikedCount > 0) {
-    notify("syncing_liked", `Descargando canciones de Liked Songs (0/${effectiveLikedCount})...`, 50, {
-      currentPlaylistName: "Liked Songs",
+  // 3a. Descarga real y exhaustiva de Liked Songs
+  notify("syncing_liked", `Descargando Liked Songs (${remoteLikedTotal > 0 ? remoteLikedTotal : "..."} canciones)...`, 40, {
+    currentPlaylistName: "Liked Songs",
+  });
+
+  const likedTracks: MusicLibraryTrack[] = [];
+  let likedUrl: string | null = "https://api.spotify.com/v1/me/tracks?limit=50";
+  let fetchedLiked = 0;
+
+  while (likedUrl) {
+    const page: { items?: RawSpotifyPlaylistItem[]; next?: string | null; total?: number } =
+      await spotifyFetchWithRetry(likedUrl, token, (sec) => {
+        notify("rate_limited", `Pausa de ${sec}s en Liked Songs...`, 45, { retryAfterSeconds: sec });
+      });
+
+    if (typeof page?.total === "number" && page.total > 0) {
+      remoteLikedTotal = page.total;
+      stats.likedSongsTotal = page.total;
+    }
+
+    const items = Array.isArray(page?.items) ? page.items : [];
+    for (const item of items) {
+      const t = item?.track;
+      if (!t || !t.id) continue;
+
+      const existing = existingTracksMap.get(t.id);
+      likedTracks.push({
+        id: t.id,
+        name: t.name ?? "Desconocido",
+        artist: Array.isArray(t.artists) ? t.artists.map((a) => a?.name).filter(Boolean).join(", ") : "Desconocido",
+        album: t.album?.name ?? null,
+        image_url: t.album?.images?.[0]?.url ?? null,
+        duration_ms: t.duration_ms ?? 0,
+        preview_url: t.preview_url ?? null,
+        added_at: item.added_at ?? null,
+        release_date: t.album?.release_date ?? null,
+        explicit: t.explicit ?? false,
+        audio_features: existing?.audio_features ?? null,
+        bpm: existing?.bpm ?? null,
+        energy: existing?.energy ?? null,
+        danceability: existing?.danceability ?? null,
+        key: existing?.key ?? null,
+        mode: existing?.mode ?? null,
+      });
+    }
+
+    fetchedLiked += items.length;
+    const pct = remoteLikedTotal > 0 ? (fetchedLiked / remoteLikedTotal) * 20 : 15;
+    notify(
+      "syncing_liked",
+      `Descargando Liked Songs (${fetchedLiked}/${remoteLikedTotal || fetchedLiked})...`,
+      40 + pct,
+      { currentPlaylistName: "Liked Songs" }
+    );
+
+    likedUrl = page?.next || null;
+    if (likedUrl) await sleep(60);
+  }
+
+  const finalLikedTracks = likedTracks.length > 0 ? likedTracks : (existingLiked?.tracks_data ?? []);
+  stagedLiked.tracks_data = finalLikedTracks;
+  stagedLiked.total_tracks = finalLikedTracks.length;
+  stagedLiked.tracks = { total: finalLikedTracks.length };
+  stats.playlistsUpdated++;
+  stats.tracksAdded += finalLikedTracks.length;
+  finalizedPlaylists.push(stagedLiked);
+
+  // 3b. Descarga real y exhaustiva de todas las playlists del usuario
+  let currentPlIdx = 0;
+  const totalToExamine = remotePlaylists.length;
+
+  for (const rpl of remotePlaylists) {
+    currentPlIdx++;
+    stats.playlistsScanned++;
+    const progressPct = 60 + (currentPlIdx / Math.max(1, totalToExamine)) * 35;
+
+    const localPl = localPlaylistsMap.get(rpl.id) || localPlaylistsMap.get(rpl.name.toLowerCase().trim());
+    const coverUrl = rpl.images?.[0]?.url || localPl?.image_url || null;
+    const persistentClass = savedClassifications[rpl.id] || savedClassifications[rpl.name] || localPl?.classification || null;
+
+    notify("syncing_playlists", `Descargando canciones de "${rpl.name}"...`, progressPct, {
+      currentPlaylistName: rpl.name,
     });
 
-    const likedTracks: MusicLibraryTrack[] = [];
-    let likedUrl: string | null = "https://api.spotify.com/v1/me/tracks?limit=50";
+    const downloadedTracks: MusicLibraryTrack[] = [];
+    let trackUrl: string | null = `https://api.spotify.com/v1/playlists/${rpl.id}/tracks?limit=100`;
 
-    let fetched = 0;
-    while (likedUrl) {
+    while (trackUrl) {
       const page: { items?: RawSpotifyPlaylistItem[]; next?: string | null } =
-        await spotifyFetchWithRetry(likedUrl, token, (sec) => {
-          notify("rate_limited", `Pausa de ${sec}s en Liked Songs...`, 55, { retryAfterSeconds: sec });
+        await spotifyFetchWithRetry(trackUrl, token, (sec) => {
+          notify("rate_limited", `Pausa de ${sec}s en "${rpl.name}"...`, progressPct, { retryAfterSeconds: sec });
         });
 
       const items = Array.isArray(page?.items) ? page.items : [];
@@ -387,7 +461,7 @@ export async function syncSpotifyLibraryClient(
         if (!t || !t.id) continue;
 
         const existing = existingTracksMap.get(t.id);
-        likedTracks.push({
+        downloadedTracks.push({
           id: t.id,
           name: t.name ?? "Desconocido",
           artist: Array.isArray(t.artists) ? t.artists.map((a) => a?.name).filter(Boolean).join(", ") : "Desconocido",
@@ -407,126 +481,14 @@ export async function syncSpotifyLibraryClient(
         });
       }
 
-      fetched += items.length;
-      const pct = effectiveLikedCount > 0 ? (fetched / effectiveLikedCount) * 20 : 15;
-      notify(
-        "syncing_liked",
-        `Descargando Liked Songs (${fetched}/${effectiveLikedCount})...`,
-        50 + pct,
-        { currentPlaylistName: "Liked Songs" }
-      );
-
-      likedUrl = page?.next || null;
-      if (likedUrl) await sleep(75);
+      trackUrl = page?.next || null;
+      if (trackUrl) await sleep(50);
     }
 
-    const finalLikedTracks = likedTracks.length > 0 ? likedTracks : (existingLiked?.tracks_data ?? []);
-    stagedLiked.tracks_data = finalLikedTracks;
-    stagedLiked.total_tracks = finalLikedTracks.length;
-    stagedLiked.tracks = { total: finalLikedTracks.length };
-    stats.playlistsUpdated++;
-    stats.tracksAdded += finalLikedTracks.length;
-  } else {
-    stats.playlistsUnchanged++;
-  }
-
-  finalizedPlaylists.push(stagedLiked);
-
-  // 3b. Deep sync user playlists ONLY if snapshot or count changed
-  let currentPlIdx = 0;
-  const totalToExamine = remotePlaylists.length;
-
-  for (const rpl of remotePlaylists) {
-    currentPlIdx++;
-    stats.playlistsScanned++;
-    const progressPct = 70 + (currentPlIdx / Math.max(1, totalToExamine)) * 25;
-
-    const localPl = localPlaylistsMap.get(rpl.id) || localPlaylistsMap.get(rpl.name.toLowerCase().trim());
-    const remoteCount = typeof rpl.tracks?.total === "number" ? rpl.tracks.total : (localPl?.total_tracks ?? localPl?.tracks_data?.length ?? 0);
-    const coverUrl = rpl.images?.[0]?.url || localPl?.image_url || null;
-    const persistentClass = savedClassifications[rpl.id] || savedClassifications[rpl.name] || localPl?.classification || null;
-
-    // Verificar si la playlist NO ha cambiado y ya tiene canciones descargadas
-    const isUnchanged =
-      localPl &&
-      localPl.snapshot_id === rpl.snapshot_id &&
-      localPl.tracks_data &&
-      localPl.tracks_data.length > 0 &&
-      localPl.tracks_data.length === remoteCount;
-
-    if (isUnchanged) {
-      stats.playlistsUnchanged++;
-      finalizedPlaylists.push({
-        ...localPl,
-        id: rpl.id,
-        name: rpl.name,
-        description: rpl.description ?? localPl.description,
-        image_url: coverUrl,
-        owner_name: rpl.owner?.display_name ?? localPl.owner_name ?? "Tú",
-        total_tracks: localPl.tracks_data?.length ?? remoteCount,
-        tracks: { total: localPl.tracks_data?.length ?? remoteCount },
-        classification: persistentClass,
-      });
-      continue;
-    }
-
-    // Playlist modificada o nueva: descargar tracks de forma ligera
-    stats.playlistsUpdated++;
-    notify("syncing_playlists", `Actualizando "${rpl.name}" (${remoteCount} pistas)...`, progressPct, {
-      currentPlaylistName: rpl.name,
-    });
-
-    const downloadedTracks: MusicLibraryTrack[] = [];
-    if (remoteCount > 0) {
-      let trackUrl: string | null = `https://api.spotify.com/v1/playlists/${rpl.id}/tracks?limit=100`;
-
-      while (trackUrl) {
-        const page: { items?: RawSpotifyPlaylistItem[]; next?: string | null } =
-          await spotifyFetchWithRetry(trackUrl, token, (sec) => {
-            notify("rate_limited", `Pausa de ${sec}s en "${rpl.name}"...`, progressPct, { retryAfterSeconds: sec });
-          });
-
-        const items = Array.isArray(page?.items) ? page.items : [];
-        for (const item of items) {
-          const t = item?.track;
-          if (!t || !t.id) continue;
-
-          const existing = existingTracksMap.get(t.id);
-          downloadedTracks.push({
-            id: t.id,
-            name: t.name ?? "Desconocido",
-            artist: Array.isArray(t.artists) ? t.artists.map((a) => a?.name).filter(Boolean).join(", ") : "Desconocido",
-            album: t.album?.name ?? null,
-            image_url: t.album?.images?.[0]?.url ?? null,
-            duration_ms: t.duration_ms ?? 0,
-            preview_url: t.preview_url ?? null,
-            added_at: item.added_at ?? null,
-            release_date: t.album?.release_date ?? null,
-            explicit: t.explicit ?? false,
-            audio_features: existing?.audio_features ?? null,
-            bpm: existing?.bpm ?? null,
-            energy: existing?.energy ?? null,
-            danceability: existing?.danceability ?? null,
-            key: existing?.key ?? null,
-            mode: existing?.mode ?? null,
-          });
-        }
-
-        trackUrl = page?.next || null;
-        if (trackUrl) await sleep(60);
-      }
-    }
-
-    // Si descargó canciones, usar descargadas; si no, preservar las que ya tenía
     const finalTracks = downloadedTracks.length > 0 ? downloadedTracks : (localPl?.tracks_data ?? []);
-    const finalCount = finalTracks.length > 0 ? finalTracks.length : remoteCount;
-
-    const prevCount = localPl?.tracks_data?.length ?? 0;
-    if (finalTracks.length > prevCount) {
-      stats.tracksAdded += finalTracks.length - prevCount;
-    } else if (finalTracks.length < prevCount) {
-      stats.tracksRemoved += prevCount - finalTracks.length;
-    }
+    const finalCount = finalTracks.length;
+    stats.tracksAdded += finalTracks.length;
+    stats.playlistsUpdated++;
 
     finalizedPlaylists.push({
       id: rpl.id,
@@ -557,7 +519,7 @@ export async function syncSpotifyLibraryClient(
   }
 
   // Guardado definitivo en IndexedDB y localStorage
-  notify("saving", "Guardando biblioteca actualizada en base de datos local...", 96);
+  notify("saving", "Guardando catálogo completo en base de datos local...", 96);
 
   const updatedLibrary: MusicLibrary = {
     last_updated_at: new Date().toISOString(),
@@ -571,7 +533,7 @@ export async function syncSpotifyLibraryClient(
     window.dispatchEvent(new Event("mymusic_library_updated"));
   }
 
-  notify("complete", "¡Sincronización en tiempo real completada con éxito!", 100);
+  notify("complete", "¡Sincronización completa finalizada con éxito!", 100);
 
   return updatedLibrary;
 }
