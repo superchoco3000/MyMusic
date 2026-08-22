@@ -27,6 +27,61 @@ const SPOTIFY_SCOPES = [
 export function useSpotifyAuth() {
   const { setUser, setAccessToken, setProviderToken, setLoading, reset } = useAuthStore();
 
+  // ─── Helpers ──────────────────────────────────────────────────────────────
+
+  /**
+   * Fetches (or creates via upsert) the user's profile row and pushes it to
+   * the auth store. Called after every successful auth state change.
+   */
+  async function syncProfile(userObj: any) {
+    const userId = typeof userObj === "string" ? userObj : userObj?.id;
+    if (!userId) {
+      setUser(null);
+      setLoading(false);
+      return;
+    }
+
+    try {
+      const { data, error } = await supabase
+        .from("profiles")
+        .select("*")
+        .eq("id", userId)
+        .single();
+
+      if (!error && data) {
+        setUser(data as Profile);
+      } else {
+        // Fallback: build profile directly from session user_metadata
+        const meta = typeof userObj === "object" ? userObj?.user_metadata : null;
+        const fallback: Profile = {
+          id: userId,
+          display_name: meta?.full_name || meta?.name || meta?.custom_claims?.name || "Usuario",
+          avatar_url: meta?.avatar_url || meta?.picture || null,
+          is_premium: true,
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString(),
+        };
+        setUser(fallback);
+      }
+    } catch (err) {
+      console.warn("[useSpotifyAuth] syncProfile exception:", err);
+      if (typeof userObj === "object" && userObj?.id) {
+        setUser({
+          id: userObj.id,
+          display_name: userObj.user_metadata?.full_name || "Usuario",
+          avatar_url: userObj.user_metadata?.avatar_url || null,
+          is_premium: true,
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString(),
+        });
+      } else {
+        setUser(null);
+      }
+    } finally {
+      setLoading(false);
+    }
+  }
+
   // ─── Session state listener ───────────────────────────────────────────────
   useEffect(() => {
     setLoading(true);
@@ -49,20 +104,31 @@ export function useSpotifyAuth() {
       }
     };
 
+    // Safety timeout: Never leave the user stuck on the spinner for more than 2.5 seconds
+    const safetyTimer = setTimeout(() => {
+      setLoading(false);
+    }, 2500);
+
     // Hydrate from the current session on first mount.
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      if (session) {
-        if (session.provider_token) {
-          storeProviderToken(session.provider_token);
+    supabase.auth
+      .getSession()
+      .then(({ data: { session } }) => {
+        if (session) {
+          if (session.provider_token) {
+            storeProviderToken(session.provider_token);
+          }
+          const effectiveProviderToken = session.provider_token ?? getStoredProviderToken();
+          setAccessToken(session.access_token);
+          setProviderToken(effectiveProviderToken);
+          syncProfile(session.user);
+        } else {
+          setLoading(false);
         }
-        const effectiveProviderToken = session.provider_token ?? getStoredProviderToken();
-        setAccessToken(session.access_token);
-        setProviderToken(effectiveProviderToken);
-        syncProfile(session.user.id);
-      } else {
+      })
+      .catch((e) => {
+        console.warn("[useSpotifyAuth] getSession error:", e);
         setLoading(false);
-      }
-    });
+      });
 
     // Subscribe to future auth state changes (login, logout, token refresh).
     const {
@@ -75,48 +141,23 @@ export function useSpotifyAuth() {
         const effectiveProviderToken = session.provider_token ?? getStoredProviderToken();
         setAccessToken(session.access_token);
         setProviderToken(effectiveProviderToken);
-        await syncProfile(session.user.id);
+        await syncProfile(session.user);
       } else {
         if (typeof window !== "undefined") {
-          try { localStorage.removeItem("spotify_provider_token"); } catch (_) {}
+          try {
+            localStorage.removeItem("spotify_provider_token");
+          } catch (_) {}
         }
         reset();
+        setLoading(false);
       }
     });
 
     return () => {
+      clearTimeout(safetyTimer);
       subscription.unsubscribe();
     };
-
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-  // ─── Helpers ──────────────────────────────────────────────────────────────
-
-  /**
-   * Fetches (or creates via upsert) the user's profile row and pushes it to
-   * the auth store.  Called after every successful auth state change.
-   */
-  async function syncProfile(userId: string) {
-    setLoading(true);
-    try {
-      const { data, error } = await supabase
-        .from("profiles")
-        .select("*")
-        .eq("id", userId)
-        .single();
-
-      if (error) {
-        // Profile may not exist yet on first login — the trigger handles it,
-        // but if it races, we just set user to null and let the next event win.
-        console.warn("[useSpotifyAuth] syncProfile:", error.message);
-        setUser(null);
-      } else {
-        setUser(data as Profile);
-      }
-    } finally {
-      setLoading(false);
-    }
-  }
 
   // ─── Public API ──────────────────────────────────────────────────────────
 
@@ -153,7 +194,9 @@ export function useSpotifyAuth() {
    */
   async function logout() {
     if (typeof window !== "undefined") {
-      try { localStorage.removeItem("spotify_provider_token"); } catch (_) {}
+      try {
+        localStorage.removeItem("spotify_provider_token");
+      } catch (_) {}
     }
     const { error } = await supabase.auth.signOut();
     if (error) {
@@ -161,7 +204,6 @@ export function useSpotifyAuth() {
     }
     reset();
   }
-
 
   return { login, logout };
 }
