@@ -900,80 +900,85 @@ export function PlaylistsGrid() {
     );
   }
 
+  console.log("🚨 [DEBUG] RENDERIZANDO PLAYLISTSGRID", { playlistsCount: playlists.length });
+
   return (
     <section className="w-full">
-      {/* ── Global Push Control Center ── */}
-      <GlobalPushHub />
-
       {/* Header row with clean RPG progression summary */}
-      <div className="mb-6 flex flex-wrap items-start justify-between gap-4 border-b border-white/5 pb-4">
+      <div className="mb-6 flex flex-col gap-4 border-b border-white/5 pb-4">
+        <div className="flex flex-wrap items-start justify-between gap-4">
+          <div>
+            <h2 className="text-lg font-bold text-white flex items-center gap-2">
+              Biblioteca de Curación RPG
+              <span className="rounded-full bg-white/10 px-2.5 py-0.5 text-xs font-normal text-white/60">
+                {playlists.length}
+              </span>
+            </h2>
 
-        <div>
-          <h2 className="text-lg font-bold text-white flex items-center gap-2">
-            Biblioteca de Curación RPG
-            <span className="rounded-full bg-white/10 px-2.5 py-0.5 text-xs font-normal text-white/60">
-              {playlists.length}
-            </span>
-          </h2>
+            <div className="mt-1.5 flex items-center gap-3 flex-wrap">
+              {rpgStats.unconfigured > 0 && (
+                <span className="flex items-center gap-1 text-[11px] text-white/50 font-semibold">
+                  <span className="h-1.5 w-1.5 rounded-full bg-white/40" />
+                  {rpgStats.unconfigured} Sin configurar
+                </span>
+              )}
+              {rpgStats.perfect > 0 && (
+                <span className="flex items-center gap-1 text-[11px] text-purple-400 font-semibold">
+                  <span className="h-1.5 w-1.5 rounded-full bg-purple-400" />
+                  {rpgStats.perfect} Perfecta{rpgStats.perfect > 1 ? "s" : ""}
+                </span>
+              )}
+              {rpgStats.almost > 0 && (
+                <span className="flex items-center gap-1 text-[11px] text-lime-400 font-semibold">
+                  <span className="h-1.5 w-1.5 rounded-full bg-lime-400" />
+                  {rpgStats.almost} Casi Perfecta{rpgStats.almost > 1 ? "s" : ""}
+                </span>
+              )}
+              {rpgStats.target > 0 && (
+                <span className="flex items-center gap-1 text-[11px] text-emerald-400 font-semibold">
+                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                  {rpgStats.target} Objetivo{rpgStats.target > 1 ? "s" : ""}
+                </span>
+              )}
+              {rpgStats.creation > 0 && (
+                <span className="flex items-center gap-1 text-[11px] text-sky-400 font-semibold">
+                  <span className="h-1.5 w-1.5 rounded-full bg-sky-400" />
+                  {rpgStats.creation} En Creación
+                </span>
+              )}
+              {rpgStats.chaotic > 0 && (
+                <span className="flex items-center gap-1 text-[11px] text-amber-400 font-semibold">
+                  <span className="h-1.5 w-1.5 rounded-full bg-amber-400" />
+                  {rpgStats.chaotic} Caótica{rpgStats.chaotic > 1 ? "s" : ""}
+                </span>
+              )}
+            </div>
+          </div>
 
-          <div className="mt-1.5 flex items-center gap-3 flex-wrap">
-            {rpgStats.unconfigured > 0 && (
-              <span className="flex items-center gap-1 text-[11px] text-white/50 font-semibold">
-                <span className="h-1.5 w-1.5 rounded-full bg-white/40" />
-                {rpgStats.unconfigured} Sin configurar
-              </span>
-            )}
-            {rpgStats.perfect > 0 && (
-              <span className="flex items-center gap-1 text-[11px] text-purple-400 font-semibold">
-                <span className="h-1.5 w-1.5 rounded-full bg-purple-400" />
-                {rpgStats.perfect} Perfecta{rpgStats.perfect > 1 ? "s" : ""}
-              </span>
-            )}
-            {rpgStats.almost > 0 && (
-              <span className="flex items-center gap-1 text-[11px] text-lime-400 font-semibold">
-                <span className="h-1.5 w-1.5 rounded-full bg-lime-400" />
-                {rpgStats.almost} Casi Perfecta{rpgStats.almost > 1 ? "s" : ""}
-              </span>
-            )}
-            {rpgStats.target > 0 && (
-              <span className="flex items-center gap-1 text-[11px] text-emerald-400 font-semibold">
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-                {rpgStats.target} Objetivo{rpgStats.target > 1 ? "s" : ""}
-              </span>
-            )}
-            {rpgStats.creation > 0 && (
-              <span className="flex items-center gap-1 text-[11px] text-sky-400 font-semibold">
-                <span className="h-1.5 w-1.5 rounded-full bg-sky-400" />
-                {rpgStats.creation} En Creación
-              </span>
-            )}
-            {rpgStats.chaotic > 0 && (
-              <span className="flex items-center gap-1 text-[11px] text-amber-400 font-semibold">
-                <span className="h-1.5 w-1.5 rounded-full bg-amber-400" />
-                {rpgStats.chaotic} Caótica{rpgStats.chaotic > 1 ? "s" : ""}
-              </span>
-            )}
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={() => {
+                if (window.confirm("¿Restablecer todas las clasificaciones de playlists al estado inicial 'Sin configurar'?")) {
+                  clearAllPlaylistClassifications();
+                  setClassifications({});
+                  fetchLocalLibrary();
+                }
+              }}
+              className="flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-semibold text-white/60 hover:border-amber-400/40 hover:bg-amber-500/10 hover:text-amber-300 transition-all cursor-pointer"
+              title="Restablece las clasificaciones para volver a probar el asistente inicial"
+            >
+              <span>🔄</span>
+              <span className="hidden sm:inline">Restablecer Estados</span>
+            </button>
+            <SyncButton />
           </div>
         </div>
-        <div className="flex items-center gap-2">
-          <button
-            type="button"
-            onClick={() => {
-              if (window.confirm("¿Restablecer todas las clasificaciones de playlists al estado inicial 'Sin configurar'?")) {
-                clearAllPlaylistClassifications();
-                setClassifications({});
-                fetchLocalLibrary();
-              }
-            }}
-            className="flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-semibold text-white/60 hover:border-amber-400/40 hover:bg-amber-500/10 hover:text-amber-300 transition-all cursor-pointer"
-            title="Restablece las clasificaciones para volver a probar el asistente inicial"
-          >
-            <span>🔄</span>
-            <span className="hidden sm:inline">Restablecer Estados</span>
-          </button>
-          <SyncButton />
-        </div>
+
+        {/* ── Global Push Control Center (Neón Azul Compacto) ── */}
+        <GlobalPushHub />
       </div>
+
 
       {/* Cards grid */}
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">

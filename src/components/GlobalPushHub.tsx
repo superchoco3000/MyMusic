@@ -193,38 +193,41 @@ export function GlobalPushHub() {
     }
   };
 
+  console.log("🚨 [DEBUG] RENDERIZANDO HUB ROJO", { targetSummariesCount: targetSummaries.length });
+
   return (
-    <section className="relative overflow-hidden rounded-3xl border border-blue-500/40 bg-gradient-to-b from-[#081028]/95 via-[#070b18]/90 to-[#060814]/95 p-5 sm:p-6 shadow-[0_0_35px_rgba(59,130,246,0.18)] backdrop-blur-xl mb-8">
+
+    <section className="relative overflow-hidden rounded-lg border border-blue-500/40 bg-gradient-to-b from-[#081028]/95 via-[#070b18]/90 to-[#060814]/95 px-4 py-3 sm:px-5 sm:py-3.5 shadow-[0_0_25px_rgba(59,130,246,0.15)] backdrop-blur-xl mb-6 w-full">
+
       {/* ── Ambient Neon Cyber Glow Effects ── */}
-      <div className="pointer-events-none absolute -left-20 -top-20 h-56 w-56 rounded-full bg-blue-500/15 blur-[90px]" />
-      <div className="pointer-events-none absolute -right-20 -bottom-20 h-56 w-56 rounded-full bg-cyan-400/10 blur-[90px]" />
+      <div className="pointer-events-none absolute -left-16 -top-16 h-40 w-40 rounded-full bg-blue-500/15 blur-[70px]" />
+      <div className="pointer-events-none absolute -right-16 -bottom-16 h-40 w-40 rounded-full bg-cyan-400/10 blur-[70px]" />
 
       {/* Cyber Scanline Top Border Accent */}
       <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-blue-400 to-transparent opacity-80" />
 
       {/* ── Header Row ── */}
-      <div className="relative z-10 flex flex-wrap items-center justify-between gap-4 border-b border-blue-500/20 pb-4">
+      <div className="relative z-10 flex flex-wrap items-center justify-between gap-3 border-b border-blue-500/20 pb-2.5">
 
-
-        <div className="flex items-center gap-3">
-          <div className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-blue-500/20 text-blue-300 border border-blue-400/50 shadow-[0_0_15px_rgba(59,130,246,0.4)]">
-            <span className="text-xl">🛰️</span>
-            <span className="absolute -top-1 -right-1 flex h-3 w-3">
+        <div className="flex items-center gap-2.5">
+          <div className="relative flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-blue-500/20 text-blue-300 border border-blue-400/50 shadow-[0_0_10px_rgba(59,130,246,0.4)]">
+            <span className="text-base">🛰️</span>
+            <span className="absolute -top-0.5 -right-0.5 flex h-2.5 w-2.5">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75" />
-              <span className="relative inline-flex rounded-full h-3 w-3 bg-blue-500" />
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-blue-500" />
             </span>
           </div>
 
           <div>
             <div className="flex items-center gap-2">
-              <h2 className="text-sm sm:text-base font-black tracking-wider text-white uppercase font-mono">
+              <h2 className="text-xs sm:text-sm font-black tracking-wider text-white uppercase font-mono">
                 CENTRO DE MANDO PUSH GLOBAL
               </h2>
-              <span className="rounded-full bg-blue-500/20 border border-blue-400/40 px-2 py-0.5 text-[9px] font-mono font-bold text-blue-300 shadow-[0_0_10px_rgba(59,130,246,0.3)]">
+              <span className="rounded bg-blue-500/20 border border-blue-400/40 px-1.5 py-0.5 text-[8px] font-mono font-bold text-blue-300 shadow-[0_0_8px_rgba(59,130,246,0.3)]">
                 CHUNKING 100
               </span>
             </div>
-            <p className="text-xs text-blue-200/60 font-sans mt-0.5">
+            <p className="text-[11px] text-blue-200/60 font-sans">
               Sincronización masiva de Listas Objetivo hacia Spotify Cloud
             </p>
           </div>
@@ -236,7 +239,7 @@ export function GlobalPushHub() {
           id="global-master-push-btn"
           onClick={handleMasterPush}
           disabled={isPushing || totalTracksToSync === 0}
-          className={`relative group inline-flex items-center gap-2.5 rounded-full px-6 py-3 text-xs font-black uppercase tracking-wider transition-all duration-300 cursor-pointer active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed shadow-[0_0_20px_rgba(59,130,246,0.4)] hover:shadow-[0_0_30px_rgba(59,130,246,0.7)] ${
+          className={`relative group inline-flex items-center gap-2 rounded-md px-4 py-2 text-xs font-black uppercase tracking-wider transition-all duration-300 cursor-pointer active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed shadow-[0_0_15px_rgba(59,130,246,0.3)] hover:shadow-[0_0_25px_rgba(59,130,246,0.6)] ${
             isPushing
               ? "bg-blue-600/30 border border-blue-400 text-blue-200 cursor-wait animate-pulse"
               : totalTracksToSync === 0
@@ -246,22 +249,23 @@ export function GlobalPushHub() {
         >
           {isPushing ? (
             <>
-              <div className="h-4 w-4 border-2 border-cyan-300 border-t-transparent animate-spin rounded-full shrink-0" />
+              <div className="h-3.5 w-3.5 border-2 border-cyan-300 border-t-transparent animate-spin rounded-full shrink-0" />
               <span className="font-mono text-cyan-200">{currentProgressText || "Sincronizando..."}</span>
             </>
           ) : (
             <>
-              <svg viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4 shrink-0 text-black">
+              <svg viewBox="0 0 24 24" fill="currentColor" className="h-3.5 w-3.5 shrink-0 text-black">
                 <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.586 14.424c-.18.295-.563.387-.857.207-2.35-1.434-5.308-1.758-8.793-.963-.335.077-.67-.133-.746-.468-.077-.334.132-.67.467-.746 3.808-.87 7.076-.51 9.722 1.113.294.18.386.563.207.857zm1.224-2.72c-.226.367-.706.482-1.072.257-2.69-1.653-6.79-2.133-9.97-1.167-.413.125-.849-.107-.973-.52-.125-.413.108-.849.52-.973 3.632-1.102 8.147-.568 11.238 1.332.366.226.482.706.257 1.072zm.105-2.835C14.692 8.95 9.375 8.775 6.297 9.71c-.493.15-1.016-.13-1.165-.624-.15-.493.13-1.017.624-1.166 3.532-1.072 9.404-.866 13.115 1.338.445.264.59.838.327 1.282-.264.444-.838.59-1.282.327z"/>
               </svg>
               <span>🚀 Sincronizar Todo a Spotify</span>
-              <span className="rounded-full bg-black/30 px-2 py-0.5 text-[10px] text-white font-mono">
+              <span className="rounded bg-black/30 px-1.5 py-0.5 text-[9px] text-white font-mono">
                 {totalTracksToSync} tracks
               </span>
             </>
           )}
         </button>
       </div>
+
 
       {/* ── Status Feedback Banner ── */}
       <AnimatePresence>
@@ -289,20 +293,20 @@ export function GlobalPushHub() {
 
       {/* ── Target Playlists Breakdown Grid (or Neutral Empty State) ── */}
       {targetSummaries.length === 0 ? (
-        <div className="mt-5 rounded-2xl border border-white/10 bg-white/[0.02] p-6 text-center">
-          <p className="text-xs font-mono text-white/40">
+        <div className="mt-3 rounded-md border border-white/10 bg-white/[0.02] p-3 text-center">
+          <p className="text-[11px] font-mono text-white/40">
             0 pistas pendientes · Configura o clasifica playlists como &quot;Objetivo&quot; para enviar automáticamente a Spotify en lotes de 100
           </p>
         </div>
       ) : (
-        <div className="relative z-10 mt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+        <div className="relative z-10 mt-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2.5">
           {targetSummaries.map((item) => {
             const pct = Math.min(100, Math.round((item.count / 100) * 100));
 
             return (
               <div
                 key={item.key}
-                className="flex flex-col gap-2 rounded-2xl border border-blue-500/20 bg-blue-950/30 p-3.5 hover:border-blue-400/60 hover:bg-blue-900/30 transition-all duration-300 group shadow-sm hover:shadow-[0_0_20px_rgba(59,130,246,0.2)]"
+                className="flex flex-col gap-1.5 rounded-md border border-blue-500/20 bg-blue-950/30 p-2.5 hover:border-blue-400/60 hover:bg-blue-900/30 transition-all duration-200 group shadow-sm hover:shadow-[0_0_15px_rgba(59,130,246,0.2)]"
               >
                 {/* Top Row: Name and Benchmark Chip */}
                 <div className="flex items-center justify-between gap-2">
@@ -310,7 +314,7 @@ export function GlobalPushHub() {
                     {item.name}
                   </span>
                   <span
-                    className={`shrink-0 rounded-full px-2 py-0.5 text-[9px] font-mono font-black border ${
+                    className={`shrink-0 rounded px-1.5 py-0.5 text-[8px] font-mono font-black border ${
                       item.isBenchmark
                         ? "bg-cyan-500/20 border-cyan-400/50 text-cyan-300 shadow-[0_0_8px_rgba(6,182,212,0.4)]"
                         : "bg-blue-500/20 border-blue-400/40 text-blue-300"
@@ -322,10 +326,10 @@ export function GlobalPushHub() {
 
                 {/* Reactive Blue Neon Line (Format: X/100 para [Nombre]) */}
                 <div className="flex items-baseline justify-between gap-2">
-                  <p className="text-xs font-bold text-blue-400 drop-shadow-[0_0_8px_rgba(59,130,246,0.8)] font-mono">
+                  <p className="text-[11px] font-bold text-blue-400 drop-shadow-[0_0_8px_rgba(59,130,246,0.8)] font-mono">
                     {item.count}/100 para {item.name}
                   </p>
-                  <span className="text-[10px] font-mono text-white/40 tabular-nums">
+                  <span className="text-[9px] font-mono text-white/40 tabular-nums">
                     {pct}%
                   </span>
                 </div>

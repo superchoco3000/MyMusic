@@ -22,9 +22,12 @@ export default function Home() {
   const { user } = useAuthStore();
 
 
+  console.log("🚨 [DEBUG] RENDERIZANDO PAGE.TSX PRINCIPAL", { user: user?.display_name ?? "null" });
+
   // ─── Authenticated view ───────────────────────────────────────────────────
   if (user) {
     return (
+
       <div className="flex min-h-dvh flex-col bg-background">
         {/* ── Top bar ── */}
         <header className="sticky top-0 z-10 flex items-center justify-between gap-4 border-b border-white/5 bg-background/80 px-6 py-4 backdrop-blur-md">

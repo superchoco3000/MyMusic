@@ -35,11 +35,17 @@ export function ClientSyncModal({
   if (!isOpen) return null;
 
   const isDone = progress?.phase === "complete";
-  const isError = progress?.phase === "error" || isAuthMissing;
+  const is403 =
+    progress?.phase === "forbidden" ||
+    (progress?.message && progress.message.includes("403")) ||
+    (progress?.message && progress.message.includes("ERROR_403_FORBIDDEN"));
+  const isError = (progress?.phase === "error" || isAuthMissing) && !is403;
   const isRateLimited = progress?.phase === "rate_limited";
   const percent = progress?.progressPercent ?? (isAuthMissing ? 0 : 5);
   const phaseLabel = isAuthMissing
     ? "Sesión de Spotify requerida"
+    : is403
+    ? "Permisos denegados (Error 403)"
     : progress?.phaseLabel ?? "Conectando con Spotify API...";
 
   return (
@@ -50,7 +56,7 @@ export function ClientSyncModal({
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.92, y: 20 }}
           transition={{ duration: 0.25, ease: "easeOut" }}
-          className="relative w-full max-w-lg rounded-3xl border border-emerald-500/30 bg-[#0c0d14]/95 p-6 sm:p-8 shadow-[0_0_50px_rgba(16,185,129,0.18)] backdrop-blur-2xl flex flex-col gap-6 overflow-hidden"
+          className="relative w-full max-w-lg rounded-2xl border border-emerald-500/30 bg-[#0c0d14]/95 p-6 sm:p-7 shadow-[0_0_50px_rgba(16,185,129,0.18)] backdrop-blur-2xl flex flex-col gap-5 overflow-hidden"
         >
           {/* Ambient light ring */}
           <div className="pointer-events-none absolute -top-24 -left-24 h-48 w-48 rounded-full bg-emerald-500/20 blur-3xl" />
@@ -59,9 +65,11 @@ export function ClientSyncModal({
           {/* Header */}
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="relative flex h-11 w-11 items-center justify-center rounded-2xl bg-emerald-500/15 border border-emerald-400/30 text-xl shadow-inner">
+              <div className="relative flex h-11 w-11 items-center justify-center rounded-xl bg-emerald-500/15 border border-emerald-400/30 text-xl shadow-inner">
                 {isDone ? (
                   <span className="text-2xl">✨</span>
+                ) : is403 ? (
+                  <span className="text-2xl">🔒</span>
                 ) : isError ? (
                   <span className="text-2xl">🔑</span>
                 ) : isRateLimited ? (
@@ -73,13 +81,15 @@ export function ClientSyncModal({
               <div>
                 <h3 className="text-base sm:text-lg font-black text-white tracking-tight flex items-center gap-2">
                   <span>Sincronización en Tiempo Real</span>
-                  <span className="rounded-full bg-emerald-500/20 border border-emerald-400/30 px-2 py-0.5 text-[9px] font-black uppercase text-emerald-300">
+                  <span className="rounded-md bg-emerald-500/20 border border-emerald-400/30 px-2 py-0.5 text-[9px] font-black uppercase text-emerald-300">
                     Exportify Engine
                   </span>
                 </h3>
                 <p className="text-xs text-white/50">
                   {isAuthMissing
                     ? "Permiso de lectura y escritura de Spotify"
+                    : is403
+                    ? "Verificación de permisos de cuenta"
                     : "Extracción delta segura sin rate-limits"}
                 </p>
               </div>
@@ -93,15 +103,34 @@ export function ClientSyncModal({
             </button>
           </div>
 
-          {/* Auth Missing Banner */}
-          {isAuthMissing ? (
-            <div className="flex flex-col gap-4 rounded-2xl border border-spotify/30 bg-spotify/10 p-4 text-xs text-white/90">
+          {/* 403 Forbidden Elegant Alert */}
+          {is403 ? (
+            <div className="flex flex-col gap-3 rounded-xl border border-amber-500/40 bg-amber-500/10 p-4 text-xs text-amber-100">
+              <div className="flex items-center gap-2 font-bold text-amber-300">
+                <span className="text-base">⚠️</span>
+                <span>Error 403: Permisos denegados</span>
+              </div>
+              <p className="text-amber-200/90 leading-relaxed">
+                Verifica los scopes de tu cuenta o que tu usuario de Spotify esté dado de alta en el panel de <strong>Spotify Developer Dashboard</strong> (si la app está en Modo Desarrollo).
+              </p>
+              <div className="flex justify-end pt-2">
+                <button
+                  onClick={onLoginRequest}
+                  className="rounded-lg bg-amber-400 hover:bg-amber-300 text-black px-4 py-2 font-bold transition-transform active:scale-95 cursor-pointer"
+                >
+                  Reconectar cuenta
+                </button>
+              </div>
+            </div>
+          ) : isAuthMissing ? (
+            /* Auth Missing Banner */
+            <div className="flex flex-col gap-4 rounded-xl border border-spotify/30 bg-spotify/10 p-4 text-xs text-white/90">
               <p className="font-semibold leading-relaxed">
                 Para descargar en tiempo real tus <strong>1.750 canciones</strong> y comparar todas tus playlists sin límites, conecta tu cuenta de Spotify:
               </p>
               <button
                 onClick={onLoginRequest}
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-spotify hover:bg-spotify/90 px-5 py-2.5 text-xs font-black text-black shadow-lg shadow-spotify/30 transition-transform active:scale-95 cursor-pointer"
+                className="inline-flex items-center justify-center gap-2 rounded-lg bg-spotify hover:bg-spotify/90 px-5 py-2.5 text-xs font-black text-black shadow-lg shadow-spotify/30 transition-transform active:scale-95 cursor-pointer"
               >
                 <span>🔑 Conectar Cuenta de Spotify</span>
               </button>
@@ -142,43 +171,43 @@ export function ClientSyncModal({
               </div>
 
               {/* Telemetry Metrics Grid */}
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
-                <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-3 flex flex-col">
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                <div className="rounded-xl border border-white/10 bg-white/[0.03] p-3 flex flex-col">
                   <span className="text-[10px] text-white/40 uppercase font-black tracking-wider">Liked Songs</span>
                   <span className="text-sm sm:text-base font-black text-emerald-300 font-mono mt-0.5">
                     {progress?.stats?.likedSongsTotal ? progress.stats.likedSongsTotal.toLocaleString() : "..."}
                   </span>
                 </div>
 
-                <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-3 flex flex-col">
+                <div className="rounded-xl border border-white/10 bg-white/[0.03] p-3 flex flex-col">
                   <span className="text-[10px] text-white/40 uppercase font-black tracking-wider">Playlists</span>
                   <span className="text-sm sm:text-base font-black text-white font-mono mt-0.5">
                     {progress?.stats ? `${progress.stats.playlistsScanned} / ${progress.stats.playlistsTotal || "..."}` : "..."}
                   </span>
                 </div>
 
-                <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-3 flex flex-col">
+                <div className="rounded-xl border border-white/10 bg-white/[0.03] p-3 flex flex-col">
                   <span className="text-[10px] text-white/40 uppercase font-black tracking-wider">Sin cambios</span>
                   <span className="text-sm sm:text-base font-black text-teal-300 font-mono mt-0.5">
                     {progress?.stats?.playlistsUnchanged ?? 0}
                   </span>
                 </div>
 
-                <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-3 flex flex-col">
+                <div className="rounded-xl border border-white/10 bg-white/[0.03] p-3 flex flex-col">
                   <span className="text-[10px] text-white/40 uppercase font-black tracking-wider">Canciones (+)</span>
                   <span className="text-sm sm:text-base font-black text-emerald-400 font-mono mt-0.5">
                     +{progress?.stats?.tracksAdded ?? 0}
                   </span>
                 </div>
 
-                <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-3 flex flex-col">
+                <div className="rounded-xl border border-white/10 bg-white/[0.03] p-3 flex flex-col">
                   <span className="text-[10px] text-white/40 uppercase font-black tracking-wider">Canciones (-)</span>
                   <span className="text-sm sm:text-base font-black text-rose-400 font-mono mt-0.5">
                     -{progress?.stats?.tracksRemoved ?? 0}
                   </span>
                 </div>
 
-                <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-3 flex flex-col">
+                <div className="rounded-xl border border-white/10 bg-white/[0.03] p-3 flex flex-col">
                   <span className="text-[10px] text-white/40 uppercase font-black tracking-wider">Depuradas</span>
                   <span className="text-sm sm:text-base font-black text-amber-300 font-mono mt-0.5">
                     {progress?.stats?.playlistsRemoved ?? 0}
@@ -188,7 +217,7 @@ export function ClientSyncModal({
 
               {/* Rate limit warning */}
               {isRateLimited && (
-                <div className="rounded-2xl border border-amber-500/40 bg-amber-500/10 p-3.5 flex items-center gap-3">
+                <div className="rounded-xl border border-amber-500/40 bg-amber-500/10 p-3.5 flex items-center gap-3">
                   <span className="text-2xl">⏳</span>
                   <div className="text-xs text-amber-200">
                     <p className="font-bold">Pausa de protección activa ({progress?.retryAfterSeconds}s)</p>
@@ -199,7 +228,7 @@ export function ClientSyncModal({
 
               {/* Error notice */}
               {isError && progress?.message && (
-                <div className="rounded-2xl border border-rose-500/40 bg-rose-500/10 p-3.5 text-xs text-rose-200">
+                <div className="rounded-xl border border-rose-500/40 bg-rose-500/10 p-3.5 text-xs text-rose-200">
                   <p className="font-bold">Aviso durante la sincronización:</p>
                   <p className="text-rose-300/80 mt-0.5">{progress.message}</p>
                 </div>
@@ -208,18 +237,18 @@ export function ClientSyncModal({
           )}
 
           {/* Footer Actions */}
-          <div className="flex justify-end gap-3 mt-2">
+          <div className="flex justify-end gap-3 mt-1">
             {isDone ? (
               <button
                 onClick={onClose}
-                className="w-full sm:w-auto rounded-full bg-spotify hover:bg-spotify/90 px-6 py-3 text-sm font-black text-black shadow-lg shadow-spotify/30 transition-transform active:scale-95 cursor-pointer"
+                className="w-full sm:w-auto rounded-lg bg-spotify hover:bg-spotify/90 px-6 py-2.5 text-sm font-black text-black shadow-lg shadow-spotify/30 transition-transform active:scale-95 cursor-pointer"
               >
                 ✓ Aplicar y Continuar
               </button>
-            ) : isError ? (
+            ) : is403 || isError ? (
               <button
                 onClick={onClose}
-                className="w-full sm:w-auto rounded-full bg-white/10 hover:bg-white/20 px-6 py-3 text-sm font-bold text-white transition-colors cursor-pointer"
+                className="w-full sm:w-auto rounded-lg bg-white/10 hover:bg-white/20 px-6 py-2.5 text-sm font-bold text-white transition-colors cursor-pointer"
               >
                 Cerrar
               </button>
