@@ -1,7 +1,10 @@
 "use client";
 
 import React, { useState, useEffect, useRef, useCallback } from "react";
+import { SafeImage } from "@/components/SafeImage";
 import { motion, AnimatePresence, useMotionValue, useTransform } from "framer-motion";
+
+
 import type { AuditedTrackItem } from "@/types/library";
 
 interface AuditSwipeDeckModalProps {
@@ -277,16 +280,14 @@ export function AuditSwipeDeckModal({
                 {/* Background Next Card Preview */}
                 {nextItem && (
                   <div className="absolute w-[92%] h-[94%] rounded-3xl border border-white/10 bg-[#16120e] p-4 flex flex-col items-center justify-between opacity-50 scale-95 translate-y-3 pointer-events-none shadow-xl">
-                    <div className="w-36 h-36 rounded-2xl bg-black/40 overflow-hidden border border-white/10">
-                      {nextItem.track.album_cover || nextItem.track.image_url ? (
-                        <img
-                          src={(nextItem.track.album_cover || nextItem.track.image_url) ?? undefined}
-                          alt={nextItem.track.name}
-                          className="w-full h-full object-cover"
-                        />
-                      ) : (
-                        <div className="w-full h-full flex items-center justify-center text-3xl">🎵</div>
-                      )}
+                    <div className="w-36 h-36 rounded-2xl bg-black/40 overflow-hidden border border-white/10 relative">
+                      <SafeImage
+                        src={(nextItem.track.album_cover || nextItem.track.image_url) ?? ""}
+                        alt={nextItem.track.name}
+                        fill
+                        fallbackIcon={<div className="w-full h-full flex items-center justify-center text-3xl">🎵</div>}
+                        className="object-cover"
+                      />
                     </div>
                     <div className="w-full text-center">
                       <p className="text-xs font-bold text-white/80 truncate">{nextItem.track.name}</p>
@@ -342,15 +343,14 @@ export function AuditSwipeDeckModal({
                     onClick={togglePlayPause}
                     className="relative w-36 h-36 sm:w-44 sm:h-44 rounded-2xl overflow-hidden bg-black/60 border-2 border-amber-400/40 shadow-2xl shrink-0 mt-1 cursor-pointer group"
                   >
-                    {currentItem.track.album_cover || currentItem.track.image_url ? (
-                      <img
-                        src={(currentItem.track.album_cover || currentItem.track.image_url) ?? undefined}
-                        alt={currentItem.track.name}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                      />
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center text-4xl">🎵</div>
-                    )}
+                    <SafeImage
+                      src={(currentItem.track.album_cover || currentItem.track.image_url) ?? ""}
+                      alt={currentItem.track.name}
+                      fill
+                      priority
+                      fallbackIcon={<div className="w-full h-full flex items-center justify-center text-4xl">🎵</div>}
+                      className="object-cover group-hover:scale-105 transition-transform duration-700"
+                    />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
 
                     {/* Audio Playback State Indicator & Equalizer */}

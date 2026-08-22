@@ -3,7 +3,10 @@
 import { useEffect, useState, useCallback, useMemo } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
+import { SafeImage } from "@/components/SafeImage";
+
 import { useAuthStore } from "@/store/authStore";
+
 import {
   loadMusicLibrary,
   getSavedClassifications,
@@ -21,6 +24,7 @@ import type {
   CompletionMeta,
   CurationRules,
 } from "@/types/library";
+
 
 const PITCH_NAMES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
 
@@ -463,12 +467,13 @@ function TransferTrackModal({
         {/* Selected Track Preview Card */}
         <div className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.03] p-3.5 mb-4 shrink-0">
           <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-xl bg-white/5">
-            {cover ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img src={cover} alt={track.name} className="h-full w-full object-cover" />
-            ) : (
-              <div className="flex h-full w-full items-center justify-center text-white/20">🎵</div>
-            )}
+            <SafeImage
+              src={cover ?? ""}
+              alt={track.name}
+              fill
+              fallbackIcon={<div className="flex h-full w-full items-center justify-center text-white/20">🎵</div>}
+              className="object-cover"
+            />
           </div>
           <div className="flex-1 min-w-0">
             <p className="truncate text-sm font-bold text-white">{track.name}</p>
@@ -1443,10 +1448,19 @@ interface PerfectViewProps {
   isBenchmark: boolean;
   onOpenArtists: () => void;
   onOpenDuplicates: () => void;
+  onCurateClick?: () => void;
 }
 
-function PerfectView({ playlist, isBenchmark, onOpenArtists, onOpenDuplicates }: PerfectViewProps) {
+function PerfectView({
+  playlist,
+  isBenchmark,
+  onOpenArtists,
+  onOpenDuplicates,
+  onCurateClick,
+}: PerfectViewProps) {
   const allTracks = playlist.tracks_data ?? [];
+  const count = playlist.total_tracks ?? allTracks.length;
+  const level = Math.max(1, Math.floor(count / 100));
 
   return (
     <motion.div
@@ -1475,12 +1489,12 @@ function PerfectView({ playlist, isBenchmark, onOpenArtists, onOpenDuplicates }:
         </div>
         <div>
           <p className={`text-sm font-bold ${isBenchmark ? "text-spotify" : "text-emerald-400"}`}>
-            {isBenchmark ? "Playlist Benchmark de Referencia" : "Playlist Curada y Coherente"}
+            {isBenchmark ? "Playlist Benchmark de Referencia" : `Playlist Curada · Nivel ${level} 👑`}
           </p>
           <p className="text-xs text-white/50">
             {isBenchmark
               ? "Esta es la referencia de calidad musical del sistema. Define el estándar para el resto."
-              : `Optimizada a ${playlist.total_tracks ?? allTracks.length} canciones con balance perfecto.`}
+              : `Optimizada a ${count} canciones. El Modo Infinito está completamente desbloqueado.`}
           </p>
         </div>
       </div>
@@ -1501,6 +1515,31 @@ function PerfectView({ playlist, isBenchmark, onOpenArtists, onOpenDuplicates }:
         classification="objetivo"
         isBenchmark={isBenchmark}
       />
+
+      {/* ── Main CTA: Lanzar Curación Orbital con Modo Infinito Desbloqueado ── */}
+      <div className="flex flex-col items-center gap-3 rounded-3xl border border-cyan-500/30 bg-cyan-950/20 p-6 text-center shadow-xl backdrop-blur-md">
+        <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-cyan-500/20 text-cyan-300 text-2xl shadow-md border border-cyan-400/30">
+          ♾️
+        </div>
+        <div>
+          <h3 className="text-base font-bold text-white">
+            Curación Orbital con Modo Infinito
+          </h3>
+          <p className="mt-1 text-xs text-white/60 max-w-sm">
+            ¡Nivel {level} alcanzado! Accede a la mesa orbital para seguir alimentando tu playlist de forma autónoma con coincidencia acústica perfecta.
+          </p>
+        </div>
+
+        <motion.button
+          whileHover={{ scale: 1.03 }}
+          whileTap={{ scale: 0.97 }}
+          onClick={onCurateClick}
+          className="mt-2 inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-cyan-400 via-teal-400 to-emerald-400 px-7 py-3 text-sm font-black text-black shadow-xl shadow-cyan-500/25 hover:shadow-cyan-500/40 cursor-pointer"
+        >
+          <span>Lanzar Curación Orbital</span>
+          <span>⚡</span>
+        </motion.button>
+      </div>
     </motion.div>
   );
 }
@@ -1556,6 +1595,7 @@ export default function PlaylistDetailPage() {
   const playlistId = params?.id ?? "";
 
   const load = useCallback(async () => {
+
     if (!playlistId) return;
     setIsLoading(true);
     setError(null);
@@ -1708,16 +1748,20 @@ export default function PlaylistDetailPage() {
       <header className="flex flex-col items-center gap-4 px-6 pb-6 pt-2 text-center">
         {/* Cover */}
         <div className="relative h-44 w-44 overflow-hidden rounded-2xl shadow-2xl shadow-black/60 sm:h-52 sm:w-52">
-          {cover ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img src={cover} alt={playlist?.name ?? "Playlist"} className="h-full w-full object-cover" />
-          ) : (
-            <div className="flex h-full w-full items-center justify-center bg-surface">
-              <svg viewBox="0 0 24 24" fill="currentColor" className="h-16 w-16 text-white/10">
-                <path d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6Z" />
-              </svg>
-            </div>
-          )}
+          <SafeImage
+            src={cover ?? ""}
+            alt={playlist?.name ?? "Playlist"}
+            fill
+            priority
+            fallbackIcon={
+              <div className="flex h-full w-full items-center justify-center bg-surface">
+                <svg viewBox="0 0 24 24" fill="currentColor" className="h-16 w-16 text-white/10">
+                  <path d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6Z" />
+                </svg>
+              </div>
+            }
+            className="object-cover"
+          />
           {/* State badge over cover */}
           {!isLoading && playlist && (
             <div className="absolute bottom-2 left-2 flex items-center gap-1">
@@ -1816,6 +1860,8 @@ export default function PlaylistDetailPage() {
         </div>
       </header>
 
+
+
       {/* Main content */}
       <main className="flex-1 px-4 sm:px-8 max-w-2xl mx-auto w-full flex flex-col gap-6">
         <AnimatePresence mode="wait">
@@ -1871,6 +1917,7 @@ export default function PlaylistDetailPage() {
                   isBenchmark={isBenchmark}
                   onOpenArtists={() => setActiveModal("artists")}
                   onOpenDuplicates={() => setActiveModal("duplicates")}
+                  onCurateClick={handleCurateClick}
                 />
               )}
             </motion.div>
@@ -1927,3 +1974,5 @@ export default function PlaylistDetailPage() {
     </div>
   );
 }
+
+

@@ -3,7 +3,10 @@
 import { useEffect, useState, useCallback, useMemo, useRef } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { motion, AnimatePresence, useMotionValue } from "framer-motion";
+import { SafeImage } from "@/components/SafeImage";
+
 import { useAuthStore } from "@/store/authStore";
+
 import {
   loadMusicLibrary,
   getSavedClassifications,
@@ -169,8 +172,14 @@ export default function OrbitalCuratePage() {
 
   const isMobile = windowWidth < 640;
   const isTablet = windowWidth >= 640 && windowWidth < 1024;
-  const radiusPx = isMobile ? 165 : isTablet ? 260 : 420;
+  // Adaptive radius calculated dynamically from viewport width to prevent phone overflow
+  const radiusPx = isMobile
+    ? Math.min(Math.max(windowWidth * 0.32, 105), 135)
+    : isTablet
+    ? Math.min(windowWidth * 0.36, 240)
+    : 380;
   const orbitDiameter = radiusPx * 2;
+
 
   // Drag motion values
   const dragX = useMotionValue(0);
@@ -328,6 +337,14 @@ export default function OrbitalCuratePage() {
   // Toggle Infinite Mode on a target planet
   const toggleInfiniteMode = useCallback(
     (planetKey: string, planetName: string) => {
+      const targetPl = targetPlaylists.find((p) => (p.id ?? p.name) === planetKey);
+      const count = targetPl?.tracks_data?.length ?? targetPl?.total_tracks ?? 0;
+
+      if (count < 100) {
+        setToast(`🔒 El Modo Infinito requiere Nivel 1 (100 canciones). Progreso: ${count}/100`);
+        return;
+      }
+
       if (infinitePlanetId === planetKey) {
         setInfinitePlanetId(null);
         setCurrentTrackAffinity(null);
@@ -335,10 +352,9 @@ export default function OrbitalCuratePage() {
       } else {
         setInfinitePlanetId(planetKey);
         playRewardSound("fanfare");
-        setToast(`♾️ Modo Infinito activado para "${planetName}"`);
+        setToast(`♾️ Modo Infinito activado para "${planetName}" (Nivel ${Math.max(1, Math.floor(count / 100))})`);
 
         // Immediately pick the best matching track for this target
-        const targetPl = targetPlaylists.find((p) => (p.id ?? p.name) === planetKey);
         if (targetPl) {
           const profile = calculateTargetAcousticProfile(targetPl);
           const candidatePool = remainingTracks.length > 0 ? remainingTracks : allTracks;
@@ -1090,13 +1106,13 @@ export default function OrbitalCuratePage() {
                             rotate: { duration: isMobile ? 65 : 90, ease: "linear", repeat: Infinity },
                             scale: { duration: 0.2 },
                           }}
-                          className={`relative z-30 pointer-events-auto flex items-center gap-2 sm:gap-3 rounded-xl sm:rounded-2xl border-2 ${
+                          className={`relative z-30 pointer-events-auto flex items-center gap-1.5 sm:gap-3 rounded-xl sm:rounded-2xl border-2 ${
                             infinitePlanetId === key
                               ? "border-cyan-400 ring-4 ring-cyan-400/50 shadow-[0_0_35px_rgba(6,182,212,0.8)]"
                               : isTargetHovered
                               ? "border-emerald-300 ring-4 sm:ring-8 ring-emerald-400/40 shadow-[0_0_40px_rgba(16,185,129,0.6)]"
                               : visuals.borderColor
-                          } bg-[#0c0c16]/95 p-2 sm:p-3.5 shadow-2xl backdrop-blur-2xl ${visuals.glowColor} transition-all duration-300 w-36 sm:w-56 lg:w-64 text-left cursor-pointer active:scale-95`}
+                          } bg-[#0c0c16]/95 p-1.5 sm:p-3.5 shadow-2xl backdrop-blur-2xl ${visuals.glowColor} transition-all duration-300 w-28 sm:w-56 lg:w-64 text-left cursor-pointer active:scale-95`}
                         >
                           {/* Shockwave Particle Pulse upon Absorption */}
                           {hasShockwave && (
@@ -1162,7 +1178,7 @@ export default function OrbitalCuratePage() {
                             </div>
 
                             {/* ── PROMPT 6: Modo Infinito Toggle Button (Unlocked at Level >= 1 / count >= 100) ── */}
-                            {count >= 100 && (
+                            {count >= 100 ? (
                               <button
                                 type="button"
                                 onPointerDownCapture={(e) => e.stopPropagation()}
@@ -1181,6 +1197,22 @@ export default function OrbitalCuratePage() {
                               >
                                 <span>♾️</span>
                                 <span>{infinitePlanetId === key ? "MODO INFINITO ACTIVO" : "MODO INFINITO"}</span>
+                              </button>
+                            ) : (
+                              <button
+                                type="button"
+                                onPointerDownCapture={(e) => e.stopPropagation()}
+                                onMouseDown={(e) => e.stopPropagation()}
+                                onTouchStart={(e) => e.stopPropagation()}
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  setToast(`🔒 Modo Infinito bloqueado. Requiere Nivel 1 (100 canciones). Progreso: ${count}/100.`);
+                                }}
+                                className="mt-0.5 inline-flex items-center gap-1 rounded-full bg-white/5 border border-white/10 px-2 py-0.5 text-[6.5px] sm:text-[7px] font-semibold text-white/40 hover:text-white/70 transition-all cursor-pointer"
+                                title={`Desbloqueo al alcanzar Nivel 1 (100 canciones). Progreso: ${count}/100`}
+                              >
+                                <span>🔒</span>
+                                <span>Infinito (LVL 1)</span>
                               </button>
                             )}
 
@@ -1288,21 +1320,20 @@ export default function OrbitalCuratePage() {
 
                     {/* Mini Album Cover with Integrated Glassmorphic Audio Preview Player */}
                     <div className="relative aspect-square w-16 h-16 sm:w-20 sm:h-20 mx-auto rounded-lg sm:rounded-xl overflow-hidden shadow-lg shadow-black/80 border border-white/10 bg-[#161622] group">
-                      {cover ? (
-                        // eslint-disable-next-line @next/next/no-img-element
-                        <img
-                          src={cover}
-                          alt={currentTrack.name}
-                          className="h-full w-full object-cover transition-transform duration-700 pointer-events-none"
-                        />
-                      ) : (
-                        <div className="flex h-full w-full flex-col items-center justify-center gap-1 text-white/20 bg-gradient-to-br from-white/[0.03] to-white/[0.08] pointer-events-none">
-                          <svg viewBox="0 0 24 24" fill="currentColor" className="h-6 w-6">
-                            <path d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6Z" />
-                          </svg>
-                          <span className="text-[8px] text-white/30">Sin carátula</span>
-                        </div>
-                      )}
+                      <SafeImage
+                        src={cover ?? ""}
+                        alt={currentTrack.name}
+                        fill
+                        fallbackIcon={
+                          <div className="flex h-full w-full flex-col items-center justify-center gap-1 text-white/20 bg-gradient-to-br from-white/[0.03] to-white/[0.08] pointer-events-none">
+                            <svg viewBox="0 0 24 24" fill="currentColor" className="h-6 w-6">
+                              <path d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6Z" />
+                            </svg>
+                            <span className="text-[8px] text-white/30">Sin carátula</span>
+                          </div>
+                        }
+                        className="object-cover transition-transform duration-700 pointer-events-none"
+                      />
 
                       {/* Glassmorphic Play/Pause Button Overlay (Drag-isolated) */}
                       <div className="absolute inset-0 flex items-center justify-center bg-black/35 backdrop-blur-[1px] opacity-90 transition-opacity pointer-events-none">

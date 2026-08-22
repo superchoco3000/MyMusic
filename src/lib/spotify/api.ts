@@ -230,3 +230,81 @@ export async function getTracksAudioFeatures(
     return new Map();
   }
 }
+
+// =============================================================================
+// Playlist track mutation (Push to Spotify with 100-track Chunking)
+// =============================================================================
+
+export interface PushTracksResponse {
+  snapshot_id: string;
+}
+
+export interface PushResult {
+  snapshots: string[];
+  totalPushed: number;
+  batchesCount: number;
+}
+
+/**
+ * Pushes track URIs to a Spotify playlist in sequential batches of at most 100 items.
+ * Adheres to Spotify API limit of 100 tracks per POST request.
+ *
+ * @param playlistId - Spotify playlist ID
+ * @param trackUris - Array of Spotify track URIs (or track IDs)
+ * @param accessToken - Spotify OAuth Bearer token
+ * @returns PushResult with array of snapshot_ids and total tracks pushed
+ */
+export async function pushTracksToSpotify(
+  playlistId: string,
+  trackUris: string[],
+  accessToken: string
+): Promise<PushResult> {
+  if (!playlistId) throw new Error("Playlist ID no especificado.");
+  if (!accessToken) throw new Error("Token de acceso de Spotify requerido.");
+  if (!trackUris || trackUris.length === 0) {
+    return { snapshots: [], totalPushed: 0, batchesCount: 0 };
+  }
+
+  // Format URIs: ensure 'spotify:track:<id>' format
+  const normalizedUris = trackUris
+    .map((uri) => uri?.trim())
+    .filter(Boolean)
+    .map((uri) => (uri.startsWith("spotify:track:") ? uri : `spotify:track:${uri}`));
+
+  const CHUNK_SIZE = 100;
+  const chunks: string[][] = [];
+  for (let i = 0; i < normalizedUris.length; i += CHUNK_SIZE) {
+    chunks.push(normalizedUris.slice(i, i + CHUNK_SIZE));
+  }
+
+  const snapshots: string[] = [];
+
+  for (const chunk of chunks) {
+    const res = await fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ uris: chunk }),
+    });
+
+    if (!res.ok) {
+      const errText = await res.text().catch(() => res.statusText);
+      console.error(`[spotify/api] Error adding batch of ${chunk.length} tracks to playlist ${playlistId}:`, errText);
+      throw new Error(`Spotify API (${res.status}): ${errText || "Error al añadir canciones a la playlist"}`);
+    }
+
+    const data = (await res.json()) as PushTracksResponse;
+    if (data.snapshot_id) {
+      snapshots.push(data.snapshot_id);
+    }
+  }
+
+  return {
+    snapshots,
+    totalPushed: normalizedUris.length,
+    batchesCount: chunks.length,
+  };
+}
+

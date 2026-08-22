@@ -1,10 +1,6 @@
 /**
- * subgenres.ts — Diccionario de Subgéneros Enriquecidos y Motor de Smart Naming
- * ==============================================================================
- * Proporciona:
- * 1. Detección de macro-género a partir del nombre de la playlist.
- * 2. Catálogo de 10 subgéneros con sus sub-subgéneros (includes) por macro-género.
- * 3. Generación de 5 propuestas de nombre (3 Pro, 1 Híbrido, 1 Fantasioso/Lore).
+ * subgenres.ts — Diccionario de Subgéneros Enriquecidos, Asistente Jerárquico y Smart Naming
+ * ===========================================================================================
  */
 
 export interface SubgenreItem {
@@ -13,43 +9,173 @@ export interface SubgenreItem {
   includes: string;
 }
 
-export type MacroGenre = "dnb" | "electronica" | "rock" | "urbano" | "chill";
+export type MacroGenre =
+  | "electronica"
+  | "rock"
+  | "pop"
+  | "hiphop"
+  | "urbano"
+  | "chill"
+  | "rnb"
+  | "jazz_clasica"
+  | "dnb";
 
-/**
- * Detects the macro-genre based on keywords in playlist.name.toLowerCase()
- */
-export function detectMacroGenre(name: string): MacroGenre {
-  const n = name.toLowerCase();
-
-  // 1. DnB / Jungle / Breakbeat / Bass
-  if (n.includes("dnb") || n.includes("drum") || n.includes("jungle") || n.includes("bass") || n.includes("breakbeat") || n.includes("neuro")) {
-    return "dnb";
-  }
-
-  // 2. Electrónica / House / Techno / Dance / Rave / Trance
-  if (n.includes("house") || n.includes("techno") || n.includes("dance") || n.includes("rave") || n.includes("electro") || n.includes("club") || n.includes("trance") || n.includes("edm") || n.includes("acid")) {
-    return "electronica";
-  }
-
-  // 3. Rock / Metal / Punk / Indie / Grunge / Guitar
-  if (n.includes("rock") || n.includes("metal") || n.includes("punk") || n.includes("indie") || n.includes("grunge") || n.includes("guitar") || n.includes("band") || n.includes("heavy") || n.includes("hard")) {
-    return "rock";
-  }
-
-  // 4. Urbano / Reggaeton / Trap / Hip-Hop / Rap / Funk / Latin / Perreo
-  if (n.includes("reggaeton") || n.includes("funk") || n.includes("rfd") || n.includes("perreo") || n.includes("latin") || n.includes("trap") || n.includes("hip hop") || n.includes("hiphop") || n.includes("rap") || n.includes("urban") || n.includes("dembow")) {
-    return "urbano";
-  }
-
-  // 5. Chill / Soul / Joyas / Jazz / Pop / Default
-  return "chill";
+export interface MacroGenreCategory {
+  id: MacroGenre;
+  name: string;
+  icon: string;
+  description: string;
+  badgeColor: string;
+  gradient: string;
+  subgenres: SubgenreItem[]; // Exactly 6 curated subgenres
 }
 
 /**
- * 10 Enriched Subgenres per Macro-Genre
+ * 8 Macro-Categorías Principales con exactamente 6 subgéneros asociados cada una
+ */
+export const HIERARCHICAL_MACRO_GENRES: MacroGenreCategory[] = [
+  {
+    id: "electronica",
+    name: "Electrónica & Club",
+    icon: "⚡",
+    description: "House, Techno, Melodic, Synthwave y ritmos de pista de baile.",
+    badgeColor: "bg-cyan-500/20 text-cyan-300 border-cyan-400/40",
+    gradient: "from-cyan-500/20 via-blue-500/10 to-transparent",
+    subgenres: [
+      { id: "house_tech", name: "House & Tech House", includes: "Rolling Basslines, Groove Club, Vocal Chops, Latin Tech..." },
+      { id: "techno_raw", name: "Techno & Industrial Peak", includes: "Dark Acid 303, Driving 135+ BPM, Hypnotic Loops..." },
+      { id: "melodic_techno", name: "Melodic & Progressive House", includes: "Emotional Synths, Organic House, Tale Of Us Style..." },
+      { id: "deep_garage", name: "Deep House & UK Garage", includes: "Rhodes Chords, 2-Step Grooves, Silky Basslines..." },
+      { id: "synthwave_cyber", name: "Synthwave & Retrowave", includes: "80s Analog Synths, Outrun, Carpenter Basslines..." },
+      { id: "hard_techno", name: "Hard Techno & Neo-Rave", includes: "Schranz, Industrial Screams, Fast 145+ BPM..." },
+    ],
+  },
+  {
+    id: "rock",
+    name: "Rock & Alternativo",
+    icon: "🎸",
+    description: "Indie, Classic Rock, Grunge, Metal, Punk y guitarras con fuerza.",
+    badgeColor: "bg-rose-500/20 text-rose-300 border-rose-400/40",
+    gradient: "from-rose-500/20 via-amber-500/10 to-transparent",
+    subgenres: [
+      { id: "indie_postpunk", name: "Indie Rock & Post-Punk", includes: "Jangle Guitars, Motorik Beats, Garage Revival..." },
+      { id: "classic_hard_rock", name: "Classic & Hard Rock Anthems", includes: "70s/80s Guitar Solos, Power Chords, Blues Arena..." },
+      { id: "grunge_alt90s", name: "Grunge & 90s Alternative", includes: "Seattle Sound, Raw Distortions, Melancholy Vocals..." },
+      { id: "pop_punk_emo", name: "Pop-Punk & 2000s Emo", includes: "Fast Tempo, Palm Mutes, Hooky Chorus, Skate Punk..." },
+      { id: "metal_riffs", name: "Metalcore & Modern Djent", includes: "Heavy Breakdowns, Polymetric Chugs, Drop Tuning..." },
+      { id: "shoegaze_dream", name: "Shoegaze & Dream Pop", includes: "Walls of Reverb, Ethereal Whispers, Sonic Soundscapes..." },
+    ],
+  },
+  {
+    id: "pop",
+    name: "Pop & Contemporáneo",
+    icon: "✨",
+    description: "Synth-Pop, Indie Pop, Dance-Pop, Hyperpop y melodías pegadizas.",
+    badgeColor: "bg-fuchsia-500/20 text-fuchsia-300 border-fuchsia-400/40",
+    gradient: "from-fuchsia-500/20 via-pink-500/10 to-transparent",
+    subgenres: [
+      { id: "synth_pop80s", name: "Synth-Pop & 80s Revival", includes: "Vintage Linndrum, Shimmering Keys, Bright Hooks..." },
+      { id: "indie_pop_folk", name: "Indie Pop & Singer-Songwriter", includes: "Acoustic Guitars, Intimate Vocals, Heartfelt Anthems..." },
+      { id: "electro_dance_pop", name: "Electro-Pop & Dancefloor Pop", includes: "Bouncy Basslines, Club Hooks, Stems Vocales..." },
+      { id: "hyperpop_future", name: "Hyperpop & Future Pop", includes: "Glitch FX, Metallic Snare, Pitch-Shifted Vocals..." },
+      { id: "dream_pop_ethereal", name: "Dream Pop & Atmospheric Gems", includes: "Lush Reverbs, Soft Pads, Melodic Whispers..." },
+      { id: "modern_chart_pop", name: "Contemporary Mainstream Pop", includes: "Clean 808s, Top-40 Production, Catchy Melodies..." },
+    ],
+  },
+  {
+    id: "hiphop",
+    name: "Hip-Hop & Rap",
+    icon: "🎤",
+    description: "Trap, Boom Bap, Drill, Lo-Fi y líricas urbanas con peso.",
+    badgeColor: "bg-amber-500/20 text-amber-300 border-amber-400/40",
+    gradient: "from-amber-500/20 via-orange-500/10 to-transparent",
+    subgenres: [
+      { id: "trap_808", name: "Trap & 808 Hard Bass", includes: "Sub-Bass Sliders, Fast Hi-Hat Rolls, Dark Leads..." },
+      { id: "boombap_90s", name: "Boom Bap & 90s Golden Era", includes: "Vinyl Sample Chops, SP1200 Drums, Lyrical Flow..." },
+      { id: "lofi_hiphop_chill", name: "Lo-Fi Hip-Hop & Chill Beats", includes: "Dusty Vinyl, Mellow Rhodes, Study Chords..." },
+      { id: "drill_uk_ny", name: "UK & NY Drill", includes: "Sliding 808s, Dark Piano Melodies, Counter-Rhythms..." },
+      { id: "conscious_lyrical", name: "Conscious & Jazz Rap", includes: "Live Horns, Upright Bass, Storytelling Bars..." },
+      { id: "cloud_melodic_rap", name: "Cloud & Melodic Emo Rap", includes: "Reverb Flutes, Autotune Melodies, Ambient Synths..." },
+    ],
+  },
+  {
+    id: "urbano",
+    name: "Urbano & Latino",
+    icon: "🔥",
+    description: "Reggaeton, Dembow, Trap Latino, Baile Funk y ritmos caribeños.",
+    badgeColor: "bg-emerald-500/20 text-emerald-300 border-emerald-400/40",
+    gradient: "from-emerald-500/20 via-teal-500/10 to-transparent",
+    subgenres: [
+      { id: "reggaeton_clasico", name: "Reggaeton Clásico & Perreo 2000s", includes: "Dembow Puro, Marquesina, Luny Tunes Style..." },
+      { id: "trap_latino_dark", name: "Trap Latino & Dark Melodies", includes: "808 Subs, Melodic Street Flow, Synth Leads..." },
+      { id: "dembow_mambo", name: "Dembow Dominicano & Mambo", includes: "Fast 120+ BPM, Heavy Snare, Party Flow..." },
+      { id: "funk_favela", name: "Funk Carioca & Baile Funk", includes: "Tamborzão 130 BPM, Favela Beat, Vocal Chants..." },
+      { id: "afro_dancehall", name: "Afrobeats & Dancehall", includes: "Jamaican Riddims, West African Grooves, Smooth Island..." },
+      { id: "neoperreo_cyber", name: "Neoperreo & Cyber Dembow", includes: "Industrial Drums, Rave Bass, Hyper-Latin Energy..." },
+    ],
+  },
+  {
+    id: "chill",
+    name: "Lo-Fi, Chill & Ambient",
+    icon: "☕",
+    description: "Study Beats, Ambient, Downtempo, Neo-Classical y sonidos relajantes.",
+    badgeColor: "bg-indigo-500/20 text-indigo-300 border-indigo-400/40",
+    gradient: "from-indigo-500/20 via-sky-500/10 to-transparent",
+    subgenres: [
+      { id: "lofi_study_beats", name: "Lo-Fi Beats & Chillhop", includes: "Vinyl Dust, Nostalgic Rhodes, Relaxed Drums..." },
+      { id: "ambient_space_drone", name: "Pure Ambient & Space Drone", includes: "Zero Beat, Infinite Reverb Pads, Meditation..." },
+      { id: "downtempo_trip_hop", name: "Downtempo & Trip-Hop", includes: "Slow Breakbeats, Dusty Guitars, Cinematic Moods..." },
+      { id: "sunset_nu_disco", name: "Nu-Disco & Sunset Grooves", includes: "Slap Bass, Funky Chords, Glitter Synths..." },
+      { id: "chillstep_melodic", name: "Chillstep & Melodic Atmosphere", includes: "Half-Tempo Bass, Emotional Piano, Vocal Echoes..." },
+      { id: "neo_classical_piano", name: "Cinematic Neo-Classical", includes: "Grand Piano, Soft Strings, Soundtrack Crescendo..." },
+    ],
+  },
+  {
+    id: "rnb",
+    name: "R&B & Soul",
+    icon: "🎷",
+    description: "Neo-Soul, Contemporary R&B, Funk, Motown y elegancia vocal.",
+    badgeColor: "bg-purple-500/20 text-purple-300 border-purple-400/40",
+    gradient: "from-purple-500/20 via-pink-500/10 to-transparent",
+    subgenres: [
+      { id: "neo_soul_organic", name: "Neo-Soul & Pocket Grooves", includes: "Laidback Drums, Jazzy 9th Chords, Silk Vocals..." },
+      { id: "contemporary_rnb", name: "Contemporary R&B & Trap Soul", includes: "Slow 808s, Vocal Layers, Midnight Drives..." },
+      { id: "classic_soul_funk", name: "Funk & Classic Soul", includes: "Tight Brass Section, Slap Bass, Motown Rhythm..." },
+      { id: "smooth_motown", name: "Vintage Motown & Northern Soul", includes: "Stomp Beats, Tambourines, Gospel Chords..." },
+      { id: "alternative_rnb", name: "Alternative R&B & Ambient Soul", includes: "Dark Textures, Reverb Vocals, Frank Ocean Vibe..." },
+      { id: "disco_funk_modern", name: "Modern Disco & Nu-Funk", includes: "Punchy Bass, Wah Guitars, Upbeat Dancefloor..." },
+    ],
+  },
+  {
+    id: "jazz_clasica",
+    name: "Jazz, Acústico & Clásica",
+    icon: "🎻",
+    description: "Bossa Nova, Indie Folk, Smooth Jazz, Cello y composiciones acústicas.",
+    badgeColor: "bg-emerald-500/20 text-teal-300 border-emerald-400/40",
+    gradient: "from-emerald-500/20 via-amber-500/10 to-transparent",
+    subgenres: [
+      { id: "bossa_lounge_jazz", name: "Bossa Nova & Lounge Jazz", includes: "Nylon Guitars, Brushes, Cocktail Bar Mood..." },
+      { id: "indie_folk_acoustic", name: "Indie Folk & Fingerpicking", includes: "Warm Acoustic Guitars, Harmonies, Organic Strings..." },
+      { id: "smooth_jazz_sax", name: "Smooth Jazz & Sax Grooves", includes: "Mellow Saxophone, Electric Piano, Evening Vibe..." },
+      { id: "modern_classical_strings", name: "Modern Classical & Cello", includes: "Minimalist Piano, String Quartets, Peaceful Pads..." },
+      { id: "acoustic_singer_songwriter", name: "Acoustic Singer-Songwriter", includes: "Solo Guitar/Piano, Raw Emotion, Storytelling..." },
+      { id: "nu_jazz_broken_beat", name: "Nu-Jazz & Broken Beat", includes: "Syncopated Drums, Horn Drops, Electronic Jazz Fusion..." },
+    ],
+  },
+];
+
+/**
+ * Fallback / Legacy SUBGENRE_DICTIONARY mapped from HIERARCHICAL_MACRO_GENRES
  */
 export const SUBGENRE_DICTIONARY: Record<MacroGenre, SubgenreItem[]> = {
-  // ── 1. DnB & Bass (10 Subgenres) ────────────────────────────────────────────
+  electronica: HIERARCHICAL_MACRO_GENRES.find((g) => g.id === "electronica")!.subgenres,
+  rock: HIERARCHICAL_MACRO_GENRES.find((g) => g.id === "rock")!.subgenres,
+  pop: HIERARCHICAL_MACRO_GENRES.find((g) => g.id === "pop")!.subgenres,
+  hiphop: HIERARCHICAL_MACRO_GENRES.find((g) => g.id === "hiphop")!.subgenres,
+  urbano: HIERARCHICAL_MACRO_GENRES.find((g) => g.id === "urbano")!.subgenres,
+  chill: HIERARCHICAL_MACRO_GENRES.find((g) => g.id === "chill")!.subgenres,
+  rnb: HIERARCHICAL_MACRO_GENRES.find((g) => g.id === "rnb")!.subgenres,
+  jazz_clasica: HIERARCHICAL_MACRO_GENRES.find((g) => g.id === "jazz_clasica")!.subgenres,
   dnb: [
     { id: "liquid_dnb", name: "Liquid & Soulful DnB", includes: "Atmospheric, Vocal DnB, Jazz & Bass, Deep Rolling..." },
     { id: "neurofunk", name: "Neurofunk & Cyber Tech", includes: "Heavy Bass Design, Darkstep, Techstep, Modulated Reese..." },
@@ -57,106 +183,89 @@ export const SUBGENRE_DICTIONARY: Record<MacroGenre, SubgenreItem[]> = {
     { id: "jungle_ragga", name: "Jungle & Ragga Drum", includes: "Amen Breaks, Dub Chords, Rastafari Toasters, Chopped Breaks..." },
     { id: "deep_minimal_dnb", name: "Deep & Minimal 174", includes: "Halftime, Micro-Funk, Skeptical Style, Sub-Heavy Clicks..." },
     { id: "dancefloor_dnb", name: "Dancefloor & Stadium DnB", includes: "Anthemic Vocals, Synth Drops, High Octane Melodies..." },
-    { id: "breakcore_crossbreed", name: "Breakcore & Crossbreed", includes: "Hardcore Techno Kicks, Mashcore, Extreme Amen Splices..." },
-    { id: "halftime_beats", name: "Halftime & Leftfield Bass", includes: "Slow 85 BPM Tempo, Glitch-Hop, Experimental Dubstep Drops..." },
-    { id: "autonomic_ambient", name: "Autonomic & Ambient DnB", includes: "Grey Area, 80s Synthwaves, Dub Ambient Textures..." },
-    { id: "drumstep_bass", name: "Drumstep & Hybrid Bass", includes: "Half-time Half-speed, Heavy Wobbles, Aggressive Drops..." },
-  ],
-
-  // ── 2. Electrónica & Rave (10 Subgenres) ────────────────────────────────────
-  electronica: [
-    { id: "tech_house", name: "Tech House & Groove Club", includes: "Rolling Basslines, Percussive Grooves, Latin Tech, Vocal Chops..." },
-    { id: "peak_techno", name: "Peak-Time & Raw Techno", includes: "Industrial Kicks, Dark Acid 303, Driving 135+ BPM, Hypnotic Loops..." },
-    { id: "melodic_house", name: "Melodic House & Techno", includes: "Progressive Chords, Emotional Synths, Organic House, Tale Of Us Style..." },
-    { id: "french_electro", name: "Electro & French Touch", includes: "Distorted Bass, Funky Filters, Cyberpunk Arpeggios, Justice Style..." },
-    { id: "deep_house_classic", name: "Deep House & Classic Garage", includes: "Rhodes Chords, UK Garage 2-Step, Soulful Vocals, Silky Bass..." },
-    { id: "psytrance_goatrance", name: "Psytrance & Goa Energy", includes: "Rolling Bass Triplet, Cosmic FX, Forest Psy, 140+ BPM Energy..." },
-    { id: "bass_house", name: "Bass House & G-House", includes: "Metallic Lead Synths, Low End Grime, UK Basslines, Hard Drops..." },
-    { id: "synthwave_cyber", name: "Synthwave & Darksynth", includes: "80s Retrowave, Outrun, Carpenter Synth Bass, Cyber Highway..." },
-    { id: "hard_dance", name: "Hard Techno & Neo-Rave", includes: "Schranz, Gabber Elements, Industrial Screams, Fast BPM..." },
-    { id: "ambient_electronica", name: "IDM & Ambient Electronica", includes: "Glitch Textures, Aphex Twin Vibes, Downtempo, Intelligent Beats..." },
-  ],
-
-  // ── 3. Rock & Alternative (10 Subgenres) ────────────────────────────────────
-  rock: [
-    { id: "rapmetal", name: "Rapmetal & Nu Metal", includes: "Crossover, Funk Metal, Industrial Riffs, 90s/00s Aggressive Vocals..." },
-    { id: "grunge_alternative", name: "Grunge & 90s Alternative", includes: "Seattle Sound, Distorted Guitars, Raw Melodic Vocals, Melancholy..." },
-    { id: "indie_postpunk", name: "Indie Rock & Post-Punk Revival", includes: "Jangle Guitars, Motorik Beats, Garage Rock, Angular Basslines..." },
-    { id: "hard_rock_classic", name: "Classic & Hard Rock Anthems", includes: "70s/80s Guitar Solos, Power Chords, Blues Rock, Heavy Arena..." },
-    { id: "pop_punk_emo", name: "Pop-Punk & Emo 2000s", includes: "Fast Tempo, Palm Mutes, Hooky Chorus, Skate Punk, Midwest Emo..." },
-    { id: "metalcore_modern", name: "Modern Metalcore & Djent", includes: "Heavy Breakdowns, Polymetric Chugs, Clean/Harsh Vocals, Drop-A Tuning..." },
-    { id: "stoner_desert_rock", name: "Stoner & Desert Psych Rock", includes: "Fuzz Pedals, Low-tuned Sludge, Groovy Psychedelic Jams..." },
-    { id: "shoegaze_dreampop", name: "Shoegaze & Dream Pop", includes: "Walls of Sound, Reverb Drench, Ethereal Whispers, Sonic Youth Style..." },
-    { id: "prog_art_rock", name: "Progressive & Art Rock", includes: "Time Signature Changes, Complex Soloing, Concept Themes, Atmospheric Keyboards..." },
-    { id: "blues_southern_rock", name: "Southern & Blues Rock", includes: "Slide Guitar, Organ Solos, Soulful Vocals, Swamp Boogie..." },
-  ],
-
-  // ── 4. Urbano & Latin (10 Subgenres) ────────────────────────────────────────
-  urbano: [
-    { id: "reggaeton_viejo", name: "Reggaeton Clásico & Perreo 2000s", includes: "Dembow Puro, Marquesina, Playero, Luny Tunes Style, Old School..." },
-    { id: "trap_latino", name: "Trap Latino & Dark Drill", includes: "808 Bass Sub, Fast Hi-Hats, Melodic Flow, Raw Street Lyrics..." },
-    { id: "funk_carioca", name: "Funk Carioca & Baile Funk", includes: "Tamborzão Beat, Favela Bass, Vocal Chants, 130 BPM Bounce..." },
-    { id: "neoperreo_hybrid", name: "Neoperreo & Cyber Dembow", includes: "Industrial Drums, Rave Synths, Experimental Latin Bass, Hyper-Reggaeton..." },
-    { id: "afrobeats_dancehall", name: "Dancehall & Afro-Fusion", includes: "Jamaican Riddims, West African Grooves, Smooth Brass, Island Flow..." },
-    { id: "boombap_classic", name: "Boom Bap & 90s Golden Hip-Hop", includes: "Vinyl Sample Chops, SP1200 Drums, Lyrical Flow, Jazz Rap..." },
-    { id: "rnb_latino_sensual", name: "R&B Latino & Trap Soul", includes: "Slow Grooves, Sensual Melodies, Vocoder Chords, Night Drives..." },
-    { id: "drill_uk_ny", name: "UK & NY Drill", includes: "Sliding 808s, Dark Piano Melodies, Counter-Rhythms, Grime Influence..." },
-    { id: "mambo_urbano", name: "Mambo Urbano & Merengue Flow", includes: "Fast Brass, Dominican Riddims, High BPM Party Grooves..." },
-    { id: "cumbia_electronica", name: "Cumbia Digital & Tropical Bass", includes: "Accordion Loops, Guacharaca + Sub-bass, Latin Electronic Fusion..." },
-  ],
-
-  // ── 5. Chill, Soul, Joyas & Pop (10 Subgenres) ──────────────────────────────
-  chill: [
-    { id: "lofi_hiphop", name: "Lofi Hip-Hop & Study Beats", includes: "Dusty Vinyl Cracks, Mellow Rhodes, Nostalgic Anime Samples, Chill Loops..." },
-    { id: "neo_soul_groove", name: "Neo-Soul & Modern R&B", includes: "Laidback Pocket Drumming, Jazzy Extended Chords, Silk Vocals..." },
-    { id: "sunset_nudisco", name: "Nu-Disco & Sunset House", includes: "Funky Basslines, Slap Bass, Glitter Synths, Poolside Grooves..." },
-    { id: "acoustic_coffee", name: "Acoustic & Indie Folk", includes: "Warm Fingerpicking Guitar, Soft Harmonies, Intimate Vocals, Wood & Strings..." },
-    { id: "ambient_drone", name: "Pure Ambient & Space Drone", includes: "Zero Beat, Infinite Reverb Pads, Meditation Textures, Sleep Soundscapes..." },
-    { id: "city_pop_retro", name: "Japanese City Pop & 80s Funk", includes: "Vintage Brass, Slap Bass, Sophisticated J-Pop, Retro Night Drives..." },
-    { id: "chillstep_future", name: "Chillstep & Melodic Bass", includes: "Slow Emotional Wobbles, Female Vocals, Echo Piano, Atmospheric Drops..." },
-    { id: "bossa_jazz_lounge", name: "Bossa Nova & Lounge Jazz", includes: "Nylon Guitars, Subtle Brushes, Cocktail Bar Chords, Relaxed Mood..." },
-    { id: "dreamy_pop_gems", name: "Dream Pop & Soulful Gems", includes: "Sparkling Arps, Heartfelt Hooks, Indie Anthems, Healing Frequencies..." },
-    { id: "cinematic_piano", name: "Cinematic Neo-Classical", includes: "Grand Piano, Solitary Cello, Film Score Melodies, Emotional Crescendos..." },
   ],
 };
 
 /**
+ * Detects the macro-genre based on keywords in playlist.name.toLowerCase()
+ */
+export function detectMacroGenre(name: string): MacroGenre {
+  const n = name.toLowerCase();
+
+  if (n.includes("dnb") || n.includes("drum") || n.includes("jungle") || n.includes("bass") || n.includes("breakbeat")) {
+    return "dnb";
+  }
+  if (n.includes("house") || n.includes("techno") || n.includes("dance") || n.includes("rave") || n.includes("electro") || n.includes("club") || n.includes("trance") || n.includes("edm") || n.includes("acid")) {
+    return "electronica";
+  }
+  if (n.includes("rock") || n.includes("metal") || n.includes("punk") || n.includes("indie") || n.includes("grunge") || n.includes("guitar") || n.includes("heavy") || n.includes("hard")) {
+    return "rock";
+  }
+  if (n.includes("pop") || n.includes("hits") || n.includes("radio") || n.includes("chart")) {
+    return "pop";
+  }
+  if (n.includes("hip hop") || n.includes("hiphop") || n.includes("rap") || n.includes("trap") || n.includes("boom bap") || n.includes("drill")) {
+    return "hiphop";
+  }
+  if (n.includes("reggaeton") || n.includes("perreo") || n.includes("latin") || n.includes("latino") || n.includes("urbano") || n.includes("dembow") || n.includes("funk carioca")) {
+    return "urbano";
+  }
+  if (n.includes("r&b") || n.includes("rnb") || n.includes("soul") || n.includes("motown") || n.includes("funk")) {
+    return "rnb";
+  }
+  if (n.includes("jazz") || n.includes("bossa") || n.includes("classical") || n.includes("clasica") || n.includes("folk") || n.includes("acoustic") || n.includes("acustica")) {
+    return "jazz_clasica";
+  }
+
+  return "chill";
+}
+
+/**
  * Generates 5 Smart Naming Proposals:
- * - 3 Pro Names (pure style / clean standard)
- * - 1 Hybrid Name (original title + style)
- * - 1 Fantasioso / Lore Name (treats original title as code / anomaly / secret project)
+ * - 3 Pro Names
+ * - 1 Hybrid Name
+ * - 1 Fantasioso / Lore Name
  */
 export function generateSmartNamingProposals(
   originalName: string,
   macroGenre: MacroGenre
 ): string[] {
-  const cleanOriginal = originalName.trim();
+  const cleanOriginal = originalName.trim() || "Nueva Playlist";
 
-  // Style Pro Templates
   const proTemplates: Record<MacroGenre, [string, string, string]> = {
     dnb: ["Drum & Bass: 174 Rolling Anthems", "Liquid & Deep Bass Sanctuary", "Sub-Low Frequency Vault"],
     electronica: ["Club Essentials: Cyber Rave Archive", "Tech & Melodic Grooves", "Nightfall Electronic Spectrum"],
     rock: ["Rock Essentials: Overdrive Anthems", "Alternative & Hard Riff Vault", "Pure Grunge & Heavy Grooves"],
+    pop: ["Pop Radiance: Modern Anthems", "Synth-Pop & Velvet Hooks", "Contemporary Sparkle Collection"],
+    hiphop: ["808 Vault: Hip-Hop & Trap Heavy", "Golden Era: Boom Bap Classics", "Midnight Flow & Lyrical Wave"],
     urbano: ["Perreo & Urbano Gold Edition", "Dembow & Trap Latino Heat", "Rhythm & Urban Underground"],
     chill: ["Chill & Soulful Gems Collection", "Healing Frequencies & Velvet Moods", "Sunset Resonance & Lofi Haven"],
+    rnb: ["Neo-Soul Sanctuary: Velvet Chords", "Midnight R&B & Trap Soul Glow", "Classic Soul & Deep Grooves"],
+    jazz_clasica: ["Acoustic & Bossa Nova Sanctuary", "Indie Folk & Wood Strings", "Cinematic Classical Echoes"],
   };
 
-  // Hybrid Templates
   const hybridTemplates: Record<MacroGenre, string> = {
     dnb: `${cleanOriginal}: Bassline Selection`,
     electronica: `${cleanOriginal}: Club Anthems`,
     rock: `${cleanOriginal}: Rock & Alternative`,
+    pop: `${cleanOriginal}: Pop & Hits`,
+    hiphop: `${cleanOriginal}: Hip-Hop Essentials`,
     urbano: `${cleanOriginal}: Urbano & Dembow`,
     chill: `${cleanOriginal}: Joyas & Chill Moods`,
+    rnb: `${cleanOriginal}: Soul & R&B Sessions`,
+    jazz_clasica: `${cleanOriginal}: Acoustic & Jazz Vault`,
   };
 
-  // Lore / Fantasy Templates
   const loreTemplates: Record<MacroGenre, string> = {
     dnb: `Anomalía [${cleanOriginal}]: Resonancia 174 BPM`,
     electronica: `El Proyecto ${cleanOriginal}: Frecuencias de Club`,
     rock: `El Archivo ${cleanOriginal}: Crónicas de Overdrive`,
+    pop: `Proyecto [${cleanOriginal}]: Resonancia Pop`,
+    hiphop: `Protocolo [${cleanOriginal}]: Frecuencias 808`,
     urbano: `Protocolo [${cleanOriginal}]: Ondas de Calle`,
     chill: `Anomalía [${cleanOriginal}]: Frecuencias de Curación`,
+    rnb: `El Archivo ${cleanOriginal}: Velvet Sessions`,
+    jazz_clasica: `Crónicas [${cleanOriginal}]: Armonías Acústicas`,
   };
 
   const pro = proTemplates[macroGenre] || proTemplates.chill;

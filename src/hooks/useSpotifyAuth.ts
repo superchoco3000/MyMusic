@@ -31,11 +31,33 @@ export function useSpotifyAuth() {
   useEffect(() => {
     setLoading(true);
 
+    const getStoredProviderToken = () => {
+      if (typeof window === "undefined") return null;
+      try {
+        return localStorage.getItem("spotify_provider_token");
+      } catch {
+        return null;
+      }
+    };
+
+    const storeProviderToken = (token: string | null | undefined) => {
+      if (typeof window === "undefined" || !token) return;
+      try {
+        localStorage.setItem("spotify_provider_token", token);
+      } catch {
+        // ignore
+      }
+    };
+
     // Hydrate from the current session on first mount.
     supabase.auth.getSession().then(({ data: { session } }) => {
       if (session) {
+        if (session.provider_token) {
+          storeProviderToken(session.provider_token);
+        }
+        const effectiveProviderToken = session.provider_token ?? getStoredProviderToken();
         setAccessToken(session.access_token);
-        setProviderToken(session.provider_token ?? null);
+        setProviderToken(effectiveProviderToken);
         syncProfile(session.user.id);
       } else {
         setLoading(false);
@@ -47,10 +69,17 @@ export function useSpotifyAuth() {
       data: { subscription },
     } = supabase.auth.onAuthStateChange(async (event, session) => {
       if (session) {
+        if (session.provider_token) {
+          storeProviderToken(session.provider_token);
+        }
+        const effectiveProviderToken = session.provider_token ?? getStoredProviderToken();
         setAccessToken(session.access_token);
-        setProviderToken(session.provider_token ?? null);
+        setProviderToken(effectiveProviderToken);
         await syncProfile(session.user.id);
       } else {
+        if (typeof window !== "undefined") {
+          try { localStorage.removeItem("spotify_provider_token"); } catch (_) {}
+        }
         reset();
       }
     });
@@ -58,6 +87,7 @@ export function useSpotifyAuth() {
     return () => {
       subscription.unsubscribe();
     };
+
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // ─── Helpers ──────────────────────────────────────────────────────────────
@@ -122,12 +152,16 @@ export function useSpotifyAuth() {
    * Destroys the current Supabase session and resets local auth state.
    */
   async function logout() {
+    if (typeof window !== "undefined") {
+      try { localStorage.removeItem("spotify_provider_token"); } catch (_) {}
+    }
     const { error } = await supabase.auth.signOut();
     if (error) {
       console.error("[useSpotifyAuth] logout error:", error.message);
     }
     reset();
   }
+
 
   return { login, logout };
 }

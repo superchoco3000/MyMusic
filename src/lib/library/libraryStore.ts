@@ -6,6 +6,7 @@ import type {
   MusicLibraryTrack,
   CurationRules,
 } from "@/types/library";
+import { getIndexedDBLibrary, setIndexedDBLibrary } from "./indexedDB";
 
 const STORAGE_KEY = "mymusic_local_library_v1";
 
@@ -89,9 +90,26 @@ export function applyTrackDiffsToPlaylist(
 
 /**
  * Loads the local persistent music library.
+ * Priority:
+ * 1. IndexedDB active client-synced library (100% up-to-date real-time)
+ * 2. Static /data/music_library.json baseline merged with localStorage metadata
  */
 export async function loadMusicLibrary(): Promise<MusicLibrary> {
-  // ── Step 1: Always fetch the static source of truth ──────────────────────
+  // ── Step 1: Check high-capacity IndexedDB for latest synced library ────────
+  if (typeof window !== "undefined") {
+    try {
+      const idbData = await getIndexedDBLibrary<MusicLibrary>();
+      if (idbData && Array.isArray(idbData.playlists) && idbData.playlists.length > 0) {
+        const diffs = getSavedTrackDiffs();
+        idbData.playlists = idbData.playlists.map((pl) => applyTrackDiffsToPlaylist(pl, diffs));
+        return idbData;
+      }
+    } catch (err) {
+      console.warn("[libraryStore] IndexedDB read failed, falling back to static:", err);
+    }
+  }
+
+  // ── Step 2: Fetch the static baseline source of truth ──────────────────────
   let staticData: MusicLibrary | null = null;
   try {
     const res = await fetch(`/data/music_library.json?t=${Date.now()}`, { cache: "no-store" });
@@ -102,7 +120,7 @@ export async function loadMusicLibrary(): Promise<MusicLibrary> {
     console.warn("[libraryStore] Failed to fetch /data/music_library.json:", e);
   }
 
-  // ── Step 2: Read localStorage metadata overlay (optional, non-blocking) ──
+  // ── Step 3: Read localStorage metadata overlay ───────────────────────────
   let cachedMeta: MusicLibraryPlaylist[] = [];
   if (typeof window !== "undefined") {
     try {
@@ -118,12 +136,11 @@ export async function loadMusicLibrary(): Promise<MusicLibrary> {
     }
   }
 
-  // ── Step 3: Merge — static is the list of record, localStorage adds metadata & diffs ─
+  // ── Step 4: Merge — static baseline + localStorage metadata & diffs ────────
   if (staticData) {
     const diffs = getSavedTrackDiffs();
 
     if (cachedMeta.length > 0) {
-      // Build lookup maps (by id AND by name) to handle CSV-imported playlists with no id.
       const metaById   = new Map<string, MusicLibraryPlaylist>();
       const metaByName = new Map<string, MusicLibraryPlaylist>();
       for (const p of cachedMeta) {
@@ -132,7 +149,6 @@ export async function loadMusicLibrary(): Promise<MusicLibrary> {
       }
 
       staticData.playlists = staticData.playlists.map((pl) => {
-        // id lookup first, then name fallback (for playlists imported from CSV without an id)
         const meta = (pl.id ? metaById.get(pl.id) : undefined) ?? metaByName.get(pl.name);
         if (!meta) return applyTrackDiffsToPlaylist(pl, diffs);
 
@@ -150,13 +166,14 @@ export async function loadMusicLibrary(): Promise<MusicLibrary> {
     return staticData;
   }
 
-  // ── Fallback: static fetch failed — serve slim cache (no tracks_data) ─────
+  // ── Fallback: slim cache from localStorage ─────────────────────────────────
   if (cachedMeta.length > 0) {
     console.warn("[libraryStore] Static JSON unavailable — falling back to localStorage cache.");
     const diffs = getSavedTrackDiffs();
     const playlists = cachedMeta.map((pl) => applyTrackDiffsToPlaylist(pl, diffs));
     return { playlists, last_updated_at: new Date().toISOString() };
   }
+
 
   return { playlists: [], last_updated_at: new Date().toISOString() };
 }

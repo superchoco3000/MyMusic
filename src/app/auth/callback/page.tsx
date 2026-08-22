@@ -22,14 +22,28 @@ export default function AuthCallbackPage() {
   const router = useRouter();
 
   useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (session?.provider_token) {
+        try {
+          localStorage.setItem("spotify_provider_token", session.provider_token);
+        } catch (_) {}
+      }
+    });
+
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange((event) => {
+    } = supabase.auth.onAuthStateChange((event, session) => {
+      if (session?.provider_token) {
+        try {
+          localStorage.setItem("spotify_provider_token", session.provider_token);
+        } catch (_) {}
+      }
       if (event === "SIGNED_IN" || event === "TOKEN_REFRESHED") {
         // Session established — navigate to the app.
         router.replace("/");
       }
     });
+
 
     // Safety net: if the SDK fires no event within 8 s (e.g. invalid code),
     // send the user to the error page so they're not stuck on a spinner.

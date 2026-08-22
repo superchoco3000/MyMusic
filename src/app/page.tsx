@@ -4,6 +4,9 @@ import { useSpotifyAuth } from "@/hooks/useSpotifyAuth";
 import { useAuthStore } from "@/store/authStore";
 import { Button } from "@/components/ui/Button";
 import { PlaylistsGrid } from "@/components/PlaylistsGrid";
+import { GlobalPushHub } from "@/components/GlobalPushHub";
+import { SafeImage } from "@/components/SafeImage";
+import { SyncButton } from "@/components/SyncButton";
 
 /**
  * Home / Entry screen
@@ -34,18 +37,21 @@ export default function Home() {
         {/* ── Top bar ── */}
         <header className="sticky top-0 z-10 flex items-center justify-between gap-4 border-b border-white/5 bg-background/80 px-6 py-4 backdrop-blur-md">
           <div className="flex items-center gap-3">
-            {user.avatar_url ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                src={user.avatar_url}
+            <div className="relative h-9 w-9 shrink-0 overflow-hidden rounded-full border border-spotify/40">
+              <SafeImage
+                src={user.avatar_url ?? ""}
                 alt={user.display_name}
-                className="h-9 w-9 rounded-full border border-spotify/40 object-cover"
+                width={36}
+                height={36}
+                priority
+                fallbackIcon={
+                  <div className="flex h-full w-full items-center justify-center bg-surface text-sm font-bold text-spotify">
+                    {user.display_name?.charAt(0)?.toUpperCase() || "U"}
+                  </div>
+                }
+                className="h-full w-full object-cover"
               />
-            ) : (
-              <div className="flex h-9 w-9 items-center justify-center rounded-full bg-surface text-sm font-bold text-spotify">
-                {user.display_name.charAt(0).toUpperCase()}
-              </div>
-            )}
+            </div>
             <div className="flex flex-col leading-tight">
               <span className="text-sm font-semibold text-white">
                 {user.display_name}
@@ -56,23 +62,26 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="flex items-center gap-2">
-            <span className="text-xs text-white/30 hidden sm:inline">
-              MyMusic
-            </span>
+          <div className="flex items-center gap-3">
+            <SyncButton />
+            <div className="h-4 w-px bg-white/10 hidden sm:block" />
             <Button variant="ghost" size="sm" onClick={logout}>
               Cerrar sesión
             </Button>
           </div>
         </header>
 
+
         {/* ── Main content ── */}
-        <main className="flex-1 px-4 py-8 sm:px-8">
+        <main className="flex-1 px-4 py-8 sm:px-8 max-w-7xl mx-auto w-full">
+          {/* ── Main RPG Library Grid with Integrated Global Push Hub ── */}
           <PlaylistsGrid />
         </main>
+
       </div>
     );
   }
+
 
   // ─── Unauthenticated / login view ─────────────────────────────────────────
   return (
