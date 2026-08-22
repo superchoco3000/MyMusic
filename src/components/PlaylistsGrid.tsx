@@ -705,8 +705,10 @@ export function PlaylistsGrid() {
     }
   };
 
-  const fetchLocalLibrary = useCallback(async () => {
-    setIsLoading(true);
+  const fetchLocalLibrary = useCallback(async (isInitial = false) => {
+    if (isInitial) {
+      setIsLoading(true);
+    }
     setError(null);
     try {
       const libData = await loadMusicLibrary();
@@ -715,13 +717,15 @@ export function PlaylistsGrid() {
     } catch (err) {
       setError(err instanceof Error ? err.message : "Error al cargar la biblioteca");
     } finally {
-      setIsLoading(false);
+      if (isInitial) {
+        setIsLoading(false);
+      }
     }
   }, []);
 
   useEffect(() => {
-    fetchLocalLibrary();
-    const onUpdate = () => fetchLocalLibrary();
+    fetchLocalLibrary(true);
+    const onUpdate = () => fetchLocalLibrary(false);
     window.addEventListener("mymusic_library_updated", onUpdate);
     window.addEventListener("mymusic_classification_updated", onUpdate);
     window.addEventListener("mymusic_track_transferred", onUpdate);
@@ -733,6 +737,7 @@ export function PlaylistsGrid() {
       window.removeEventListener("storage", onUpdate);
     };
   }, [fetchLocalLibrary]);
+
 
   const handleCardClick = (e: React.MouseEvent, playlist: MusicLibraryPlaylist) => {
     e.stopPropagation();
@@ -884,9 +889,10 @@ export function PlaylistsGrid() {
     return (
       <section className="w-full rounded-2xl border border-white/5 bg-surface/50 p-6 text-center">
         <p className="text-sm text-white/40">{error}</p>
-        <button onClick={fetchLocalLibrary} className="mt-3 text-xs text-white/30 underline hover:text-white">
+        <button onClick={() => fetchLocalLibrary(true)} className="mt-3 text-xs text-white/30 underline hover:text-white">
           Reintentar
         </button>
+
       </section>
     );
   }
