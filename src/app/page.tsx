@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/Button";
 import { PlaylistsGrid } from "@/components/PlaylistsGrid";
 import { GlobalPushHub } from "@/components/GlobalPushHub";
 import { SafeImage } from "@/components/SafeImage";
-import { SyncButton } from "@/components/SyncButton";
+
 
 /**
  * Home / Entry screen
@@ -58,12 +58,11 @@ export default function Home() {
           </div>
 
           <div className="flex items-center gap-3">
-            <SyncButton />
-            <div className="h-4 w-px bg-white/10 hidden sm:block" />
             <Button variant="ghost" size="sm" onClick={logout}>
               Cerrar sesión
             </Button>
           </div>
+
         </header>
 
 
