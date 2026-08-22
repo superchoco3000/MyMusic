@@ -55,11 +55,12 @@ export function useSpotifyAuth() {
         const meta = typeof userObj === "object" ? userObj?.user_metadata : null;
         const fallback: Profile = {
           id: userId,
+          spotify_id: meta?.provider_id || userId,
           display_name: meta?.full_name || meta?.name || meta?.custom_claims?.name || "Usuario",
           avatar_url: meta?.avatar_url || meta?.picture || null,
           is_premium: true,
+          total_tracks: 0,
           created_at: new Date().toISOString(),
-          updated_at: new Date().toISOString(),
         };
         setUser(fallback);
       }
@@ -68,11 +69,12 @@ export function useSpotifyAuth() {
       if (typeof userObj === "object" && userObj?.id) {
         setUser({
           id: userObj.id,
+          spotify_id: userObj.user_metadata?.provider_id || userObj.id,
           display_name: userObj.user_metadata?.full_name || "Usuario",
           avatar_url: userObj.user_metadata?.avatar_url || null,
           is_premium: true,
+          total_tracks: 0,
           created_at: new Date().toISOString(),
-          updated_at: new Date().toISOString(),
         });
       } else {
         setUser(null);
@@ -80,6 +82,7 @@ export function useSpotifyAuth() {
     } finally {
       setLoading(false);
     }
+
   }
 
   // ─── Session state listener ───────────────────────────────────────────────
