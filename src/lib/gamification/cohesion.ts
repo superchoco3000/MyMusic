@@ -75,11 +75,16 @@ export function getPlaylistRPGState(
 ): RPGStateResult {
   const tracks = playlist.tracks_data ?? [];
   const trackCount =
-    playlist.completion_meta?.current_count ??
-    playlist.total_tracks ??
-    playlist.tracks?.total ??
-    tracks.length ??
-    0;
+    (typeof playlist.total_tracks === "number" && playlist.total_tracks > 0)
+      ? playlist.total_tracks
+      : (typeof playlist.tracks?.total === "number" && playlist.tracks.total > 0)
+      ? playlist.tracks.total
+      : (typeof playlist.completion_meta?.current_count === "number" && playlist.completion_meta.current_count > 0)
+      ? playlist.completion_meta.current_count
+      : (tracks.length > 0)
+      ? tracks.length
+      : 0;
+
 
   const cohesionScore = calculateCohesion(tracks);
   const isBenchmark = playlist.completion_meta?.is_benchmark === true;

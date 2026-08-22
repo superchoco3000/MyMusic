@@ -79,13 +79,18 @@ export function applyTrackDiffsToPlaylist(
   }
 
   pl.tracks_data = tracks;
-  pl.total_tracks = tracks.length;
+  const count = tracks.length > 0
+    ? tracks.length
+    : Math.max(0, (pl.total_tracks ?? pl.tracks?.total ?? 0) + (diff.added?.length ?? 0) - (diff.removedIds?.length ?? 0));
+  pl.total_tracks = count;
+  pl.tracks = { total: count };
   if (pl.completion_meta) {
-    pl.completion_meta.current_count = tracks.length;
-    pl.completion_meta.gap = pl.completion_meta.target_count - tracks.length;
+    pl.completion_meta.current_count = count;
+    pl.completion_meta.gap = (pl.completion_meta.target_count || 100) - count;
   }
 
   return pl;
+
 }
 
 /**
@@ -148,7 +153,9 @@ export async function loadMusicLibrary(): Promise<MusicLibrary> {
         if (p.name) metaByName.set(p.name, p);
       }
 
-      staticData.playlists = staticData.playlists.map((pl) => {
+      const staticSeenIds = new Set<string>();
+      const mergedList: MusicLibraryPlaylist[] = staticData.playlists.map((pl) => {
+        if (pl.id) staticSeenIds.add(pl.id);
         const meta = (pl.id ? metaById.get(pl.id) : undefined) ?? metaByName.get(pl.name);
         if (!meta) return applyTrackDiffsToPlaylist(pl, diffs);
 
@@ -157,14 +164,27 @@ export async function loadMusicLibrary(): Promise<MusicLibrary> {
           ...(meta.name && meta.name !== pl.name ? { name: meta.name } : {}),
           ...(meta.classification               ? { classification: meta.classification } : {}),
           ...(meta.completion_meta              ? { completion_meta: meta.completion_meta } : {}),
+          ...(typeof meta.total_tracks === "number" ? { total_tracks: meta.total_tracks, tracks: { total: meta.total_tracks } } : {}),
+          ...(meta.image_url                    ? { image_url: meta.image_url } : {}),
+          ...(meta.snapshot_id                  ? { snapshot_id: meta.snapshot_id } : {}),
         };
         return applyTrackDiffsToPlaylist(merged, diffs);
       });
+
+      // Also append any new playlists that were synced from Spotify and saved in cachedMeta
+      for (const meta of cachedMeta) {
+        if (meta.id && !staticSeenIds.has(meta.id)) {
+          mergedList.push(applyTrackDiffsToPlaylist(meta, diffs));
+        }
+      }
+
+      staticData.playlists = mergedList;
     } else {
       staticData.playlists = staticData.playlists.map((pl) => applyTrackDiffsToPlaylist(pl, diffs));
     }
     return staticData;
   }
+
 
   // ── Fallback: slim cache from localStorage ─────────────────────────────────
   if (cachedMeta.length > 0) {

@@ -8,17 +8,13 @@ import {
 } from "@/lib/library/libraryStore";
 import { useAuthStore } from "@/store/authStore";
 import { useSpotifyAuth } from "@/hooks/useSpotifyAuth";
-import { syncSpotifyLibraryClient, type ClientSyncProgress } from "@/lib/spotify/clientSync";
-import { ClientSyncModal } from "@/components/ClientSyncModal";
+import { syncSpotifyLibraryClient } from "@/lib/spotify/clientSync";
 
 export function SyncButton() {
   const providerToken = useAuthStore((s) => s.providerToken);
   const { login } = useSpotifyAuth();
 
   const [isSyncing, setIsSyncing] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isAuthMissing, setIsAuthMissing] = useState(false);
-  const [syncProgress, setSyncProgress] = useState<ClientSyncProgress | null>(null);
   const [isDone, setIsDone] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -32,79 +28,38 @@ export function SyncButton() {
       providerToken ||
       (typeof window !== "undefined" ? localStorage.getItem("spotify_provider_token") : null);
 
-    setIsModalOpen(true);
     setHasError(false);
     setErrorMessage(null);
     setIsDone(false);
 
     if (!token) {
-      console.warn("[SyncButton] Spotify token is missing, requesting connection...");
-      setIsAuthMissing(true);
+      console.warn("[SyncButton] Spotify token is missing, redirecting to login...");
+      login();
       return;
     }
 
-    setIsAuthMissing(false);
     setIsSyncing(true);
-
-    // Initial immediate progress state so modal is fully active
-    setSyncProgress({
-      phase: "init",
-      phaseLabel: "Iniciando motor de sincronización...",
-      progressPercent: 5,
-      stats: {
-        playlistsTotal: 0,
-        playlistsScanned: 0,
-        playlistsUpdated: 0,
-        playlistsUnchanged: 0,
-        playlistsRemoved: 0,
-        tracksAdded: 0,
-        tracksRemoved: 0,
-        likedSongsTotal: 0,
-      },
-    });
 
     try {
       const currentLib = await loadMusicLibrary();
-
-      await syncSpotifyLibraryClient(token, currentLib, (progress) => {
-        setSyncProgress(progress);
-      });
+      await syncSpotifyLibraryClient(token, currentLib);
 
       setIsDone(true);
+      setTimeout(() => {
+        setIsDone(false);
+      }, 3000);
     } catch (err) {
-      console.error("[SyncButton] Error en client sync:", err);
+      console.error("[SyncButton] Error en sincronización silenciosa:", err);
       const msg = err instanceof Error ? err.message : "Error durante la sincronización";
       setHasError(true);
       setErrorMessage(msg);
-      setSyncProgress((prev) =>
-        prev
-          ? { ...prev, phase: "error", phaseLabel: "Error en la sincronización", message: msg }
-          : {
-              phase: "error",
-              phaseLabel: "Error en la sincronización",
-              progressPercent: 0,
-              stats: {
-                playlistsTotal: 0,
-                playlistsScanned: 0,
-                playlistsUpdated: 0,
-                playlistsUnchanged: 0,
-                playlistsRemoved: 0,
-                tracksAdded: 0,
-                tracksRemoved: 0,
-                likedSongsTotal: 0,
-              },
-              message: msg,
-            }
-      );
+      setTimeout(() => {
+        setHasError(false);
+        setErrorMessage(null);
+      }, 4000);
     } finally {
       setIsSyncing(false);
     }
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-    setIsAuthMissing(false);
-    setIsDone(false);
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -122,15 +77,13 @@ export function SyncButton() {
           importCSVToLibrary(currentLib, content, file.name);
         }
         setIsDone(true);
+        setTimeout(() => setIsDone(false), 3000);
       } catch {
         setHasError(true);
         setErrorMessage("Error al importar archivo");
+        setTimeout(() => setHasError(false), 3000);
       } finally {
         setIsSyncing(false);
-        setTimeout(() => {
-          setIsDone(false);
-          setHasError(false);
-        }, 3000);
         if (fileInputRef.current) fileInputRef.current.value = "";
       }
     };
@@ -150,117 +103,106 @@ export function SyncButton() {
   ].join(" ");
 
   return (
-    <>
-      <div className="inline-flex items-center gap-2">
-        <input
-          type="file"
-          ref={fileInputRef}
-          accept=".csv,.json"
-          onChange={handleFileChange}
-          className="hidden"
-        />
-
-        <button
-          id="sync-button"
-          onClick={handleSyncClick}
-          disabled={isSyncing}
-          className={btnClass}
-        >
-          {isSyncing ? (
-            <>
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.5"
-                className="h-4 w-4 animate-spin shrink-0 text-spotify"
-              >
-                <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
-                <path d="M3 3v5h5" />
-                <path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16" />
-                <path d="M16 16h5v5" />
-              </svg>
-              <span className="truncate">Sincronizando...</span>
-            </>
-          ) : hasError ? (
-            <>
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.5"
-                className="h-4 w-4 shrink-0"
-              >
-                <circle cx="12" cy="12" r="10" />
-                <line x1="12" y1="8" x2="12" y2="12" />
-                <line x1="12" y1="16" x2="12.01" y2="16" />
-              </svg>
-              <span className="truncate max-w-[160px]" title={errorMessage ?? undefined}>
-                {errorMessage || "Error"}
-              </span>
-            </>
-          ) : isDone ? (
-            <>
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="3"
-                className="h-4 w-4 shrink-0"
-              >
-                <polyline points="20 6 9 17 4 12" />
-              </svg>
-              <span>Sincronizado</span>
-            </>
-          ) : (
-            <>
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.5"
-                className="h-4 w-4 shrink-0"
-              >
-                <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
-                <path d="M3 3v5h5" />
-                <path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16" />
-                <path d="M16 16h5v5" />
-              </svg>
-              <span>Sincronizar</span>
-            </>
-          )}
-        </button>
-
-        {/* CSV/JSON Import Button */}
-        <button
-          id="import-file-button"
-          onClick={() => fileInputRef.current?.click()}
-          disabled={isSyncing}
-          title="Importar CSV/JSON local"
-          className="rounded-full bg-white/10 p-2 text-white/70 hover:bg-white/20 hover:text-white transition-colors disabled:opacity-40 cursor-pointer"
-        >
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth={2}
-            className="h-4 w-4"
-          >
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 1 1 0-4v-4" />
-            <polyline points="17 8 12 3 7 8" />
-            <line x1="12" y1="3" x2="12" y2="15" />
-          </svg>
-        </button>
-      </div>
-
-      {/* Real-Time Client Sync Modal */}
-      <ClientSyncModal
-        isOpen={isModalOpen}
-        progress={syncProgress}
-        onClose={handleCloseModal}
-        onLoginRequest={login}
-        isAuthMissing={isAuthMissing}
+    <div className="inline-flex items-center gap-2">
+      <input
+        type="file"
+        ref={fileInputRef}
+        accept=".csv,.json"
+        onChange={handleFileChange}
+        className="hidden"
       />
-    </>
+
+      <button
+        id="sync-button"
+        onClick={handleSyncClick}
+        disabled={isSyncing}
+        className={btnClass}
+      >
+        {isSyncing ? (
+          <>
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              className="h-4 w-4 animate-spin shrink-0 text-spotify"
+            >
+              <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+              <path d="M3 3v5h5" />
+              <path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16" />
+              <path d="M16 16h5v5" />
+            </svg>
+            <span className="truncate">Sincronizando...</span>
+          </>
+        ) : hasError ? (
+          <>
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              className="h-4 w-4 shrink-0"
+            >
+              <circle cx="12" cy="12" r="10" />
+              <line x1="12" y1="8" x2="12" y2="12" />
+              <line x1="12" y1="16" x2="12.01" y2="16" />
+            </svg>
+            <span className="truncate max-w-[160px]" title={errorMessage ?? undefined}>
+              {errorMessage || "Error"}
+            </span>
+          </>
+        ) : isDone ? (
+          <>
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="3"
+              className="h-4 w-4 shrink-0"
+            >
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
+            <span>Sincronizado</span>
+          </>
+        ) : (
+          <>
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              className="h-4 w-4 shrink-0"
+            >
+              <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+              <path d="M3 3v5h5" />
+              <path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16" />
+              <path d="M16 16h5v5" />
+            </svg>
+            <span>Sincronizar</span>
+          </>
+        )}
+      </button>
+
+      {/* CSV/JSON Import Button */}
+      <button
+        id="import-file-button"
+        onClick={() => fileInputRef.current?.click()}
+        disabled={isSyncing}
+        title="Importar CSV/JSON local"
+        className="rounded-full bg-white/10 p-2 text-white/70 hover:bg-white/20 hover:text-white transition-colors disabled:opacity-40 cursor-pointer"
+      >
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth={2}
+          className="h-4 w-4"
+        >
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 1 1 0-4v-4" />
+          <polyline points="17 8 12 3 7 8" />
+          <line x1="12" y1="3" x2="12" y2="15" />
+        </svg>
+      </button>
+    </div>
   );
 }

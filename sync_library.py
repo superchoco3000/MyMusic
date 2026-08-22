@@ -306,50 +306,8 @@ def delta_sync(access_token: str) -> tuple[bool, int, dict]:
         first_remote_id = remote_liked_items[0].get("track", {}).get("id") if remote_liked_items else None
         first_local_id = local_liked_tracks[0].get("id") if local_liked_tracks else None
 
-        # Si el conteo coincide exactamente y el track más reciente es idéntico, saltar paginación completa
-        if local_liked_tracks and len(local_liked_tracks) == total_remote_liked and first_remote_id == first_local_id:
-            log_msg(f"[SKIP] 'Liked Songs' ({total_remote_liked} tracks) — sin cambios en Spotify.")
-            liked_tracks_final = local_liked_tracks
-        else:
-            log_msg(f"[DELTA] Descargando Liked Songs ({total_remote_liked} tracks remotos)...")
-            while liked_res.get("next"):
-                time.sleep(0.1)
-                try:
-                    liked_res = sp.next(liked_res)
-                    remote_liked_items.extend(liked_res.get("items", []))
-                except SpotifyException as e:
-                    if e.http_status == 429:
-                        log_msg("Rate Limit 429 paginando Liked Songs. Guardando items obtenidos.", level="warning")
-                    break
+        liked_tracks_final = local_liked_tracks
 
-            local_enriched = {t["id"]: t for t in local_liked_tracks if t.get("id")}
-            liked_tracks_final = []
-            for item in remote_liked_items:
-                track = item.get("track") if isinstance(item, dict) else None
-                if not track or not track.get("id"):
-                    continue
-                tid = track["id"]
-                if tid in local_enriched:
-                    liked_tracks_final.append(local_enriched[tid])
-                else:
-                    artists = ", ".join(
-                        a["name"] for a in (track.get("artists") or [])
-                        if isinstance(a, dict) and a.get("name")
-                    ) or "Artista Desconocido"
-                    album_obj = track.get("album") or {}
-                    album_images = album_obj.get("images") or []
-                    album_cover = album_images[0]["url"] if album_images else None
-                    liked_tracks_final.append({
-                        "id": tid,
-                        "name": track.get("name", ""),
-                        "artist": artists,
-                        "album": album_obj.get("name", ""),
-                        "album_cover": album_cover,
-                        "image_url": album_cover,
-                        "duration_ms": track.get("duration_ms", 0),
-                        "preview_url": track.get("preview_url"),
-                        "audio_features": None,
-                    })
 
         # Construir/Actualizar objeto de Liked Songs
         local_liked_playlist = {

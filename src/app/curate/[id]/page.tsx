@@ -20,6 +20,8 @@ import { getPlaylistRPGState, type RPGStateResult } from "@/lib/gamification/coh
 import { SolitaireVictoryAnimation } from "@/components/SolitaireVictoryAnimation";
 import { AuditSwipeDeckModal } from "@/components/AuditSwipeDeckModal";
 import { playRewardSound } from "@/lib/gamification/sounds";
+import { syncChaoticPlaylist } from "@/lib/spotify/clientSync";
+
 import {
   calculateTargetAcousticProfile,
   getInfiniteRecommendations,
@@ -221,20 +223,36 @@ export default function OrbitalCuratePage() {
       }
 
       if (found) {
-        setPlaylist(found);
         const savedClasses = getSavedClassifications();
         const savedRules = getSavedCurationRules();
         const key = found.id ?? found.name;
+        const currentClass = savedClasses[key] ?? found.completion_meta?.classification ?? found.classification ?? "caotica";
 
-        setClassification(savedClasses[key] ?? found.completion_meta?.classification ?? found.classification ?? "caotica");
+        setClassification(currentClass);
         setCurationRules(savedRules[key] ?? found.completion_meta?.rules ?? null);
 
         // Fetch all Target Objective playlists
         const targets = await getTargetPlaylists(key);
         setTargetPlaylists(targets);
 
+        // JIT Deep Fetch: If tracks_data is empty and it is chaotic (or Liked Songs), fetch from Spotify!
+        let tracks = found.tracks_data ?? [];
+        if (tracks.length === 0 && (currentClass === "caotica" || found.id === "spotify_liked_songs") && providerToken) {
+          try {
+            const freshTracks = await syncChaoticPlaylist(key, providerToken);
+            if (freshTracks && freshTracks.length > 0) {
+              tracks = freshTracks;
+              found.tracks_data = freshTracks;
+              found.total_tracks = freshTracks.length;
+            }
+          } catch (e) {
+            console.warn("[curate] JIT chaotic sync error:", e);
+          }
+        }
+
+        setPlaylist({ ...found, tracks_data: tracks });
+
         // Pick initial random track from tracks_data
-        const tracks = found.tracks_data ?? [];
         if (tracks.length > 0) {
           const randIdx = Math.floor(Math.random() * tracks.length);
           const initial = tracks[randIdx];
@@ -242,6 +260,7 @@ export default function OrbitalCuratePage() {
           setProcessedIds(new Set([initial.id ?? `${initial.name}:::${initial.artist}`]));
         }
       } else {
+
         setError("Playlist no encontrada en la biblioteca.");
       }
     } catch (err) {

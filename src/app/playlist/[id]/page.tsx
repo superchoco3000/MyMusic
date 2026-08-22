@@ -18,6 +18,8 @@ import {
 } from "@/lib/library/libraryStore";
 import { SolitaireVictoryAnimation } from "@/components/SolitaireVictoryAnimation";
 import { playRewardSound } from "@/lib/gamification/sounds";
+import { syncChaoticPlaylist } from "@/lib/spotify/clientSync";
+
 import type {
   MusicLibraryPlaylist,
   MusicLibraryTrack,
@@ -1641,7 +1643,19 @@ export default function PlaylistDetailPage() {
         const currentSavedClass = savedClasses[key] ?? found.completion_meta?.classification ?? found.classification ?? (found.completion_meta?.is_benchmark ? "objetivo" : "caotica");
         setClassification(currentSavedClass);
 
+        // JIT Deep Fetch: If it's Chaotic (or Liked Songs) and tracks are empty, fetch on demand in background!
+        if (currentSavedClass === "caotica" && (!found.tracks_data || found.tracks_data.length === 0) && providerToken) {
+          syncChaoticPlaylist(key, providerToken)
+            .then((freshTracks) => {
+              if (freshTracks && freshTracks.length > 0) {
+                setPlaylist((prev) => prev ? { ...prev, tracks_data: freshTracks, total_tracks: freshTracks.length } : null);
+              }
+            })
+            .catch((e) => console.warn("[playlist/detail] JIT chaotic sync error:", e));
+        }
+
         const trackCount = found.tracks_data?.length ?? found.total_tracks ?? 0;
+
         if (!found.completion_meta) {
           found.completion_meta = {
             target_count: 100,

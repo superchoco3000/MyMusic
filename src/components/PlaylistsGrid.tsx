@@ -20,6 +20,9 @@ import {
 import { SyncButton } from "@/components/SyncButton";
 import { GlobalPushHub } from "@/components/GlobalPushHub";
 import { playRewardSound } from "@/lib/gamification/sounds";
+import { useAuthStore } from "@/store/authStore";
+import { syncChaoticPlaylist } from "@/lib/spotify/clientSync";
+
 
 import type {
   MusicLibraryPlaylist,
@@ -643,12 +646,14 @@ function PlaylistCard({ playlist, classification, onClick }: PlaylistCardProps) 
 
 export function PlaylistsGrid() {
   const router = useRouter();
+  const providerToken = useAuthStore((s) => s.providerToken);
   const [playlists, setPlaylists] = useState<MusicLibraryPlaylist[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError]         = useState<string | null>(null);
 
   const [classifications, setClassifications] = useState<Record<string, PlaylistClassification>>({});
   const [interceptPlaylist, setInterceptPlaylist] = useState<MusicLibraryPlaylist | null>(null);
+
 
   // ── PROMPT 5.2: Background Scan, Direct Audit Swipe Deck & Level Victory ──
   const [activeAuditDeck, setActiveAuditDeck] = useState<{
@@ -848,9 +853,17 @@ export function PlaylistsGrid() {
       }
     }
 
+    if (type === "caotica" && providerToken) {
+      // JIT Background Deep Fetch for Chaotic Playlist
+      syncChaoticPlaylist(key, providerToken).catch((err) =>
+        console.warn("[PlaylistsGrid] Background chaotic sync error:", err)
+      );
+    }
+
     setInterceptPlaylist(null);
     router.push(`/playlist/${targetIdOrName}`);
   };
+
 
   const rpgStats = useMemo(() => {
     let unconfigured = 0;
